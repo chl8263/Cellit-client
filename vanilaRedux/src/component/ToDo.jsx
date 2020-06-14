@@ -18,7 +18,6 @@ const ToDo = ( {text, id, dDeleteToDo} ) => {
 }
 
 const mapDispathToProps = (dispatch, ownProps) => {
-    console.log("Child props --> ",ownProps);
     return (
         {
             dDeleteToDo: (id) => dispatch(actionCreators.deleteToDo(id)),
