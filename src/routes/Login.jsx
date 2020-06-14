@@ -1,7 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import $ from "jquery";
+import { connect } from "react-redux";
 
-const Login = () => {
+import { actionCreators } from "../store";
+import PAGE_ROUTE from "../util/Const";
+
+const Login = ( {switchSignUp} ) => {
 
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -9,16 +13,17 @@ const Login = () => {
     const passwordRef = useRef(null);
 
     useEffect(() => {
-
+        history.pushState('','', '/Login');
+        $(".preloader").fadeOut();
     }, []);
 
     const onChangeUserNameInput = (e) => {
         setUserName(e.target.value);
-    }
+    };
 
     const onChangePasswordInput = (e) => {
         setPassword(e.target.value);
-    }
+    };
 
     const onSubmitLoginForm = (e) => {
         e.preventDefault();
@@ -31,18 +36,28 @@ const Login = () => {
         } else {
 
         }
-        
-    }
+    };
+
+    const onclickSignUpBtn = () => {
+        switchSignUp();
+    };
 
     return(
         <>
             <div id="mainWrapper" className="main-wrapper">
-                {/* <div className="preloader">
+                {/* <!-- ============================================================== -->
+                <!-- Preloader - style you can find in spinners.css -->
+                <!-- ============================================================== --> */}
+                <div className="preloader">
                     <div className="lds-ripple">
                         <div className="lds-pos"></div>
                         <div className="lds-pos"></div>
                     </div>
-                </div> */}
+                </div>
+                {/* <!-- ============================================================== -->
+                <!-- Preloader - style you can find in spinners.css -->
+                <!-- ============================================================== --> */}
+                
                 <div className="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
                     <div className="auth-box bg-dark border-top border-secondary">
                         <div id="loginform">
@@ -72,7 +87,7 @@ const Login = () => {
                                         <div className="form-group">
                                             <div className="p-t-20">
                                                 {/* <button className="btn btn-info" id="to-recover" type="button"><i className="fa fa-lock m-r-5"></i> Lost password?</button> */}
-                                                <button className="btn btn-danger" id="signUpBtn" type="button" href="/signUp"><i className="fa fa-lock m-r-5"></i> SignUp </button>
+                                                <button className="btn btn-danger" id="signUpBtn" type="button" onClick={onclickSignUpBtn}><i className="fa fa-lock m-r-5"></i> SignUp </button>
                                                 <button className="btn btn-success float-right" type="submit">Login</button>
                                             </div>
                                         </div>
@@ -111,4 +126,14 @@ const Login = () => {
     );
 };
 
-export default Login;
+const mapStateToProps = (state, ownProps) => {
+    return state;
+}
+
+const mapDispathToProps = (dispatch) => {
+    return {
+        switchSignUp: () => dispatch(actionCreators.switchMainPageRoute(PAGE_ROUTE.SIGNUP)),
+    };
+}
+
+export default connect(mapStateToProps, mapDispathToProps) (Login);

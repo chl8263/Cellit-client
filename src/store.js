@@ -12,10 +12,9 @@ const reducer = createReducer(
             currentUserName: ""
         },
     },
-    [],
     {
         [switchMainPageRoute]: (state, action) => {
-            return state.mainPageRoute = action.payload;
+            return { ...state, mainPageRoute: action.payload };
         },
         [addJwtToken]: (state, action) => {
             return state.clientInfo.jwtToken = action.payload;
@@ -25,7 +24,7 @@ const reducer = createReducer(
 
 const store = configureStore({reducer});
 
-export const actionCreater = {
+export const actionCreators = {
     switchMainPageRoute,
     addJwtToken,
 }

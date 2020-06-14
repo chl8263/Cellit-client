@@ -1,8 +1,9 @@
-import React from 'react';
-import Login from '../routes/Login'
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import PAGE_ROUTE from "../util/Const"
+import Login from "../routes/Login";
+import SignUp from "../routes/SignUp";
+import PAGE_ROUTE from "../util/Const";
 
 const App = ( {page} ) => {
 
@@ -10,6 +11,12 @@ const App = ( {page} ) => {
         return (
             <>
                 <Login />
+            </>
+        )
+    }else if(page === PAGE_ROUTE.SIGNUP){
+        return (
+            <>
+                <SignUp />
             </>
         )
     }else {
