@@ -72,7 +72,7 @@ const Login = () => {
                                         <div className="form-group">
                                             <div className="p-t-20">
                                                 {/* <button className="btn btn-info" id="to-recover" type="button"><i className="fa fa-lock m-r-5"></i> Lost password?</button> */}
-                                                <button class="btn btn-danger" id="signUpBtn" type="button" href="/signUp"><i class="fa fa-lock m-r-5"></i> SignUp </button>
+                                                <button className="btn btn-danger" id="signUpBtn" type="button" href="/signUp"><i className="fa fa-lock m-r-5"></i> SignUp </button>
                                                 <button className="btn btn-success float-right" type="submit">Login</button>
                                             </div>
                                         </div>

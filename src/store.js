@@ -1,22 +1,33 @@
 import { createAction, createReducer, configureStore } from '@reduxjs/toolkit';
+import PAGE_ROUTE from "./util/Const"
 
-const addToDo = createAction("ADD");
-const deleteToDo = createAction("DELTE");
+const switchMainPageRoute = createAction("SWITCHMAINPAGEROUTE");
+const addJwtToken = createAction("ADDJWTTOKEN");
 
-const reducer = createReducer([], {
-    [addToDo]: (state, action) => {
-        state.push({text: action.payload, id: Date.now()});
+const reducer = createReducer(
+    {
+        mainPageRoute: PAGE_ROUTE.LOGIN,
+        clientInfo: {
+            jwtToken: "",
+            currentUserName: ""
+        },
     },
-    [deleteToDo]: (state, action) => {
-        return state.filter(todos => todos.id !== action.payload);
+    [],
+    {
+        [switchMainPageRoute]: (state, action) => {
+            return state.mainPageRoute = action.payload;
+        },
+        [addJwtToken]: (state, action) => {
+            return state.clientInfo.jwtToken = action.payload;
+        },
     }
-});
+);
 
 const store = configureStore({reducer});
 
-export const actionCreators = {
-    addToDo,
-    deleteToDo
+export const actionCreater = {
+    switchMainPageRoute,
+    addJwtToken,
 }
 
 export default store;

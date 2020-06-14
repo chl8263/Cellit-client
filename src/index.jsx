@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 import {Provider} from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 
-import App from'./component/App';
+import App from'./routes/App';
 import store from './store';
 
 const Hot = hot(App);
