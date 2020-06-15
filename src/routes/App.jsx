@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import Login from "../routes/Login";
 import SignUp from "../routes/SignUp";
-import PAGE_ROUTE from "../util/Const";
+import { PAGE_ROUTE } from "../util/Const";
 
 const App = ( {page} ) => {
 

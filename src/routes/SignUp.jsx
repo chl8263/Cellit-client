@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import $ from "jquery";
 
 import { actionCreators } from "../store";
-import PAGE_ROUTE from "../util/Const";
+import { PAGE_ROUTE } from "../util/Const";
 
 const SignUp = ( {switchLogin} ) => {
 

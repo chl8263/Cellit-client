@@ -3,9 +3,9 @@ import $ from "jquery";
 import { connect } from "react-redux";
 
 import { actionCreators } from "../store";
-import PAGE_ROUTE from "../util/Const";
+import { PAGE_ROUTE, HTTP, MediaType} from "../util/Const";
 
-const Login = ( {switchSignUp} ) => {
+const Login = ( {switchSignUp, addJwtToken, addUserName} ) => {
 
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -35,6 +35,35 @@ const Login = ( {switchSignUp} ) => {
             passwordRef.current.focus();
         } else {
 
+            const accountInfo = {
+                accountname: userName,
+                password: password
+            }
+
+            fetch(HTTP.SERVER_URL + "/auth", {
+                method: HTTP.POST,
+                headers: {
+                    'Content-type': MediaType.JSON,
+                    'Accept': MediaType.JSON
+                },
+                body: JSON.stringify(accountInfo)
+                
+            }).then((res) => {
+                if(!res.ok){
+                    throw res;
+                }
+                return res;
+            }).then((res) => {
+                return res.json();
+            }).then((json) => {
+                var JWT_TOKEN = json.token;
+                if(JWT_TOKEN !== "" || JWT_TOKEN !== null){
+                    addJwtToken(JWT_TOKEN);
+                    addUserName(userName);
+                }
+            }).catch(error => {
+                alert(error);
+            });
         }
     };
 
@@ -133,6 +162,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispathToProps = (dispatch) => {
     return {
         switchSignUp: () => dispatch(actionCreators.switchMainPageRoute(PAGE_ROUTE.SIGNUP)),
+        addJwtToken: (jwtToken) => dispatch(actionCreators.addJwtToken(jwtToken)),
+        addUserName: (username) => dispatch(actionCreators.addUserName(username)),
     };
 }
 
