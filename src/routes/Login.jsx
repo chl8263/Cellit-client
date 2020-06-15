@@ -34,12 +34,11 @@ const Login = ( {switchSignUp, addJwtToken, addUserName} ) => {
             alert("Please fill out 'Password' field");
             passwordRef.current.focus();
         } else {
-
             const accountInfo = {
                 accountname: userName,
                 password: password
             }
-
+            // s: Ajax ----------------------------------
             fetch(HTTP.SERVER_URL + "/auth", {
                 method: HTTP.POST,
                 headers: {
@@ -64,6 +63,7 @@ const Login = ( {switchSignUp, addJwtToken, addUserName} ) => {
             }).catch(error => {
                 alert(error);
             });
+            // e: Ajax ----------------------------------
         }
     };
 

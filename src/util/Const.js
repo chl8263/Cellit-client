@@ -9,14 +9,25 @@ const HTTP = {
     POST: "POST",
     PUT: "PUT",
     DELETE: "DELETE",
+
+    // --- 2xx Success ---
+    STATUS_OK: 200,
+    STATUS_CREATED: 201,
+    STATUS_ACCEPTED: 202,
+    
+    // --- 4xx Client Error ---
+    STATUS_BAD_REQUEST: 400,
+    STATUS_UNAUTHORIZED: 401,
+    STATUS_NOT_FOUND: 404,
     
     SERVER_URL: "http://localhost:8081",
     BASIC_TOKEN_PREFIX: "Bearer ",
 }
 
 const MediaType = {
-    JSON : "application/json",
-    HTML : "text/html",
+    JSON: "application/json",
+    HAL_JSON: "application/hal+json",
+    HTML: "text/html",
 }
 
 

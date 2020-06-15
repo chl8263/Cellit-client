@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import $ from "jquery";
 
 import { actionCreators } from "../store";
-import { PAGE_ROUTE } from "../util/Const";
+import { PAGE_ROUTE, HTTP, MediaType} from "../util/Const";
 
 const SignUp = ( {switchLogin} ) => {
 
@@ -33,8 +33,37 @@ const SignUp = ( {switchLogin} ) => {
         if(password !== confirmPassword){
             alert("Not match password, Please check again.");
         }else {
-            alert("Create account successfully");
-            switchLogin();
+            const accountInfo = {
+                accountname: userName,
+                password: password
+            }
+            // s: Ajax ----------------------------------
+            fetch(HTTP.SERVER_URL + "/api/account", {
+                method: HTTP.POST,
+                headers: {
+                    'Content-type': MediaType.JSON,
+                    'Accept': MediaType.HAL_JSON
+                },
+                body: JSON.stringify(accountInfo)
+            }).then((res) => {
+                console.log(res);
+                if(!res.ok){
+                    throw res;
+                }
+                return res;
+            }).then((res) => {
+                if(res.status === HTTP.STATUS_CREATED){
+                    alert("Create account successfully");
+                    switchLogin();     
+                }
+                else throw res;
+            }).catch(error => {
+                alert("Cannot use this account , try another information.");
+            });
+            // e: Ajax ----------------------------------
+
+            // alert("Create account successfully");
+            // switchLogin();
         }
     };
 
