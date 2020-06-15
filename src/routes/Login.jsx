@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { actionCreators } from "../store";
 import { PAGE_ROUTE, HTTP, MediaType} from "../util/Const";
 
-const Login = ( {switchSignUp, addJwtToken, addUserName} ) => {
+const Login = ( {switchSignUp,switchMainBoard, addJwtToken, addUserName} ) => {
 
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -59,6 +59,7 @@ const Login = ( {switchSignUp, addJwtToken, addUserName} ) => {
                 if(JWT_TOKEN !== "" || JWT_TOKEN !== null){
                     addJwtToken(JWT_TOKEN);
                     addUserName(userName);
+                    switchMainBoard();
                 }
             }).catch(error => {
                 alert(error);
@@ -162,6 +163,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispathToProps = (dispatch) => {
     return {
         switchSignUp: () => dispatch(actionCreators.switchMainPageRoute(PAGE_ROUTE.SIGNUP)),
+        switchMainBoard: () => dispatch(actionCreators.switchMainPageRoute(PAGE_ROUTE.MAINBOARD)),
         addJwtToken: (jwtToken) => dispatch(actionCreators.addJwtToken(jwtToken)),
         addUserName: (username) => dispatch(actionCreators.addUserName(username)),
     };
