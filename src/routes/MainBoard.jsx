@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import $ from "jquery";
 import { connect } from "react-redux";
 
+import PreLoader from "../component/PreLoader";
+
 const MainBoard = () => {
+
+    useEffect(() => {
+        $(".preloader").fadeOut();
+    }, []);
+
     return (
         <>
             <header className="topbar" data-navbarbg="skin5">
+                <PreLoader />
                 <nav className="navbar top-navbar navbar-expand-md navbar-dark">
 
                     {/* <!-- ============================================================== -->

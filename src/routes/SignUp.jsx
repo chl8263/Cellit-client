@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import $ from "jquery";
 
+import PreLoader from "../component/PreLoader";
+
 import { actionCreators } from "../store";
 import { PAGE_ROUTE, HTTP, MediaType} from "../util/Const";
 
@@ -74,18 +76,7 @@ const SignUp = ( {switchLogin} ) => {
     return (
         <div className="main-wrapper">
 
-            {/* <!-- ============================================================== -->
-            <!-- Preloader - style you can find in spinners.css -->
-            <!-- ============================================================== --> */}
-            <div className="preloader">
-                <div className="lds-ripple">
-                    <div className="lds-pos"></div>
-                    <div className="lds-pos"></div>
-                </div>
-            </div>
-            {/* <!-- ============================================================== -->
-            <!-- Preloader - style you can find in spinners.css -->
-            <!-- ============================================================== --> */}
+            <PreLoader />
 
             <div className="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
                 <div className="auth-box bg-dark border-top border-secondary">
