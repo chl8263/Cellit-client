@@ -3,12 +3,21 @@ import $ from "jquery";
 import { connect } from "react-redux";
 
 import PreLoader from "../component/PreLoader";
+import { PAGE_ROUTE } from "../util/Const";
+import { actionCreators } from "../store";
 
-const MainBoard = () => {
+const MainBoard = ( {switchLogin, initJwtToken, initUserName} ) => {
 
     useEffect(() => {
-        $(".preloader").fadeOut();
+        $(".preloader").fadeOut(); // Remove preloader.
     }, []);
+
+    const onClickLogOut = (e) => {
+        e.preventDefault();
+        initJwtToken();
+        initUserName();
+        switchLogin();
+    }
 
     return (
         <>
@@ -185,7 +194,7 @@ const MainBoard = () => {
                                     <div className="dropdown-divider"></div>
                                     <a className="dropdown-item" href="javascript:void(0)"><i className="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
                                     <div className="dropdown-divider"></div>
-                                    <form id="logoutForm">
+                                    <form id="logoutForm" onSubmit={onClickLogOut}>
                                         <button className="dropdown-item" type="submit"><i className="fa fa-power-off m-r-5 m-l-5"></i> Logout</button>
                                     </form>
                                 </div>
@@ -260,4 +269,16 @@ const MainBoard = () => {
     );
 };
 
-export default connect() (MainBoard);
+const mapStateToProps = (state, ownProps) => {
+    return state;
+}
+
+const mapDispathToProps = (dispatch) => {
+    return {
+        switchLogin: () => dispatch(actionCreators.switchMainPageRoute(PAGE_ROUTE.LOGIN)),
+        initJwtToken: () => dispatch(actionCreators.addJwtToken("")),
+        initUserName: () => dispatch(actionCreators.addUserName("")),
+    };
+}
+
+export default connect(mapStateToProps, mapDispathToProps) (MainBoard);
