@@ -10,6 +10,8 @@ const MainBoard = ( {switchLogin, initJwtToken, initUserName} ) => {
 
     useEffect(() => {
         $(".preloader").fadeOut(); // Remove preloader.
+        
+        
     }, []);
 
     const onClickLogOut = (e) => {

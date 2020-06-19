@@ -6,6 +6,7 @@ import PreLoader from "../component/PreLoader";
 
 import { actionCreators } from "../store";
 import { PAGE_ROUTE, HTTP, MediaType} from "../util/Const";
+import errorCodeToAlertCreater from "../util/ErrorCodeToAlertCreater";
 
 const SignUp = ( {switchLogin} ) => {
 
@@ -48,8 +49,7 @@ const SignUp = ( {switchLogin} ) => {
                 },
                 body: JSON.stringify(accountInfo)
             }).then((res) => {
-                console.log(res);
-                if(!res.ok){
+                if(!res.ok && res.status !== HTTP.STATUS_CREATED && res.status !== HTTP.STATUS_BAD_REQUEST){
                     throw res;
                 }
                 return res;
@@ -57,8 +57,14 @@ const SignUp = ( {switchLogin} ) => {
                 if(res.status === HTTP.STATUS_CREATED){
                     alert("Create account successfully");
                     switchLogin();     
+                }else if(res.status === HTTP.STATUS_BAD_REQUEST){
+                    return res.json();
                 }
                 else throw res;
+            }).then((res) => {
+                console.log(res);
+                errorCodeToAlertCreater(res);
+
             }).catch(error => {
                 alert("Cannot use this account , try another information.");
             });

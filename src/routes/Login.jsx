@@ -64,7 +64,7 @@ const Login = ( {switchSignUp,switchMainBoard, addJwtToken, addUserName} ) => {
                     switchMainBoard();
                 }
             }).catch(error => {
-                alert(error);
+                alert("Please check account again.");
             });
             // e: Ajax ----------------------------------
         }
