@@ -62,9 +62,7 @@ const SignUp = ( {switchLogin} ) => {
                 }
                 else throw res;
             }).then((res) => {
-                console.log(res);
                 errorCodeToAlertCreater(res);
-
             }).catch(error => {
                 alert("Cannot use this account , try another information.");
             });
