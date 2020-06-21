@@ -58,6 +58,7 @@ const SignUp = ( {switchLogin} ) => {
                     alert("Create account successfully");
                     switchLogin();     
                 }else if(res.status === HTTP.STATUS_BAD_REQUEST){
+                    
                     return res.json();
                 }
                 else throw res;

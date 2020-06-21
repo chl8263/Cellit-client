@@ -1,18 +1,72 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import { connect } from "react-redux";
 
 import PreLoader from "../component/PreLoader";
-import { PAGE_ROUTE } from "../util/Const";
+import { PAGE_ROUTE, HTTP, MediaType} from "../util/Const";
 import { actionCreators } from "../store";
+import errorCodeToAlertCreater from "../util/ErrorCodeToAlertCreater";
 
-const MainBoard = ( {switchLogin, initJwtToken, initUserName} ) => {
+
+const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserName} ) => {
+
+    const [createCellname, setCreateCellname] = useState("");
+
+    
 
     useEffect(() => {
         $(".preloader").fadeOut(); // Remove preloader.
         
         
     }, []);
+
+    const onChangeCreateCellname = (e) => {
+        setCreateCellname(e.target.value);
+    };
+
+    const onSubmitCreateCell = (e) => {
+        e.preventDefault();
+        
+        const jwt = appInfo.appInfo.jwtToken;
+
+        const cellInfo = {
+            cellName: createCellname,
+        }
+        // /api/cells
+        //s: Ajax ----------------------------------
+        fetch(HTTP.SERVER_URL + "/api/cells", {
+            method: HTTP.POST,
+            headers: {
+                'Content-type': MediaType.JSON,
+                'Accept': MediaType.HAL_JSON,
+                'Authorization': HTTP.BASIC_TOKEN_PREFIX + jwt
+            },
+            body: JSON.stringify(cellInfo)
+        }).then((res) => {
+            if(!res.ok && res.status !== HTTP.STATUS_CREATED && res.status !== HTTP.STATUS_BAD_REQUEST){
+                throw res;
+            }
+            return res;
+        }).then((res) => {
+            if(res.status === HTTP.STATUS_CREATED){
+                console.log(res);
+                alert("Create cell successfully");
+            }else if(res.status === HTTP.STATUS_BAD_REQUEST){
+                return res.json();
+            }
+            else throw res;
+        }).then((res) => {
+            try{
+                errorCodeToAlertCreater(res);
+            }catch(error){
+                console.error(error);
+            }
+        }).catch(error => {
+            console.log(error);
+            alert("Cannot create cell, Please try later.");
+        });
+        // e: Ajax ----------------------------------
+    };
 
     const onClickLogOut = (e) => {
         e.preventDefault();
@@ -54,7 +108,7 @@ const MainBoard = ( {switchLogin, initJwtToken, initUserName} ) => {
                             <!-- Search -->
                             <!-- ============================================================== --> */}
                             <li className="nav-item search-box">
-                                <input type="text" class="form-control" placeholder="Search Cell" style={{"margin-top": "15px", width: 300}}/>
+                                <input type="text" className="form-control" placeholder="Search Cell" style={{"margin-top": "15px", width: 300}}/>
                             </li>
                             
                             {/* <li className="nav-item search-box"> <a className="nav-link waves-effect waves-dark" href="javascript:void(0)"><i className="ti-search"></i></a>
@@ -239,31 +293,32 @@ const MainBoard = ( {switchLogin, initJwtToken, initUserName} ) => {
                             <h4 className="modal-title"><strong>Create new Cell Unit</strong></h4>
                             <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
-                        <div className="modal-body">
-                            <form id="createNewCellUnitForm">
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <label className="control-label">Cell Unit Name</label>
-                                        <input id="cellName" name="cellName" className="form-control form-white" placeholder="Enter name" type="text"  />
+                        <form id="createNewCellUnitForm" onSubmit={onSubmitCreateCell}>
+                            <div className="modal-body">
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <label className="control-label">Cell Unit Name</label>
+                                            <input id="cellName" name="cellName" className="form-control form-white" onChange={onChangeCreateCellname} value={createCellname} placeholder="Enter name" type="text"  />
+                                        </div>
+                                        <div className="col-md-6">
+                                            <label className="control-label">Choose Category Color</label>
+                                            <select className="form-control form-white" data-placeholder="Choose a color..." name="category-color">
+                                                <option value="success">Success</option>
+                                                <option value="danger">Danger</option>
+                                                <option value="info">Info</option>
+                                                <option value="primary">Primary</option>
+                                                <option value="warning">Warning</option>
+                                                <option value="inverse">Inverse</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div className="col-md-6">
-                                        <label className="control-label">Choose Category Color</label>
-                                        <select className="form-control form-white" data-placeholder="Choose a color..." name="category-color">
-                                            <option value="success">Success</option>
-                                            <option value="danger">Danger</option>
-                                            <option value="info">Info</option>
-                                            <option value="primary">Primary</option>
-                                            <option value="warning">Warning</option>
-                                            <option value="inverse">Inverse</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div className="modal-footer">
-                            <button id="createNewCellUnitSubmitButton" type="button" className="btn btn-danger waves-effect waves-light save-category">Save</button>
-                            <button type="button" className="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                        </div>
+                                
+                            </div>
+                            <div className="modal-footer">
+                                <button type="submit" className="btn btn-danger waves-effect waves-light save-category">Save</button>
+                                <button type="button" className="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -272,7 +327,7 @@ const MainBoard = ( {switchLogin, initJwtToken, initUserName} ) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-    return state;
+    return { appInfo: state };
 }
 
 const mapDispathToProps = (dispatch) => {

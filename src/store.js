@@ -9,7 +9,7 @@ const addUserName = createAction("ADDUSERNAME");
 const reducer = createReducer(
     {
         mainPageRoute: PAGE_ROUTE.LOGIN,
-        clientInfo: {
+        appInfo: {
             jwtToken: "",
             currentUserName: ""
         },
@@ -20,16 +20,16 @@ const reducer = createReducer(
         },
         [addJwtToken]: (state, action) => {
             return { ...state, 
-                clientInfo: {
-                    ...state.clientInfo,
+                appInfo: {
+                    ...state.appInfo,
                     jwtToken: action.payload,
                 },
             };
         },
         [addUserName]: (state, action) => {
             return { ...state, 
-                clientInfo: {
-                    ...state.clientInfo,
+                appInfo: {
+                    ...state.appInfo,
                     currentUserName: action.payload,
                 },
             };
