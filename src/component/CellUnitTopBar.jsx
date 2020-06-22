@@ -8,6 +8,7 @@ const CellUnitTopBar = () => {
                 <!-- toggle and nav items -->
                 <!-- ============================================================== --> */}
                 <ul className="navbar-nav float-left mr-auto">
+                    
                     <li className="nav-item search-box">
                         <input type="text" className="form-control" placeholder="Search Cell" style={{"margin-left": "15px", width: 300}}/>
                     </li>

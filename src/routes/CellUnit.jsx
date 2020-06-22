@@ -2,21 +2,30 @@ import React, { useEffect } from "react";
 import $ from "jquery";
 import { connect } from "react-redux";
 
+import { actionCreators } from "../store";
+import { PAGE_ROUTE, HTTP, MediaType, ROLE} from "../util/Const";
+
 import PreLoader from "../component/PreLoader";
 import CellUnitTopBar from "../component/CellUnitTopBar";
 import CellUnitSide from "../component/CellUnitSide";
 
-const CellUnit = () => {
+
+const CellUnit = ({ switchMainBoard }) => {
 
     useEffect(() => {
+        history.pushState('','', '/CellUnit');
         $(".preloader").fadeOut(); // Remove preloader.
     }, []);
+
+    const onClickReturnMainBoard = () => {
+        switchMainBoard();
+    }
 
     return(
         <div id="main-wrapper">
 
             <PreLoader />
-            
+
             <header className="topbar" data-navbarbg="skin5">
                 <nav className="navbar top-navbar navbar-expand-md navbar-dark">
                     <div className="navbar-header" data-logobg="skin5">
@@ -25,27 +34,22 @@ const CellUnit = () => {
                         {/* <!-- ============================================================== -->
                         <!-- Logo -->
                         <!-- ============================================================== --> */}
-                        <a className="navbar-brand" href="index.html">
+                        <a className="navbar-brand" >
                             {/* <!-- Logo icon --> */}
                             <b className="logo-icon p-l-10">
-                                {/* <!--You can put here icon as well // <i className="wi wi-sunset"></i> //--> */}
-                                {/* <!-- Dark Logo icon --> */}
-                                <img src="../../assets/images/logo-icon.png" alt="homepage" className="light-logo" />
-                            
+                                <img onClick={onClickReturnMainBoard} style={{"cursor": "pointer"}} src="./public/assets/images/returnArrow.png" alt="homepage" className="light-logo" />
                             </b>
                             {/* <!--End Logo icon -->
                             <!-- Logo text --> */}
                             <span className="logo-text">
                                 {/* <!-- dark Logo text --> */}
-                                <img src="../../assets/images/logo-text.png" alt="homepage" className="light-logo" />
-                                
+                                <div style={{"margin-left": "40px"}}>Account</div>
                             </span>
                             {/* <!-- Logo icon --> */}
                             {/* <!-- <b className="logo-icon"> -->
                                 <!--You can put here icon as well // <i className="wi wi-sunset"></i> //-->
                                 <!-- Dark Logo icon -->
                                 <!-- <img src="../../assets/images/logo-text.png" alt="homepage" className="light-logo" /> -->
-                                
                             <!-- </b> -->
                             <!--End Logo icon --> */}
                         </a>
@@ -133,6 +137,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispathToProps = (dispatch) => {
     return {
+        switchMainBoard: () => dispatch(actionCreators.switchMainPageRoute(PAGE_ROUTE.MAINBOARD)),
     };
 }
 
