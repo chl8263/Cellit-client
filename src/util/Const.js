@@ -1,3 +1,8 @@
+const ROLE = {
+    USER: "ROLE_USER",
+    ADMIN: "ROLE_ADMIN",
+}
+
 const PAGE_ROUTE  = {
     LOGIN: "LOGIN",
     SIGNUP: "SIGNUP",
@@ -33,4 +38,4 @@ const MediaType = {
 }
 
 
-export { PAGE_ROUTE, HTTP, MediaType};
+export { PAGE_ROUTE, HTTP, MediaType, ROLE};

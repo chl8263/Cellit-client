@@ -3,7 +3,9 @@ import { PAGE_ROUTE } from "./util/Const"
 
 const switchMainPageRoute = createAction("SWITCHMAINPAGEROUTE");
 const addJwtToken = createAction("ADDJWTTOKEN");
-const addUserName = createAction("ADDUSERNAME");
+const addUserInfo = createAction("ADDUSERINFO");
+// const addUserName = createAction("ADDUSERNAME");
+// const addUserId = createAction("ADDUSERNAME");
 
 
 const reducer = createReducer(
@@ -11,7 +13,9 @@ const reducer = createReducer(
         mainPageRoute: PAGE_ROUTE.LOGIN,
         appInfo: {
             jwtToken: "",
-            currentUserName: ""
+            currentUserId: "",
+            currentUserName: "",
+            currentUserRole: ""
         },
     },
     {
@@ -26,14 +30,24 @@ const reducer = createReducer(
                 },
             };
         },
-        [addUserName]: (state, action) => {
+        [addUserInfo]: (state, action) => {
             return { ...state, 
                 appInfo: {
                     ...state.appInfo,
-                    currentUserName: action.payload,
+                    currentUserId: action.payload.accountId,
+                    currentUserName: action.payload.accountName,
+                    currentUserRole: action.payload.role,
                 },
             };
         },
+        // [addUserName]: (state, action) => {
+        //     return { ...state, 
+        //         appInfo: {
+        //             ...state.appInfo,
+        //             currentUserName: action.payload,
+        //         },
+        //     };
+        // },
     }
 );
 
@@ -42,7 +56,8 @@ const store = configureStore({reducer});
 export const actionCreators = {
     switchMainPageRoute,
     addJwtToken,
-    addUserName,
+    addUserInfo,
+    //addUserName,
 }
 
 export default store;

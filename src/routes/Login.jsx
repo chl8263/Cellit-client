@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 import PreLoader from "../component/PreLoader";
 
 import { actionCreators } from "../store";
-import { PAGE_ROUTE, HTTP, MediaType} from "../util/Const";
+import { PAGE_ROUTE, HTTP, MediaType, ROLE} from "../util/Const";
 
-const Login = ( {switchSignUp,switchMainBoard, addJwtToken, addUserName} ) => {
+const Login = ( {switchSignUp,switchMainBoard, addJwtToken, addUserInfo} ) => {
 
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -60,8 +60,32 @@ const Login = ( {switchSignUp,switchMainBoard, addJwtToken, addUserName} ) => {
                 var JWT_TOKEN = json.token;
                 if(JWT_TOKEN !== "" || JWT_TOKEN !== null){
                     addJwtToken(JWT_TOKEN);
-                    addUserName(userName);
-                    switchMainBoard();
+                    
+                    
+                    fetch(HTTP.SERVER_URL + `/api/account/${userName}`, {
+                        method: HTTP.GET,
+                        headers: {
+                            'Content-type': MediaType.JSON,
+                            'Accept': MediaType.HAL_JSON,
+                            'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
+                        },
+                    }).then((res) => {
+                        if(!res.ok){
+                            throw res;
+                        }
+                        return res;
+                    }).then((res) => {
+                        return res.json();
+                    }).then((json) => {
+                        addUserInfo(json)
+                        if(json.role === ROLE.USER){
+                            switchMainBoard();
+                        }else if(json.role === ROLE.ADMIN){
+                            // TODO : switch ADMIN page..
+                        }else {throw json;}
+                    }).catch(error => {
+                        alert("Please check account again.");
+                    });
                 }
             }).catch(error => {
                 alert("Please check account again.");
@@ -156,7 +180,8 @@ const mapDispathToProps = (dispatch) => {
         switchSignUp: () => dispatch(actionCreators.switchMainPageRoute(PAGE_ROUTE.SIGNUP)),
         switchMainBoard: () => dispatch(actionCreators.switchMainPageRoute(PAGE_ROUTE.MAINBOARD)),
         addJwtToken: (jwtToken) => dispatch(actionCreators.addJwtToken(jwtToken)),
-        addUserName: (username) => dispatch(actionCreators.addUserName(username)),
+        addUserInfo: (userInfo) => dispatch(actionCreators.addUserInfo(userInfo)),
+        //addUserName: (username) => dispatch(actionCreators.addUserName(username)),
     };
 }
 
