@@ -16,6 +16,7 @@ const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserInfo} ) => {
     const [cells, setCells] = useState([]);
 
     useEffect(() => {
+        history.pushState('','', '/MainBoard');
         $(".preloader").fadeOut(); // Remove preloader.
 
         getCells(); //get Cells with current user
