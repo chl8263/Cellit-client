@@ -10,7 +10,7 @@ import errorCodeToAlertCreater from "../util/ErrorCodeToAlertCreater";
 import CellsList from "../component/CellsList";
 
 
-const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserName} ) => {
+const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserInfo} ) => {
 
     const [createCellname, setCreateCellname] = useState("");
     const [cells, setCells] = useState([]);
@@ -111,7 +111,7 @@ const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserName} ) => {
     const onClickLogOut = (e) => {
         e.preventDefault();
         initJwtToken();
-        initUserName();
+        initUserInfo();
         switchLogin();
     };
 
@@ -363,7 +363,7 @@ const mapDispathToProps = (dispatch) => {
     return {
         switchLogin: () => dispatch(actionCreators.switchMainPageRoute(PAGE_ROUTE.LOGIN)),
         initJwtToken: () => dispatch(actionCreators.addJwtToken("")),
-        initUserName: () => dispatch(actionCreators.addUserName("")),
+        initUserInfo: () => dispatch(actionCreators.addUserInfo("")),
     };
 }
 

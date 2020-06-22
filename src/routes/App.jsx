@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Login from "../routes/Login";
 import SignUp from "../routes/SignUp";
 import MainBoard from "../routes/MainBoard";
+import CellUnit from "../routes/CellUnit";
 import { PAGE_ROUTE } from "../util/Const";
 
 const App = ( {page} ) => {
@@ -24,6 +25,12 @@ const App = ( {page} ) => {
         return (
             <>
                 <MainBoard />
+            </>
+        )
+    }else if(page === PAGE_ROUTE.CELLUNIT){
+        return (
+            <>
+                <CellUnit />
             </>
         )
     }else {

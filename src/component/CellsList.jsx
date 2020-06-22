@@ -1,13 +1,24 @@
 import React from "react"
+import { connect } from "react-redux";
 
-const CellsList = ({cellInfo}) => {
+import { PAGE_ROUTE } from "../util/Const";
+import { actionCreators } from "../store";
+
+
+const CellsList = ({cellInfo, appInfo, switchCellUnit}) => {
+
+    const onClickCellsList = () => {
+        switchCellUnit();
+    }
 
     return (
         <>
             {console.log(1111, cellInfo)}
+            {console.log(2222, appInfo)}
+            {console.log(3333, switchCellUnit)}
             <div className="comment-widgets scrollable">
                 {/* <!-- Comment Row --> */}
-                <div className="d-flex flex-row comment-row m-t-0">
+                <div className="d-flex flex-row comment-row m-t-0" onClick={onClickCellsList}>
                     <div className="p-2"><img src="./public/assets/images/users/1.jpg" alt="user" width="50" className="rounded-circle"/></div>
                     <div className="comment-text w-100">
                         <h6 className="font-medium">{cellInfo.cellName}</h6>
@@ -25,4 +36,14 @@ const CellsList = ({cellInfo}) => {
     );
 };
 
-export default CellsList;
+const mapStateToProps = (state, ownProps) => {
+    return { appInfo: state };
+}
+
+const mapDispathToProps = (dispatch) => {
+    return {
+        switchCellUnit: () => dispatch(actionCreators.switchMainPageRoute(PAGE_ROUTE.CELLUNIT)),
+    };
+}
+
+export default connect(mapStateToProps, mapDispathToProps) (CellsList);
