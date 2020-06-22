@@ -13,10 +13,12 @@ const reducer = createReducer(
         mainPageRoute: PAGE_ROUTE.LOGIN,
         appInfo: {
             jwtToken: "",
+        },
+        userInfo: {
             currentUserId: "",
             currentUserName: "",
             currentUserRole: ""
-        },
+        }
     },
     {
         [switchMainPageRoute]: (state, action) => {
@@ -32,12 +34,18 @@ const reducer = createReducer(
         },
         [addUserInfo]: (state, action) => {
             return { ...state, 
-                appInfo: {
-                    ...state.appInfo,
+                userInfo: {
+                    ...state.userInfo,
                     currentUserId: action.payload.accountId,
                     currentUserName: action.payload.accountName,
                     currentUserRole: action.payload.role,
-                },
+                }
+                // appInfo: {
+                //     ...state.appInfo,
+                //     currentUserId: action.payload.accountId,
+                //     currentUserName: action.payload.accountName,
+                //     currentUserRole: action.payload.role,
+                // },
             };
         },
         // [addUserName]: (state, action) => {

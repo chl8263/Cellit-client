@@ -7,39 +7,77 @@ import { PAGE_ROUTE, HTTP, MediaType} from "../util/Const";
 import { actionCreators } from "../store";
 import errorCodeToAlertCreater from "../util/ErrorCodeToAlertCreater";
 
+import CellsList from "../component/CellsList";
+
 
 const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserName} ) => {
 
     const [createCellname, setCreateCellname] = useState("");
-
-    
+    const [cells, setCells] = useState([]);
 
     useEffect(() => {
         $(".preloader").fadeOut(); // Remove preloader.
-        
-        
+
+        getCells(); //get Cells with current user
     }, []);
 
     const onChangeCreateCellname = (e) => {
         setCreateCellname(e.target.value);
     };
 
+    const getCells = () => {
+        const JWT_TOKEN = appInfo.appInfo.jwtToken;
+        //s: Ajax ----------------------------------
+        fetch(HTTP.SERVER_URL + `/api/account/${appInfo.userInfo.currentUserId}/cells`, {
+            method: HTTP.GET,
+            headers: {
+                'Content-type': MediaType.JSON,
+                'Accept': MediaType.HAL_JSON,
+                'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
+            },
+        }).then((res) => {
+            if(!res.ok){
+                throw res;
+            }
+            return res;
+        }).then((res) => {
+            return res.json();
+        }).then((res) => {
+            console.log(res);
+            //cellEntityModelList
+            if("_embedded" in res ){
+                console.log(111);
+                console.log(res._embedded.cellEntityModelList);
+                setCells(res._embedded.cellEntityModelList);
+                // setCells(pre => [...pre, "aa"]);
+                // console.log(cells);
+            }else {console.log(2);}
+        }).catch(error => {
+            console.log(error);
+            alert("Cannot create cell, Please try later.");
+        });
+        // e: Ajax ----------------------------------
+    };
+
     const onSubmitCreateCell = (e) => {
         e.preventDefault();
+
+        console.log(cells);
         
-        const jwt = appInfo.appInfo.jwtToken;
+        const JWT_TOKEN = appInfo.appInfo.jwtToken;
 
         const cellInfo = {
             cellName: createCellname,
         }
-        // /api/cells
+        const modalClose = document.getElementById("modalClose");
+        
         //s: Ajax ----------------------------------
         fetch(HTTP.SERVER_URL + "/api/cells", {
             method: HTTP.POST,
             headers: {
                 'Content-type': MediaType.JSON,
                 'Accept': MediaType.HAL_JSON,
-                'Authorization': HTTP.BASIC_TOKEN_PREFIX + jwt
+                'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
             },
             body: JSON.stringify(cellInfo)
         }).then((res) => {
@@ -51,6 +89,8 @@ const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserName} ) => {
             if(res.status === HTTP.STATUS_CREATED){
                 console.log(res);
                 alert("Create cell successfully");
+                modalClose.click();
+                getCells();
             }else if(res.status === HTTP.STATUS_BAD_REQUEST){
                 return res.json();
             }
@@ -73,7 +113,7 @@ const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserName} ) => {
         initJwtToken();
         initUserName();
         switchLogin();
-    }
+    };
 
     return (
         <>
@@ -267,22 +307,11 @@ const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserName} ) => {
                 <div className="card-body">
                     <h4 className="card-title">My Cell Unit</h4>
                 </div>
-                <div className="comment-widgets scrollable">
-                    {/* <!-- Comment Row --> */}
-                    <div className="d-flex flex-row comment-row m-t-0">
-                        <div className="p-2"><img src="./public/assets/images/users/1.jpg" alt="user" width="50" className="rounded-circle"/></div>
-                        <div className="comment-text w-100">
-                            <h6 className="font-medium">James Anderson</h6>
-                            <span className="m-b-15 d-block">Lorem Ipsum is simply dummy text of the printing and type setting industry. </span>
-                            <div className="comment-footer">
-                                <span className="text-muted float-right">April 14, 2016</span>
-                                <button type="button" className="btn btn-cyan btn-sm">Edit</button>
-                                <button type="button" className="btn btn-success btn-sm">Publish</button>
-                                <button type="button" className="btn btn-danger btn-sm">Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
+                {cells.map( x => {
+                    return <CellsList cellInfo={x} />
+                })}
+                
             </div>
 
             {/* <!-- Modal Add Category --> */}
@@ -291,7 +320,7 @@ const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserName} ) => {
                     <div className="modal-content">
                         <div className="modal-header">
                             <h4 className="modal-title"><strong>Create new Cell Unit</strong></h4>
-                            <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <button id="modalClose" type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <form id="createNewCellUnitForm" onSubmit={onSubmitCreateCell}>
                             <div className="modal-body">
