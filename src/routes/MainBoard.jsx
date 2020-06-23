@@ -44,17 +44,10 @@ const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserInfo} ) => {
         }).then((res) => {
             return res.json();
         }).then((res) => {
-            console.log(res);
-            //cellEntityModelList
             if("_embedded" in res ){
-                console.log(111);
-                console.log(res._embedded.cellEntityModelList);
                 setCells(res._embedded.cellEntityModelList);
-                // setCells(pre => [...pre, "aa"]);
-                // console.log(cells);
             }else {console.log(2);}
         }).catch(error => {
-            console.log(error);
             alert("Cannot create cell, Please try later.");
         });
         // e: Ajax ----------------------------------
@@ -63,8 +56,6 @@ const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserInfo} ) => {
     const onSubmitCreateCell = (e) => {
         e.preventDefault();
 
-        console.log(cells);
-        
         const JWT_TOKEN = appInfo.appInfo.jwtToken;
 
         const cellInfo = {
@@ -88,7 +79,6 @@ const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserInfo} ) => {
             return res;
         }).then((res) => {
             if(res.status === HTTP.STATUS_CREATED){
-                console.log(res);
                 alert("Create cell successfully");
                 modalClose.click();
                 getCells();
@@ -103,7 +93,7 @@ const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserInfo} ) => {
                 console.error(error);
             }
         }).catch(error => {
-            console.log(error);
+            console.error(error);
             alert("Cannot create cell, Please try later.");
         });
         // e: Ajax ----------------------------------
@@ -309,10 +299,13 @@ const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserInfo} ) => {
                     <h4 className="card-title">My Cell Unit</h4>
                 </div>
                 
-                {cells.map( x => {
-                    return <CellsList cellInfo={x} />
-                })}
-                
+                {/* <div className="doScroll scroll-y"> */}
+                <div className="doScroll scrollable"  style={{"height": "80vh"}}>
+                    {cells.map( x => {
+                        return <CellsList key={x.cellId} cellInfo={x} />
+                    })}
+                </div>
+
             </div>
 
             {/* <!-- Modal Add Category --> */}

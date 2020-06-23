@@ -12348,6 +12348,11 @@ label {
 .scrollable {
   position: relative; }
 
+.doScroll {
+  overflow:scroll;
+  width:500px; 
+  height:150px; }
+
 .error-box {
   height: 100%;
   position: fixed;

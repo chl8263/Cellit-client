@@ -13,10 +13,7 @@ const CellsList = ({cellInfo, appInfo, switchCellUnit}) => {
 
     return (
         <>
-            {console.log(1111, cellInfo)}
-            {console.log(2222, appInfo)}
-            {console.log(3333, switchCellUnit)}
-            <div className="comment-widgets scrollable">
+            <div className="comment-widgets">
                 {/* <!-- Comment Row --> */}
                 <div className="d-flex flex-row comment-row m-t-0" onClick={onClickCellsList}>
                     <div className="p-2"><img src="./public/assets/images/users/1.jpg" alt="user" width="50" className="rounded-circle"/></div>
