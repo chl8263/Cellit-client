@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import { connect } from "react-redux";
 
@@ -24,6 +24,8 @@ const init = () => {
 
 const ChannelContainer = ({ appInfo }) => {
 
+    const [channels, setChannels] = useState([]);
+
     useEffect(() => {
         init();
 
@@ -45,7 +47,7 @@ const ChannelContainer = ({ appInfo }) => {
         }).then((res) => {
             return res.json();
         }).then((res) => {
-            console.log(res);
+            setChannels(res._embedded.channelEntityModelList);
         }).catch(error => {
             console.error(error);
             alert("Cannot load channel list");
@@ -57,8 +59,11 @@ const ChannelContainer = ({ appInfo }) => {
         <>
             <li className="sidebar-item sideContainer sideContainer-open"> <a className="sidebar-link has-arrow waves-effect waves-dark" aria-expanded="false"><span className="hide-menu">Channel </span></a>
                 <ul aria-expanded="false" className="collapse first-level">
-                    <ChannelChild />
-                    <li className="sidebar-item"><a href="form-wizard.html" className="sidebar-link"><i className="mdi mdi-pound"></i><span className="hide-menu"> Form Wizard </span></a></li>
+                    {channels.map(x => {
+                        return <ChannelChild channelId={x.channelId} channelName={x.channelName}/> 
+                    })}
+                    
+                    {/* <li className="sidebar-item"><a href="form-wizard.html" className="sidebar-link"><i className="mdi mdi-pound"></i><span className="hide-menu"> Form Wizard </span></a></li> */}
                 </ul>
             </li>
         </>
