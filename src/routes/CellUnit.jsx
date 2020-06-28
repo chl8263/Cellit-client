@@ -10,7 +10,7 @@ import CellUnitTopBar from "../component/CellUnitTopBar";
 import CellUnitSide from "../component/CellUnitSide";
 
 
-const CellUnit = ({ switchMainBoard }) => {
+const CellUnit = ({ switchMainBoard, appInfo }) => {
 
     useEffect(() => {
         history.pushState('','', '/CellUnit');
