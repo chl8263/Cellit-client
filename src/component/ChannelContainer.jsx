@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 import $ from "jquery";
+import { connect } from "react-redux";
+
+import { HTTP, MediaType } from "../util/Const";
 
 import ChannelChild from "../component/ChannelChild";
 
@@ -19,15 +22,40 @@ const init = () => {
     });
 }
 
-const ChannelContainer = () => {
+const ChannelContainer = ({ appInfo }) => {
 
     useEffect(() => {
         init();
+
+        const cellId = appInfo.cellInfo.cellId;
+        const JWT_TOKEN = appInfo.appInfo.jwtToken;
+
+        // s: Ajax ----------------------------------
+        fetch(HTTP.SERVER_URL + `/api/cells/${cellId}/channels`, {
+            method: HTTP.GET,
+            headers: {
+                'Accept': MediaType.HAL_JSON,
+                'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
+            },
+        }).then((res) => {
+            if(!res.ok){
+                throw res;
+            }
+            return res;
+        }).then((res) => {
+            return res.json();
+        }).then((res) => {
+            console.log(res);
+        }).catch(error => {
+            console.error(error);
+            alert("Cannot load channel list");
+        });
+        // e: Ajax ----------------------------------
     }, []);
 
     return (
         <>
-            <li className="sidebar-item sideContainer sideContainer-open"> <a className="sidebar-link has-arrow waves-effect waves-dark" aria-expanded="false"><span className="hide-menu">Forms </span></a>
+            <li className="sidebar-item sideContainer sideContainer-open"> <a className="sidebar-link has-arrow waves-effect waves-dark" aria-expanded="false"><span className="hide-menu">Channel </span></a>
                 <ul aria-expanded="false" className="collapse first-level">
                     <ChannelChild />
                     <li className="sidebar-item"><a href="form-wizard.html" className="sidebar-link"><i className="mdi mdi-pound"></i><span className="hide-menu"> Form Wizard </span></a></li>
@@ -35,6 +63,16 @@ const ChannelContainer = () => {
             </li>
         </>
     );
+};
+
+const mapStateToProps = (state, ownProps) => {
+    return { appInfo: state };
 }
 
-export default ChannelContainer;
+const mapDispathToProps = (dispatch) => {
+    return {
+        //switchMainBoard: () => dispatch(actionCreators.switchMainPageRoute(PAGE_ROUTE.MAINBOARD)),
+    };
+}
+
+export default connect(mapStateToProps, mapDispathToProps) (ChannelContainer);

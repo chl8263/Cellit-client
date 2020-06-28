@@ -5,7 +5,7 @@ import ChannelContainer from "../component/ChannelContainer";
 const CellUnitSide = () => {
 
     useEffect(() => {
-
+        
     }, []);
 
     return (
