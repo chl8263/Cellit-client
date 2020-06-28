@@ -4,7 +4,7 @@ import { PAGE_ROUTE } from "./util/Const"
 const switchMainPageRoute = createAction("SWITCHMAINPAGEROUTE");
 const addJwtToken = createAction("ADDJWTTOKEN");
 const addUserInfo = createAction("ADDUSERINFO");
-const renewCellId = createAction("RENEWCELLID");
+const renewCellInfo = createAction("RENEWCELLINFO");
 // const addUserName = createAction("ADDUSERNAME");
 // const addUserId = createAction("ADDUSERNAME");
 
@@ -22,6 +22,7 @@ const reducer = createReducer(
         },
         cellInfo: {
             cellId: 0,
+            role: "",
         },
     },
     {
@@ -52,10 +53,11 @@ const reducer = createReducer(
                 // },
             };
         },
-        [renewCellId]: (state, action) => {
+        [renewCellInfo]: (state, action) => {
             return { ...state, 
                 cellInfo: {
-                    cellId: action.payload,
+                    cellId: action.payload.cellId,
+                    role: action.payload.role,
                 },
             };
         },
@@ -76,7 +78,7 @@ export const actionCreators = {
     switchMainPageRoute,
     addJwtToken,
     addUserInfo,
-    renewCellId,
+    renewCellInfo,
     //addUserName,
 }
 

@@ -5,12 +5,11 @@ import { PAGE_ROUTE } from "../util/Const";
 import { actionCreators } from "../store";
 
 
-const CellsList = ({cellInfo, appInfo, switchCellUnit, renewCellId}) => {
+const CellsList = ({cellInfo, appInfo, switchCellUnit, renewCellInfo}) => {
 
     const onClickCellsList = () => {
-        console.log(cellInfo);
         switchCellUnit();
-        renewCellId(cellInfo.cellId);
+        renewCellInfo(cellInfo);
     }
 
     return (
@@ -42,7 +41,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispathToProps = (dispatch) => {
     return {
         switchCellUnit: () => dispatch(actionCreators.switchMainPageRoute(PAGE_ROUTE.CELLUNIT)),
-        renewCellId: (cellId) => dispatch(actionCreators.renewCellId(cellId)),
+        renewCellInfo: (cellInfo) => dispatch(actionCreators.renewCellInfo(cellInfo)),
     };
 }
 

@@ -45,6 +45,7 @@ const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserInfo} ) => {
             return res.json();
         }).then((res) => {
             if("_embedded" in res ){
+                console.log(res._embedded.cellEntityModelList);
                 setCells(res._embedded.cellEntityModelList);
             }else {console.log(2);}
         }).catch(error => {
