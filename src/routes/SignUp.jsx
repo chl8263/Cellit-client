@@ -54,17 +54,19 @@ const SignUp = ( {switchLogin} ) => {
                 }
                 return res;
             }).then((res) => {
+                console.log(res);
                 if(res.status === HTTP.STATUS_CREATED){
                     alert("Create account successfully");
                     switchLogin();     
                 }else if(res.status === HTTP.STATUS_BAD_REQUEST){
-                    
                     return res.json();
                 }
                 else throw res;
             }).then((res) => {
-                errorCodeToAlertCreater(res);
+                if(res !== undefined)
+                    errorCodeToAlertCreater(res);
             }).catch(error => {
+                console.error(error)
                 alert("Cannot use this account , try another information.");
             });
             // e: Ajax ----------------------------------
