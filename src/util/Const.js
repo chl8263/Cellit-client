@@ -37,5 +37,11 @@ const MediaType = {
     HTML: "text/html",
 }
 
+const CellUnitRoles = {
+    CREATOR: "CREATOR",
+    ADMIN: "ADMIN",
+    USER: "USER",
+}
 
-export { PAGE_ROUTE, HTTP, MediaType, ROLE};
+
+export { PAGE_ROUTE, HTTP, MediaType, ROLE, CellUnitRoles};

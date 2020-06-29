@@ -1,9 +1,12 @@
 import React, { useEffect } from "react"
 
+import { CellUnitRoles } from "../../../util/Const";
+
 import ChannelContainer from "../ChannelContainer";
 import Setting from "../Setting";
+import { connect } from "react-redux";
 
-const CellUnitSide = () => {
+const CellUnitSide = ({ appInfo }) => {
 
     useEffect(() => {
         
@@ -40,7 +43,8 @@ const CellUnitSide = () => {
                             </li>
                             
                             {/* Setting for page admin */}
-                            <Setting />
+                            {(appInfo.cellInfo.role === CellUnitRoles.CREATOR || appInfo.cellInfo.role === CellUnitRoles.ADMIN)
+                                && <Setting /> }
 
                         </ul>
                     </nav>
@@ -52,4 +56,13 @@ const CellUnitSide = () => {
     );
 }
 
-export default CellUnitSide;
+const mapStateToProps = (state, ownProps) => {
+    return { appInfo: state };
+}
+
+const mapDispathToProps = (dispatch) => {
+    return {
+    };
+}
+
+export default connect(mapStateToProps, mapDispathToProps) (CellUnitSide);

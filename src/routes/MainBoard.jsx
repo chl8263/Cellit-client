@@ -5,14 +5,13 @@ import { connect } from "react-redux";
 import PreLoader from "../component/PreLoader";
 import { PAGE_ROUTE, HTTP, MediaType} from "../util/Const";
 import { actionCreators } from "../store";
-import errorCodeToAlertCreater from "../util/ErrorCodeToAlertCreater";
 
 import CellsList from "../component/mainBoard/CellsList";
+import CreateCellUnitModal from "../component/mainBoard/CreateCellUnitModal";
 
 
 const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserInfo} ) => {
 
-    const [createCellname, setCreateCellname] = useState("");
     const [cells, setCells] = useState([]);
 
     useEffect(() => {
@@ -21,10 +20,6 @@ const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserInfo} ) => {
 
         getCells(); //get Cells with current user
     }, []);
-
-    const onChangeCreateCellname = (e) => {
-        setCreateCellname(e.target.value);
-    };
 
     const getCells = () => {
         const JWT_TOKEN = appInfo.appInfo.jwtToken;
@@ -49,52 +44,6 @@ const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserInfo} ) => {
                 setCells(res._embedded.cellEntityModelList);
             }else {console.log(2);}
         }).catch(error => {
-            alert("Cannot create cell, Please try later.");
-        });
-        // e: Ajax ----------------------------------
-    };
-
-    const onSubmitCreateCell = (e) => {
-        e.preventDefault();
-
-        const JWT_TOKEN = appInfo.appInfo.jwtToken;
-
-        const cellInfo = {
-            cellName: createCellname,
-        }
-        const modalClose = document.getElementById("modalClose");
-        
-        //s: Ajax ----------------------------------
-        fetch(HTTP.SERVER_URL + "/api/cells", {
-            method: HTTP.POST,
-            headers: {
-                'Content-type': MediaType.JSON,
-                'Accept': MediaType.HAL_JSON,
-                'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
-            },
-            body: JSON.stringify(cellInfo)
-        }).then((res) => {
-            if(!res.ok && res.status !== HTTP.STATUS_CREATED && res.status !== HTTP.STATUS_BAD_REQUEST){
-                throw res;
-            }
-            return res;
-        }).then((res) => {
-            if(res.status === HTTP.STATUS_CREATED){
-                alert("Create cell successfully");
-                modalClose.click();
-                getCells();
-            }else if(res.status === HTTP.STATUS_BAD_REQUEST){
-                return res.json();
-            }
-            else throw res;
-        }).then((res) => {
-            try{
-                errorCodeToAlertCreater(res);
-            }catch(error){
-                console.error(error);
-            }
-        }).catch(error => {
-            console.error(error);
             alert("Cannot create cell, Please try later.");
         });
         // e: Ajax ----------------------------------
@@ -130,8 +79,8 @@ const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserInfo} ) => {
                                     <span className="d-block d-md-none"><i className="fa fa-plus"></i></span>
                                 </a>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a className="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#add-new-event">Create Cell Unit</a>
-                                    <a className="dropdown-item" href="#">....</a>
+                                    <a className="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#createCellUnit">Create Cell Unit</a>
+                                    <a className="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#">Search All Cell Unit</a>
                                     <div className="dropdown-divider"></div>
                                     <a className="dropdown-item" href="#">....</a>
                                 </div>
@@ -306,46 +255,10 @@ const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserInfo} ) => {
                         return <CellsList key={x.cellId} cellInfo={x} />
                     })}
                 </div>
-
             </div>
 
             {/* <!-- Modal Add Category --> */}
-            <div className="modal fade none-border" id="add-new-event">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h4 className="modal-title"><strong>Create new Cell Unit</strong></h4>
-                            <button id="modalClose" type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <form id="createNewCellUnitForm" onSubmit={onSubmitCreateCell}>
-                            <div className="modal-body">
-                                    <div className="row">
-                                        <div className="col-md-6">
-                                            <label className="control-label">Cell Unit Name</label>
-                                            <input id="cellName" name="cellName" className="form-control form-white" onChange={onChangeCreateCellname} value={createCellname} placeholder="Enter name" type="text"  />
-                                        </div>
-                                        <div className="col-md-6">
-                                            <label className="control-label">Choose Category Color</label>
-                                            <select className="form-control form-white" data-placeholder="Choose a color..." name="category-color">
-                                                <option value="success">Success</option>
-                                                <option value="danger">Danger</option>
-                                                <option value="info">Info</option>
-                                                <option value="primary">Primary</option>
-                                                <option value="warning">Warning</option>
-                                                <option value="inverse">Inverse</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                
-                            </div>
-                            <div className="modal-footer">
-                                <button type="submit" className="btn btn-danger waves-effect waves-light save-category">Save</button>
-                                <button type="button" className="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            <CreateCellUnitModal getCells = {getCells}/>
         </> 
     );
 };
