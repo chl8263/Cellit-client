@@ -6,8 +6,8 @@ import { actionCreators } from "../store";
 import { PAGE_ROUTE, HTTP, MediaType, ROLE} from "../util/Const";
 
 import PreLoader from "../component/PreLoader";
-import CellUnitTopBar from "../component/CellUnitTopBar";
-import CellUnitSide from "../component/CellUnitSide";
+import CellUnitTopBar from "../component/cellUnit/frame/CellUnitTopBar";
+import CellUnitSide from "../component/cellUnit/frame/CellUnitSide";
 
 
 const CellUnit = ({ switchMainBoard, appInfo }) => {

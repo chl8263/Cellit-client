@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import { connect } from "react-redux";
 
-import { HTTP, MediaType } from "../util/Const";
+import { HTTP, MediaType } from "../../util/Const";
 
-import ChannelChild from "../component/ChannelChild";
+import ChannelChild from "../cellUnit/ChannelChild";
 
 const init = () => {
 

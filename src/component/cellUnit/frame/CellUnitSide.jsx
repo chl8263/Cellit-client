@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 
-import ChannelContainer from "../component/ChannelContainer";
+import ChannelContainer from "../ChannelContainer";
+import Setting from "../Setting";
 
 const CellUnitSide = () => {
 
@@ -38,6 +39,9 @@ const CellUnitSide = () => {
                                 </ul>
                             </li>
                             
+                            {/* Setting for page admin */}
+                            <Setting />
+
                         </ul>
                     </nav>
                     {/* <!-- End Sidebar navigation --> */}

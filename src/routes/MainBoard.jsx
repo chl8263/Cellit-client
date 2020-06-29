@@ -7,7 +7,7 @@ import { PAGE_ROUTE, HTTP, MediaType} from "../util/Const";
 import { actionCreators } from "../store";
 import errorCodeToAlertCreater from "../util/ErrorCodeToAlertCreater";
 
-import CellsList from "../component/CellsList";
+import CellsList from "../component/mainBoard/CellsList";
 
 
 const MainBoard = ( {appInfo, switchLogin, initJwtToken, initUserInfo} ) => {
