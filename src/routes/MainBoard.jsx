@@ -7,6 +7,7 @@ import { PAGE_ROUTE, HTTP, MediaType} from "../util/Const";
 import { actionCreators } from "../store";
 
 import MainBoardTopbar from "../component/mainBoard/frame/MainBoardTopbar";
+import CellsListContainer from "../component/mainBoard/frame/CellsListContainer";
 import CellsList from "../component/mainBoard/CellsList";
 import CreateCellUnitModal from "../component/mainBoard/CreateCellUnitModal";
 
@@ -54,21 +55,10 @@ const MainBoard = ( {appInfo} ) => {
     return (
         <>
             <PreLoader />
-            
+
             <MainBoardTopbar />
 
-            <div className="card">
-                <div className="card-body">
-                    <h4 className="card-title">My Cell Unit</h4>
-                </div>
-                
-                {/* <div className="doScroll scroll-y"> */}
-                <div className="doScroll scrollable"  style={{"height": "80vh"}}>
-                    {cells.map( x => {
-                        return <CellsList key={x.cellId} cellInfo={x} />
-                    })}
-                </div>
-            </div>
+            <CellsListContainer cells={cells}/>
 
             {/* <!-- Modal Add Category --> */}
             <CreateCellUnitModal getCells = {getCells}/>
