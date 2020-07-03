@@ -36,7 +36,7 @@ const MainBoardTopbar = ( { switchLogin, initJwtToken, initUserInfo } ) => {
                                 </a>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a className="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#createCellUnit">Create Cell Unit</a>
-                                    <a className="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#">Search All Cell Unit</a>
+                                    <a className="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#searchAllCellUnit">Search All Cell Unit</a>
                                     <div className="dropdown-divider"></div>
                                     <a className="dropdown-item" href="#">....</a>
                                 </div>

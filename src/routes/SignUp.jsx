@@ -41,7 +41,7 @@ const SignUp = ( {switchLogin} ) => {
                 password: password
             }
             // s: Ajax ----------------------------------
-            fetch(HTTP.SERVER_URL + "/api/account", {
+            fetch(HTTP.SERVER_URL + "/api/accounts", {
                 method: HTTP.POST,
                 headers: {
                     'Content-type': MediaType.JSON,

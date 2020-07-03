@@ -8,9 +8,8 @@ import { actionCreators } from "../store";
 
 import MainBoardTopbar from "../component/mainBoard/frame/MainBoardTopbar";
 import CellsListContainer from "../component/mainBoard/frame/CellsListContainer";
-import CellsList from "../component/mainBoard/CellsList";
 import CreateCellUnitModal from "../component/mainBoard/CreateCellUnitModal";
-
+import SearchAllCellUnitModal from "../component/mainBoard/SearchAllCellUnitModal";
 
 const MainBoard = ( {appInfo} ) => {
 
@@ -26,7 +25,7 @@ const MainBoard = ( {appInfo} ) => {
     const getCells = () => {
         const JWT_TOKEN = appInfo.appInfo.jwtToken;
         //s: Ajax ----------------------------------
-        fetch(HTTP.SERVER_URL + `/api/account/${appInfo.userInfo.currentUserId}/cells`, {
+        fetch(HTTP.SERVER_URL + `/api/accounts/${appInfo.userInfo.currentUserId}/cells`, {
             method: HTTP.GET,
             headers: {
                 'Content-type': MediaType.JSON,
@@ -60,8 +59,11 @@ const MainBoard = ( {appInfo} ) => {
 
             <CellsListContainer cells={cells}/>
 
-            {/* <!-- Modal Add Category --> */}
+            {/* <!-- Modal Create new Cell Unit --> */}
             <CreateCellUnitModal getCells = {getCells}/>
+
+            {/* <!-- Modal Search all Cell Unit --> */}
+            <SearchAllCellUnitModal />
         </> 
     );
 };

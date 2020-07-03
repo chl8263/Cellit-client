@@ -62,7 +62,7 @@ const Login = ( {switchSignUp,switchMainBoard, addJwtToken, addUserInfo} ) => {
                     addJwtToken(JWT_TOKEN);
                     
                     
-                    fetch(HTTP.SERVER_URL + `/api/account/${userName}`, {
+                    fetch(HTTP.SERVER_URL + `/api/accounts/${userName}`, {
                         method: HTTP.GET,
                         headers: {
                             'Content-type': MediaType.JSON,
@@ -84,6 +84,7 @@ const Login = ( {switchSignUp,switchMainBoard, addJwtToken, addUserInfo} ) => {
                             // TODO : switch ADMIN page..
                         }else {throw json;}
                     }).catch(error => {
+                        console.log(error);
                         alert("Please check account again.");
                     });
                 }
