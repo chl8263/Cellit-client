@@ -13,16 +13,16 @@ import SearchAllCellUnitModal from "../component/mainBoard/SearchAllCellUnitModa
 
 const MainBoard = ( {appInfo} ) => {
 
-    const [cells, setCells] = useState([]);
+    const [cellList, setCellList] = useState([]);
 
     useEffect(() => {
         history.pushState('','', '/MainBoard');
         $(".preloader").fadeOut(); // Remove preloader.
 
-        getCells(); //get Cells with current user
+        getCellList(); //get Cells with current user
     }, []);
 
-    const getCells = () => {
+    const getCellList = () => {
         const JWT_TOKEN = appInfo.appInfo.jwtToken;
         //s: Ajax ----------------------------------
         fetch(HTTP.SERVER_URL + `/api/accounts/${appInfo.userInfo.currentUserId}/cells`, {
@@ -42,7 +42,7 @@ const MainBoard = ( {appInfo} ) => {
         }).then((res) => {
             if("_embedded" in res ){
                 console.log(res._embedded.cellEntityModelList);
-                setCells(res._embedded.cellEntityModelList);
+                setCellList(res._embedded.cellEntityModelList);
             }else {console.log(2);}
         }).catch(error => {
             alert("Cannot create cell, Please try later.");
@@ -57,10 +57,10 @@ const MainBoard = ( {appInfo} ) => {
 
             <MainBoardTopbar />
 
-            <CellsListContainer cells={cells}/>
+            <CellsListContainer cellList={cellList}/>
 
             {/* <!-- Modal Create new Cell Unit --> */}
-            <CreateCellUnitModal getCells = {getCells}/>
+            <CreateCellUnitModal getCellList = {getCellList}/>
 
             {/* <!-- Modal Search all Cell Unit --> */}
             <SearchAllCellUnitModal />

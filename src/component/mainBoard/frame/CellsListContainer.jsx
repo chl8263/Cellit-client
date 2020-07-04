@@ -2,7 +2,7 @@ import React from "react";
 
 import CellsList from "../CellsList";
 
-const CellsListContainer = ( { cells } ) => {
+const CellsListContainer = ( { cellList } ) => {
 
     return (
         <>
@@ -13,7 +13,7 @@ const CellsListContainer = ( { cells } ) => {
                 
                 {/* <div className="doScroll scroll-y"> */}
                 <div className="doScroll scrollable"  style={{"height": "80vh"}}>
-                    {cells.map( x => {
+                    {cellList.map( x => {
                         return <CellsList key={x.cellId} cellInfo={x} />
                     })}
                 </div>

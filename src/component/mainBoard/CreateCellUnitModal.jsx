@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { PAGE_ROUTE, HTTP, MediaType} from "../../util/Const";
 import errorCodeToAlertCreater from "../../util/ErrorCodeToAlertCreater";
 
-const CreateCellUnitModal = ( { appInfo, getCells } ) => {
+const CreateCellUnitModal = ( { appInfo, getCellList } ) => {
 
     const [createCellname, setCreateCellname] = useState("");
+    const cellNameInputRef = useRef(null);
+
+    useEffect(() => {
+        cellNameInputRef.current.focus();
+    }, []);
 
     const onChangeCreateCellname = (e) => {
         setCreateCellname(e.target.value);
@@ -40,7 +45,7 @@ const CreateCellUnitModal = ( { appInfo, getCells } ) => {
             if(res.status === HTTP.STATUS_CREATED){
                 alert("Create cell successfully");
                 modalClose.click();
-                getCells();
+                getCellList();
             }else if(res.status === HTTP.STATUS_BAD_REQUEST){
                 return res.json();
             }
@@ -72,7 +77,7 @@ const CreateCellUnitModal = ( { appInfo, getCells } ) => {
                                     <div className="row">
                                         <div className="col-md-6">
                                             <label className="control-label">Cell Unit Name</label>
-                                            <input id="cellName" name="cellName" className="form-control form-white" onChange={onChangeCreateCellname} value={createCellname} placeholder="Enter name" type="text"  />
+                                            <input id="cellName" name="cellName" ref={cellNameInputRef} focu className="form-control form-white" onChange={onChangeCreateCellname} value={createCellname} placeholder="Enter name" type="text"  />
                                         </div>
                                         <div className="col-md-6">
                                             <label className="control-label">Choose Category Color</label>
