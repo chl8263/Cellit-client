@@ -15,12 +15,12 @@ const CellsList = ({cellInfo, appInfo, switchCellUnit, renewCellInfo}) => {
     return (
         <>
             <div className="comment-widgets">
-                {/* <!-- Comment Row --> */}
+                {/* <!-- CellList --> */}
                 <div className="d-flex flex-row comment-row m-t-0" onClick={onClickCellsList}>
                     <div className="p-2"><img src="./public/assets/images/users/1.jpg" alt="user" width="50" className="rounded-circle"/></div>
                     <div className="comment-text w-100">
                         <h6 className="font-medium">{cellInfo.cellName}</h6>
-                        <span className="m-b-15 d-block">Lorem Ipsum is simply dummy text of the printing and type setting industry. </span>
+                        <span className="m-b-15 d-block">{cellInfo.cellDescription} </span>
                         <div className="comment-footer">
                             <span className="text-muted float-right">April 14, 2016</span>
                             <button type="button" className="btn btn-cyan btn-sm">Edit</button>

@@ -7,6 +7,7 @@ import errorCodeToAlertCreater from "../../util/ErrorCodeToAlertCreater";
 const CreateCellUnitModal = ( { appInfo, getCellList } ) => {
 
     const [createCellname, setCreateCellname] = useState("");
+    const [createCellDescription, setCreateCellDescription] = useState("");
     const cellNameInputRef = useRef(null);
 
     useEffect(() => {
@@ -17,6 +18,10 @@ const CreateCellUnitModal = ( { appInfo, getCellList } ) => {
         setCreateCellname(e.target.value);
     };
 
+    const onChangeCreateCellDescription = (e) => {
+        setCreateCellDescription(e.target.value);
+    };
+
     const onSubmitCreateCell = (e) => {
         e.preventDefault();
 
@@ -24,6 +29,7 @@ const CreateCellUnitModal = ( { appInfo, getCellList } ) => {
 
         const cellInfo = {
             cellName: createCellname,
+            cellDescription: createCellDescription,
         }
         const modalClose = document.getElementById("modalClose");
         
@@ -77,7 +83,11 @@ const CreateCellUnitModal = ( { appInfo, getCellList } ) => {
                                     <div className="row">
                                         <div className="col-md-6">
                                             <label className="control-label">Cell Unit Name</label>
-                                            <input id="cellName" name="cellName" ref={cellNameInputRef} focu className="form-control form-white" onChange={onChangeCreateCellname} value={createCellname} placeholder="Enter name" type="text"  />
+                                            <input id="cellName" name="cellName" ref={cellNameInputRef} className="form-control form-white" onChange={onChangeCreateCellname} value={createCellname} placeholder="Enter name" type="text"  />
+                                        </div>
+                                        <div className="col-md-6">
+                                            <label className="control-label">Cell Unit Description</label>
+                                            <input id="cellDescription" name="cellDescription" className="form-control form-white" onChange={onChangeCreateCellDescription} value={createCellDescription} placeholder="Enter Description" type="text"  />
                                         </div>
                                         <div className="col-md-6">
                                             <label className="control-label">Choose Category Color</label>

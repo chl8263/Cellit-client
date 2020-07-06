@@ -74,9 +74,12 @@ const SearchAllCellUnitModal = ( { appInfo, getCells } ) => {
                                 </form>
                                 <hr/>
                                 <label className="control-label">Result of Cell List</label>
-                                {searchedCellList.map( x => {
-                                    return <SearchCellUnitList key={x.cellId} cellInfo = {x}/>
-                                })}
+                                <div className="doScroll scrollable"  style={{"height": "50vh"}}>
+                                    {searchedCellList.map( x => {
+                                        return <SearchCellUnitList key={x.cellId} cellInfo = {x}/>
+                                    })}
+                                </div>
+                                
                                 {/* <div className="row">
                                     <div className="col-md-6">
                                         <label className="control-label">Cell Unit Name</label>
