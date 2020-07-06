@@ -12,7 +12,7 @@ const SearchCellUnitList = ( { cellInfo, isAssign } ) => {
                     <h6 className="font-medium">{cellInfo.cellName}</h6>
                     <span className="m-b-15 d-block">{cellInfo.cellDescription} </span>
                     <div className="comment-footer">
-                        <span className="text-muted float-right">April 14, 2016</span>
+                        <span className="text-muted float-right">{cellInfo.createDate}</span>
                         {!isAssign && <button type="button" className="btn btn-success btn-sm">Request to join</button>}
                         {isAssign && <span className="text-muted float-left">Already joined this Cell Unit</span>}
                     </div>
