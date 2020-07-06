@@ -6,7 +6,7 @@ import errorCodeToAlertCreater from "../../util/ErrorCodeToAlertCreater";
 
 import SearchCellUnitList from "../mainBoard/SearchCellUnitList";
 
-const SearchAllCellUnitModal = ( { appInfo, getCells } ) => {
+const SearchAllCellUnitModal = ( { appInfo, currentCellList } ) => {
 
     const [searchCellname, setSearchCellname] = useState("");
     const [searchedCellList, setSearchedCellList] = useState([]);
@@ -74,9 +74,16 @@ const SearchAllCellUnitModal = ( { appInfo, getCells } ) => {
                                 </form>
                                 <hr/>
                                 <label className="control-label">Result of Cell List</label>
-                                <div className="doScroll scrollable"  style={{"height": "50vh"}}>
+                                <div className="doScroll scrollable" style={{"height": "50vh"}}>
                                     {searchedCellList.map( x => {
-                                        return <SearchCellUnitList key={x.cellId} cellInfo = {x}/>
+                                        var isAssign = false;
+                                        for(const k of currentCellList){
+                                            if(k.cellId == x.cellId){
+                                                isAssign = true;
+                                                break;
+                                            }
+                                        }
+                                        return <SearchCellUnitList key={x.cellId} cellInfo={x} isAssign={isAssign}/>
                                     })}
                                 </div>
                                 

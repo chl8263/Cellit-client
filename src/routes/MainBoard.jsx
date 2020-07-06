@@ -63,7 +63,7 @@ const MainBoard = ( {appInfo} ) => {
             <CreateCellUnitModal getCellList = {getCellList}/>
 
             {/* <!-- Modal Search all Cell Unit --> */}
-            <SearchAllCellUnitModal />
+            <SearchAllCellUnitModal currentCellList={cellList}/>
         </> 
     );
 };
