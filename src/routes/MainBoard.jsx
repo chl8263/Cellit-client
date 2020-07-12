@@ -45,6 +45,7 @@ const MainBoard = ( {appInfo} ) => {
                 setCellList(res._embedded.cellEntityModelList);
             }else {console.log(2);}
         }).catch(error => {
+            console.error(error);
             alert("Cannot create cell, Please try later.");
         });
         // e: Ajax ----------------------------------

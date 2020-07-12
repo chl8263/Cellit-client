@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { PAGE_ROUTE, HTTP, MediaType} from "../../util/Const";
+import { FETCH_STATE ,PAGE_ROUTE, HTTP, MediaType} from "../../util/Const";
 import errorCodeToAlertCreater from "../../util/ErrorCodeToAlertCreater";
 
 const CreateCellUnitModal = ( { appInfo, getCellList } ) => {
@@ -52,19 +52,22 @@ const CreateCellUnitModal = ( { appInfo, getCellList } ) => {
                 alert("Create cell successfully");
                 modalClose.click();
                 getCellList();
-            }else if(res.status === HTTP.STATUS_BAD_REQUEST){
+                throw(FETCH_STATE.FINE);
+            }else {
+                console.warn(res.json());
                 return res.json();
             }
-            else throw res;
         }).then((res) => {
             try{
                 errorCodeToAlertCreater(res);
             }catch(error){
-                console.error(error);
+                throw error;
             }
         }).catch(error => {
-            console.error(error);
-            alert("Cannot create cell, Please try later.");
+            if(!error === FETCH_STATE.FINE){
+                console.error(error);
+                alert("Client unexpect error.");
+            }
         });
         // e: Ajax ----------------------------------
     };

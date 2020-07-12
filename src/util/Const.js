@@ -1,3 +1,7 @@
+const FETCH_STATE = {
+    FINE: "FINE",
+}
+
 const ROLE = {
     USER: "ROLE_USER",
     ADMIN: "ROLE_ADMIN",
@@ -44,4 +48,4 @@ const CellUnitRoles = {
 }
 
 
-export { PAGE_ROUTE, HTTP, MediaType, ROLE, CellUnitRoles};
+export {FETCH_STATE, PAGE_ROUTE, HTTP, MediaType, ROLE, CellUnitRoles};
