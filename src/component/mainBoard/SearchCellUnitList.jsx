@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { FETCH_STATE } from "../../util/Const";
+import { HTTP, MediaType, FETCH_STATE} from "../../util/Const";
+import errorCodeToAlertCreater from "../../util/ErrorCodeToAlertCreater";
 
 const SearchCellUnitList = ( { appInfo, cellInfo, isAssign } ) => {
+
+    const [requestFlg, setRequestFlg] = useState(false);
 
     const onClickRequestToJoinBtn = (e) => {
         e.preventDefault();
@@ -23,9 +26,8 @@ const SearchCellUnitList = ( { appInfo, cellInfo, isAssign } ) => {
             },
         }).then(res => {
             if(res.ok){        
-                alert("Create cell successfully");
-                modalClose.click();
-                getCellList();
+                alert("Request successflly");
+                setRequestFlg(true);
                 throw(FETCH_STATE.FINE);
             }else {
                 return res.json();
@@ -56,7 +58,8 @@ const SearchCellUnitList = ( { appInfo, cellInfo, isAssign } ) => {
                     <span className="m-b-15 d-block">{cellInfo.cellDescription} </span>
                     <div className="comment-footer">
                         <span className="text-muted float-right">{cellInfo.createDate}</span>
-                        {!isAssign && <button type="button" className="btn btn-success btn-sm" onClick={onClickRequestToJoinBtn}>Request to join</button>}
+                        {!isAssign && !requestFlg && <button type="button" className="btn btn-success btn-sm" onClick={onClickRequestToJoinBtn}>Request to join</button>}
+                        {!isAssign && requestFlg && <span className="text-muted float-left">Requested</span>}
                         {isAssign && <span className="text-muted float-left">Already joined this Cell Unit</span>}
                     </div>
                 </div>
