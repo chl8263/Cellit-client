@@ -1,10 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ChannelChild = ({ channelId, channelName }) => {
 
+    const url = `/channel/${channelId}`
     return(
         <>
-            <li className="sidebar-item"><a href="form-basic.html" className="sidebar-link"><i className="mdi mdi-pound"></i><span className="hide-menu"> {channelName} </span></a></li>
+            <Link to={url}><li className="sidebar-item"><a className="sidebar-link"><i className="mdi mdi-pound"></i><span className="hide-menu"> {channelName} </span></a></li></Link>
         </>
     );
 };

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import $ from "jquery";
 import { connect } from "react-redux";
+import { HashRouter, Route, Link } from "react-router-dom";
 
 import { actionCreators } from "../store";
 import { PAGE_ROUTE, HTTP, MediaType, ROLE} from "../util/Const";
@@ -8,12 +9,13 @@ import { PAGE_ROUTE, HTTP, MediaType, ROLE} from "../util/Const";
 import PreLoader from "../component/PreLoader";
 import CellUnitTopBar from "../component/cellUnit/frame/CellUnitTopBar";
 import CellUnitSide from "../component/cellUnit/frame/CellUnitSide";
+import ContentMatcher from "../component/cellUnit/ContentMatcher";
 
 
 const CellUnit = ({ switchMainBoard, appInfo }) => {
 
     useEffect(() => {
-        history.pushState('','', '/CellUnit');
+        history.pushState('','', `/CellUnit/${appInfo.cellInfo.cellId}`);
         $(".preloader").fadeOut(); // Remove preloader.
     }, []);
 
@@ -74,59 +76,42 @@ const CellUnit = ({ switchMainBoard, appInfo }) => {
             {/* <!-- ============================================================== -->
             <!-- Left Sidebar - style you can find in sidebar.scss  -->
             <!-- ============================================================== -->  */}
-            <CellUnitSide />
-            {/* <!-- ============================================================== -->
-            <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-            <!-- ============================================================== --> */}
-
-            {/* <!-- ============================================================== -->
-            <!-- Page wrapper  -->
-            <!-- ============================================================== --> */}
-            <div className="page-wrapper">
+            <HashRouter>
+                <CellUnitSide />
+                
                 {/* <!-- ============================================================== -->
-                <!-- Bread crumb and right sidebar toggle -->
+                <!-- End Left Sidebar - style you can find in sidebar.scss  -->
                 <!-- ============================================================== --> */}
-                <div className="page-breadcrumb">
-                    <div className="row">
-                        <div className="col-12 d-flex no-block align-items-center">
-                            <h4 className="page-title">Tables</h4>
-                            <div className="ml-auto text-right">
-                                <nav aria-label="breadcrumb">
-                                    <ol className="breadcrumb">
-                                        <li className="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li className="breadcrumb-item active" aria-current="page">Library</li>
-                                    </ol>
-                                </nav>
+
+                {/* <!-- ============================================================== -->
+                <!-- Main content  -->
+                <!-- ============================================================== --> */}
+                <div class="page-wrapper">
+
+                    <Route path="/:name" render={(props) => <ContentMatcher {...props} />} />
+                    {/* <div className="page-breadcrumb">
+                        <div className="row">
+                            <div className="col-12 d-flex no-block align-items-center">
+                                <h4 className="page-title">Tables</h4>
+                                <div className="ml-auto text-right">
+                                    <nav aria-label="breadcrumb">
+                                        <ol className="breadcrumb">
+                                            <li className="breadcrumb-item"><a href="#">Home</a></li>
+                                            <li className="breadcrumb-item active" aria-current="page">Library</li>
+                                        </ol>
+                                    </nav>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div className="container-fluid">
+                    </div> */}
                 </div>
                 {/* <!-- ============================================================== -->
-                <!-- End Bread crumb and right sidebar toggle -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Container fluid  -->
+                <!-- Main content  -->
                 <!-- ============================================================== --> */}
-                <div className="container-fluid">
-                    
-                   
-                </div>
-                {/* <!-- ============================================================== -->
-                <!-- End Container fluid  -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- footer -->
-                <!-- ============================================================== --> */}
-                {/* <footer className="footer text-center">
-                    All Rights Reserved by Matrix-admin. Designed and Developed by <a href="https://wrappixel.com">WrapPixel</a>.
-                </footer> */}
-                {/* <!-- ============================================================== -->
-                <!-- End footer -->
-                <!-- ============================================================== --> */}
-            </div>
-            {/* <!-- ============================================================== -->
-            <!-- End Page wrapper  -->
-            <!-- ============================================================== --> */}
+
+            </HashRouter>
         </div>
     );
 };
