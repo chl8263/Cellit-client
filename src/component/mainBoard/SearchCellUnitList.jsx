@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { FETCH_STATE } from "../../util/Const";
 
 const SearchCellUnitList = ( { appInfo, cellInfo, isAssign } ) => {
 
@@ -20,29 +21,26 @@ const SearchCellUnitList = ( { appInfo, cellInfo, isAssign } ) => {
                 'Accept': MediaType.HAL_JSON,
                 'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
             },
-        }).then((res) => {
-            if(!res.ok && res.status !== HTTP.STATUS_CREATED && res.status !== HTTP.STATUS_BAD_REQUEST){
-                throw res;
-            }
-            return res;
-        }).then((res) => {
-            if(res.status === HTTP.STATUS_CREATED){
+        }).then(res => {
+            if(res.ok){        
                 alert("Create cell successfully");
                 modalClose.click();
                 getCellList();
-            }else if(res.status === HTTP.STATUS_BAD_REQUEST){
+                throw(FETCH_STATE.FINE);
+            }else {
                 return res.json();
             }
-            else throw res;
-        }).then((res) => {
+        }).then(json => {
             try{
-                errorCodeToAlertCreater(res);
+                errorCodeToAlertCreater(json);
             }catch(error){
-                console.error(error);
+                throw error;
             }
         }).catch(error => {
-            console.error(error);
-            alert("Cannot create cell, Please try later.");
+            if(!error === FETCH_STATE.FINE){
+                console.error(error);
+                alert("Client unexpect error.");
+            }
         });
         //e: Ajax ----------------------------------
     }

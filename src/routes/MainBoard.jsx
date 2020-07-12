@@ -32,21 +32,22 @@ const MainBoard = ( {appInfo} ) => {
                 'Accept': MediaType.HAL_JSON,
                 'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
             },
-        }).then((res) => {
-            if(!res.ok){
-                throw res;
-            }
-            return res;
-        }).then((res) => {
+        }).then(res => {
             return res.json();
-        }).then((res) => {
-            if("_embedded" in res ){
+        }).then(res => {
+            if("errors" in res){
+                try{
+                    errorCodeToAlertCreater(json);
+                }catch(error){
+                    throw error;
+                }
+            }else if("_embedded" in res){
                 console.log(res._embedded.cellEntityModelList);
                 setCellList(res._embedded.cellEntityModelList);
-            }else {console.log(2);}
+            }
         }).catch(error => {
             console.error(error);
-            alert("Cannot create cell, Please try later.");
+            alert("Client unexpect error.");
         });
         // e: Ajax ----------------------------------
     };

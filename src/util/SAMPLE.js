@@ -1,54 +1,59 @@
 // ajax for get
-fetch(HTTP.SERVER_URL + `/api/cells/${cellId}/channels`, {
+//s: Ajax ----------------------------------
+fetch(HTTP.SERVER_URL + `/api/accounts/${appInfo.userInfo.currentUserId}/cells`, {
     method: HTTP.GET,
     headers: {
+        'Content-type': MediaType.JSON,
         'Accept': MediaType.HAL_JSON,
         'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
     },
-}).then((res) => {
-    if(!res.ok){
-        throw res;
-    }
-    return res;
-}).then((res) => {
+}).then(res => {
     return res.json();
-}).then((res) => {
-    console.log(res);
+}).then(res => {
+    if("errors" in res){
+        try{
+            errorCodeToAlertCreater(json);
+        }catch(error){
+            throw error;
+        }
+    }else if("_embedded" in res){
+        console.log(res._embedded.cellEntityModelList);
+        setCellList(res._embedded.cellEntityModelList);
+    }
 }).catch(error => {
     console.error(error);
-    alert("Cannot load channel list");
+    alert("Client unexpect error.");
 });
+// e: Ajax ----------------------------------
 
 // ajax for post 
-fetch(HTTP.SERVER_URL + "/api/cells", {
+// s: Ajax ----------------------------------
+fetch(HTTP.SERVER_URL + "/api/accounts", {
     method: HTTP.POST,
     headers: {
         'Content-type': MediaType.JSON,
         'Accept': MediaType.HAL_JSON,
         'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
     },
-    body: JSON.stringify(cellInfo)
-}).then((res) => {
-    if(!res.ok && res.status !== HTTP.STATUS_CREATED && res.status !== HTTP.STATUS_BAD_REQUEST){
-        throw res;
-    }
-    return res;
-}).then((res) => {
-    if(res.status === HTTP.STATUS_CREATED){
-        alert("Create cell successfully");
-        modalClose.click();
-        getCells();
-    }else if(res.status === HTTP.STATUS_BAD_REQUEST){
+    body: JSON.stringify(accountInfo)
+}).then(res => {
+    if(res.ok){        
+        alert("Create account successfully");
+        switchLogin();     
+        throw(FETCH_STATE.FINE);
+    }else {
         return res.json();
     }
-    else throw res;
-}).then((res) => {
+}).then(json => {
     try{
-        errorCodeToAlertCreater(res);
+        errorCodeToAlertCreater(json);
     }catch(error){
-        console.error(error);
+        throw error;
     }
 }).catch(error => {
-    console.error(error);
-    alert("Cannot create cell, Please try later.");
+    if(!error === FETCH_STATE.FINE){
+        console.error(error);
+        alert("Client unexpect error.");
+    }
 });
+// e: Ajax ----------------------------------

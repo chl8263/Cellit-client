@@ -31,23 +31,22 @@ const SearchAllCellUnitModal = ( { appInfo, currentCellList } ) => {
                 'Accept': MediaType.HAL_JSON,
                 'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
             },
-        }).then((res) => {
-            if(!res.ok){
-                throw res;
-            }
-            return res;
-        }).then((res) => {
+        }).then(res => {
             return res.json();
         }).then(res => {
-            if("_embedded" in res && res._embedded.cellEntityModelList.length > 0){
+            if("errors" in res){
+                try{
+                    errorCodeToAlertCreater(json);
+                }catch(error){
+                    throw error;
+                }
+            }else if("_embedded" in res && res._embedded.cellEntityModelList.length > 0){
                 console.log(res._embedded.cellEntityModelList);
                 setSearchedCellList(res._embedded.cellEntityModelList);
-            }else {
-
             }
         }).catch(error => {
             console.error(error);
-            alert("Cannot create cell, Please try later.");
+            alert("Client unexpect error.");
         });
         //e: Ajax ----------------------------------
     };

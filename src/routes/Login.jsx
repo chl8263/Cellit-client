@@ -49,18 +49,17 @@ const Login = ( {switchSignUp,switchMainBoard, addJwtToken, addUserInfo} ) => {
                 },
                 body: JSON.stringify(accountInfo)
                 
-            }).then((res) => {
+            }).then(res => {
                 if(!res.ok){
                     throw res;
                 }
                 return res;
-            }).then((res) => {
+            }).then(res => {
                 return res.json();
-            }).then((json) => {
+            }).then(json => {
                 var JWT_TOKEN = json.token;
                 if(JWT_TOKEN !== "" || JWT_TOKEN !== null){
                     addJwtToken(JWT_TOKEN);
-                    
                     
                     fetch(HTTP.SERVER_URL + `/api/accounts/${userName}`, {
                         method: HTTP.GET,
@@ -69,14 +68,14 @@ const Login = ( {switchSignUp,switchMainBoard, addJwtToken, addUserInfo} ) => {
                             'Accept': MediaType.HAL_JSON,
                             'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
                         },
-                    }).then((res) => {
+                    }).then(res => {
                         if(!res.ok){
                             throw res;
                         }
                         return res;
-                    }).then((res) => {
+                    }).then(res => {
                         return res.json();
-                    }).then((json) => {
+                    }).then(json => {
                         addUserInfo(json)
                         if(json.role === ROLE.USER){
                             switchMainBoard();

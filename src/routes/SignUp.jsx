@@ -49,7 +49,7 @@ const SignUp = ( {switchLogin} ) => {
                 },
                 body: JSON.stringify(accountInfo)
             }).then((res) => {
-                if(res.status === HTTP.STATUS_CREATED){
+                if(res.ok){
                     alert("Create account successfully");
                     switchLogin();     
                     throw(FETCH_STATE.FINE);

@@ -48,13 +48,12 @@ const CreateCellUnitModal = ( { appInfo, getCellList } ) => {
             }
             return res;
         }).then((res) => {
-            if(res.status === HTTP.STATUS_CREATED){
+            if(res.ok){        
                 alert("Create cell successfully");
                 modalClose.click();
                 getCellList();
                 throw(FETCH_STATE.FINE);
             }else {
-                console.warn(res.json());
                 return res.json();
             }
         }).then((res) => {

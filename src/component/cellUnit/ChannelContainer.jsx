@@ -39,15 +39,18 @@ const ChannelContainer = ({ appInfo }) => {
                 'Accept': MediaType.HAL_JSON,
                 'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
             },
-        }).then((res) => {
-            if(!res.ok){
-                throw res;
-            }
-            return res;
-        }).then((res) => {
+        }).then(res => {
             return res.json();
-        }).then((res) => {
-            setChannels(res._embedded.channelEntityModelList);
+        }).then(res => {
+            if("errors" in res){
+                try{
+                    errorCodeToAlertCreater(json);
+                }catch(error){
+                    throw error;
+                }
+            }else{
+                setChannels(res._embedded.channelEntityModelList);
+            }
         }).catch(error => {
             console.error(error);
             alert("Cannot load channel list");
