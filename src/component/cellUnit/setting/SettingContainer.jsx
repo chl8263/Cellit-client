@@ -1,6 +1,6 @@
 import React from "react";
 
-import RequestCell from "../setting/settingContent/RequestCell"
+import RequestCell from "./settingContent/requestCell/RequestCell"
 
 const SettingContainer = () => {
     return (
