@@ -1,5 +1,7 @@
 import React from "react";
 
+import RequestCell from "../setting/settingContent/RequestCell"
+
 const SettingContainer = () => {
     return (
         <>
@@ -14,7 +16,7 @@ const SettingContainer = () => {
                 <div className="tab-content tabcontent-border">
                     <div className="tab-pane active" id="home" role="tabpanel">
                         <div className="p-20">
-                            one
+                            <RequestCell />
                         </div>
                     </div>
                     <div className="tab-pane  p-20" id="profile" role="tabpanel">
