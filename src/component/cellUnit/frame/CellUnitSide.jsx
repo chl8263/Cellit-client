@@ -3,8 +3,8 @@ import { HashRouter, Route, Link } from "react-router-dom";
 
 import { CellUnitRoles } from "../../../util/Const";
 
-import ChannelContainer from "../ChannelContainer";
-import Setting from "../Setting";
+import ChannelContainer from "../channel/ChannelContainer";
+import Setting from "../setting/Setting";
 import { connect } from "react-redux";
 
 const CellUnitSide = ({ appInfo }) => {
