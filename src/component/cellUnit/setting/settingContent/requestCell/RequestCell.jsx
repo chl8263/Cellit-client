@@ -1,22 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const RequestCell = () => {
+import { PAGE_ROUTE, HTTP, MediaType} from "../../../../../util/Const";
+import { connect } from "react-redux";
+
+import RequestCellRow from "../requestCell/RequestCellRow";
+
+const RequestCell = ({appInfo}) => {
+
+    const [cellRequestList, setCellRequestList] = useState([]);
+
+    useEffect(() => {
+        getCellRequestList(); //get CellRequests with cell id
+    }, []);
+
+    const getCellRequestList = () => {
+        const JWT_TOKEN = appInfo.appInfo.jwtToken;
+        //s: Ajax ----------------------------------
+        fetch(HTTP.SERVER_URL + `/api/cells/${appInfo.cellInfo.cellId}/cellRequests`, {
+            method: HTTP.GET,
+            headers: {
+                'Content-type': MediaType.JSON,
+                'Accept': MediaType.HAL_JSON,
+                'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
+            },
+        }).then(res => {
+            return res.json();
+        }).then(res => {
+            if("errors" in res){
+                try{
+                    errorCodeToAlertCreater(json);
+                }catch(error){
+                    throw error;
+                }
+            }else if("_embedded" in res){
+                console.log(res._embedded.cellRequestEntityModelList);
+                setCellRequestList(res._embedded.cellRequestEntityModelList);
+            }
+        }).catch(error => {
+            console.error(error);
+            alert("Client unexpect error.");
+        });
+        // e: Ajax ----------------------------------
+    };
+
     return (
         <>
             <div className="card">
-                <div className="card-body">
-                    <h5 className="card-title m-b-0">Tasks</h5>
-                </div>
+                
                 <table className="table">
                     <thead>
                         <tr>
-                            <th scope="col">Description</th>
+                            <th scope="col">User</th>
                             <th scope="col">Status</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+
+                        {cellRequestList.map(x => {
+                            return <RequestCellRow key={x.accountId} requestInfo={x}/>
+                        })}
+                        {/* <tr>
                             <td>Making The New Suit</td>
                             <td className="text-success">Progress</td>
                             <td>
@@ -51,7 +95,7 @@ const RequestCell = () => {
                                     <i className="mdi mdi-close"></i>
                                 </a>
                             </td>  
-                        </tr>
+                        </tr> */}
                     </tbody>
                 </table>
             </div>
@@ -59,4 +103,8 @@ const RequestCell = () => {
     );
 };
 
-export default RequestCell;
+const mapStateToProps = (state, ownProps) => {
+    return { appInfo: state };
+}
+
+export default connect(mapStateToProps) (RequestCell);
