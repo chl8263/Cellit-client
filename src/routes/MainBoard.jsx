@@ -59,7 +59,7 @@ const MainBoard = ( {appInfo} ) => {
 
             <MainBoardTopbar />
 
-            <CellsListContainer cellList={cellList}/>
+            <CellsListContainer cellList={cellList} getCellList={getCellList}/>
 
             {/* <!-- Modal Create new Cell Unit --> */}
             <CreateCellUnitModal getCellList = {getCellList}/>
