@@ -14,6 +14,7 @@ const RequestCell = ({appInfo}) => {
     }, []);
 
     const getCellRequestList = () => {
+        console.log(1111);
         const JWT_TOKEN = appInfo.appInfo.jwtToken;
         //s: Ajax ----------------------------------
         fetch(HTTP.SERVER_URL + `/api/cells/${appInfo.cellInfo.cellId}/cellRequests`, {
@@ -33,6 +34,7 @@ const RequestCell = ({appInfo}) => {
                     throw error;
                 }
             }else if("_embedded" in res){
+                console.log(222);
                 console.log(res._embedded.cellRequestEntityModelList);
                 setCellRequestList(res._embedded.cellRequestEntityModelList);
             }
@@ -58,7 +60,7 @@ const RequestCell = ({appInfo}) => {
                     <tbody>
 
                         {cellRequestList.map(x => {
-                            return <RequestCellRow key={x.accountId} requestInfo={x}/>
+                            return <RequestCellRow key={x.accountId} requestInfo={x} />
                         })}
                         {/* <tr>
                             <td>Making The New Suit</td>
