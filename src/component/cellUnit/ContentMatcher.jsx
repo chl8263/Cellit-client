@@ -4,8 +4,6 @@ import SettingContainer from "../cellUnit/setting/SettingContainer"
 
 const ContentMatcher = (props) => {
 
-    console.log(props);
-
     if(props.match.params.name === "dashboard"){
         return (<div>dash board</div>);
     }else if(props.match.params.name === "channel"){

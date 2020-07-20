@@ -14,8 +14,6 @@ const Notification = ( { appInfo } ) => {
     }, []);
 
     const getNotication = () => {
-        console.log(111);
-
         const currentAccountId = appInfo.userInfo.currentUserId;
         const JWT_TOKEN = appInfo.appInfo.jwtToken;
 

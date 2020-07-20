@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import { HTTP, MediaType, FETCH_STATE} from "../../../../../util/Const";
+import errorCodeToAlertCreater from "../../../../../util/ErrorCodeToAlertCreater";
 
 const ACCEPT = "ACCEPT";
 const PENDING = "PENDING";
@@ -13,6 +14,37 @@ const RequestCellRow = ( {appInfo, requestInfo} ) => {
     const [status, setStatus] = useState("PENDING");
     const [btnStatus, setBtnStatus] = useState(true);
     const JWT_TOKEN = appInfo.appInfo.jwtToken;
+
+    const deleteRequestCell = () => {
+        // s: Ajax ----------------------------------
+        const cellId = appInfo.cellInfo.cellId;
+        fetch(HTTP.SERVER_URL + `/api/cells/${cellId}/cellRequests/accounts/${requestInfo.accountId}`, {
+            method: HTTP.DELETE,
+            headers: {
+                'Content-type': MediaType.JSON,
+                'Accept': MediaType.HAL_JSON,
+                'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
+            },
+        }).then(res => {
+            if(res.ok){        
+                throw(FETCH_STATE.FINE);
+            }else {
+                return res.json();
+            }
+        }).then(json => {
+            try{
+                errorCodeToAlertCreater(json);
+            }catch(error){
+                throw error;
+            }
+        }).catch(error => {
+            if(!error === FETCH_STATE.FINE){
+                console.error(error);
+                alert("Client unexpect error.");
+            }
+        });
+        // e: Ajax ----------------------------------
+    };
 
     const onclickApproveRequest = () => {
         if(confirm("Would you like to approve?")){
@@ -62,7 +94,7 @@ const RequestCellRow = ( {appInfo, requestInfo} ) => {
                         }
                     });
                     // e: Ajax ----------------------------------
-
+                    deleteRequestCell();
                     throw(FETCH_STATE.FINE);
                 }else {
                     return res.json();
@@ -74,6 +106,7 @@ const RequestCellRow = ( {appInfo, requestInfo} ) => {
                     throw error;
                 }
             }).catch(error => {
+                console.error(error);
                 if(!error === FETCH_STATE.FINE){
                     console.error(error);
                     alert("Client unexpect error.");
@@ -103,6 +136,7 @@ const RequestCellRow = ( {appInfo, requestInfo} ) => {
                     alert("The request was processed successfully.");
                     setStatus(REJECT);
                     setBtnStatus(false);
+                    deleteRequestCell();
                     throw(FETCH_STATE.FINE);
                 }else {
                     return res.json();

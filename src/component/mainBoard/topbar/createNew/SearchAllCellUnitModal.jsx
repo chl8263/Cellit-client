@@ -17,7 +17,6 @@ const SearchAllCellUnitModal = ( { appInfo, currentCellList } ) => {
 
     const onSubmitSearchCell = (e) => {
         e.preventDefault();
-        console.log(searchCellname);
 
         const JWT_TOKEN = appInfo.appInfo.jwtToken;
 

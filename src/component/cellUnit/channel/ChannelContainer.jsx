@@ -49,7 +49,6 @@ const ChannelContainer = ({ appInfo }) => {
                     throw error;
                 }
             }else{
-                console.log(res);
                 setChannels(res._embedded.channelEntityModelList);
             }
         }).catch(error => {
