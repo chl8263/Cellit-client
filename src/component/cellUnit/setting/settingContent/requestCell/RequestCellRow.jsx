@@ -29,6 +29,40 @@ const RequestCellRow = ( {appInfo, requestInfo} ) => {
                     alert("The request was processed successfully.");
                     setStatus(ACCEPT);
                     setBtnStatus(false);
+
+                    const notiInfo = {
+                        message: `Approved join request the cell '${appInfo.cellInfo.cellName}'`,
+                        status: "APPROVE"
+                    }
+                    // s: Ajax ----------------------------------
+                    fetch(HTTP.SERVER_URL + `/api/accounts/${requestInfo.accountId}/accountNotifications`, {
+                        method: HTTP.POST,
+                        headers: {
+                            'Content-type': MediaType.JSON,
+                            'Accept': MediaType.HAL_JSON,
+                            'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
+                        },
+                        body: JSON.stringify(notiInfo)
+                    }).then(res => {
+                        if(res.ok){        
+                            throw(FETCH_STATE.FINE);
+                        }else {
+                            return res.json();
+                        }
+                    }).then(json => {
+                        try{
+                            errorCodeToAlertCreater(json);
+                        }catch(error){
+                            throw error;
+                        }
+                    }).catch(error => {
+                        if(!error === FETCH_STATE.FINE){
+                            console.error(error);
+                            alert("Client unexpect error.");
+                        }
+                    });
+                    // e: Ajax ----------------------------------
+
                     throw(FETCH_STATE.FINE);
                 }else {
                     return res.json();
@@ -50,9 +84,8 @@ const RequestCellRow = ( {appInfo, requestInfo} ) => {
     };
 
     const onclickReject = () => {
-        console.log(requestInfo);
         const notiInfo = {
-            message: "The approve ",
+            message: `Rejected join request the cell '${appInfo.cellInfo.cellName}'`,
             status: "REJECT"
         }
         if(confirm("Would you like to Reject?")){

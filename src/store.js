@@ -22,6 +22,7 @@ const reducer = createReducer(
         },
         cellInfo: {
             cellId: 0,
+            cellName: "",
             role: "",
         },
     },
@@ -57,6 +58,7 @@ const reducer = createReducer(
             return { ...state, 
                 cellInfo: {
                     cellId: action.payload.cellId,
+                    cellName: action.payload.cellName,
                     role: action.payload.role,
                 },
             };
