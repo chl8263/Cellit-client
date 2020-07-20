@@ -28,6 +28,10 @@ fetch(HTTP.SERVER_URL + `/api/accounts/${appInfo.userInfo.currentUserId}/cells`,
 
 // ajax for post 
 // s: Ajax ----------------------------------
+const accountInfo = {
+    accountname: userName,
+    password: password
+}
 fetch(HTTP.SERVER_URL + "/api/accounts", {
     method: HTTP.POST,
     headers: {
