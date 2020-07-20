@@ -1,68 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Notification = () => {
+import NotificationMessage from "../notification/NotificationMessage";
+import { connect } from "react-redux";
+
+const Notification = ( { appInfo } ) => {
+
+    const [notificationList, setNotificationList] = useState([]);
+
+    const getNotication = () => {
+
+        const currentAccountId = appInfo.userInfo.currentUserId;
+        const JWT_TOKEN = appInfo.appInfo.jwtToken;
+
+        //s: Ajax ----------------------------------
+        fetch(HTTP.SERVER_URL + `/api/accounts/${currentAccountId}/accountNotifications?offset=0&limit=9`, {
+            method: HTTP.GET,
+            headers: {
+                'Content-type': MediaType.JSON,
+                'Accept': MediaType.HAL_JSON,
+                'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
+            },
+        }).then(res => {
+            return res.json();
+        }).then(res => {
+            if("errors" in res){
+                try{
+                    errorCodeToAlertCreater(json);
+                }catch(error){
+                    throw error;
+                }
+            }else if("_embedded" in res){
+                console.log(res._embedded.accountNotificationEntityModelList);
+                setNotificationList(res._embedded.accountNotificationEntityModelList);
+            }
+        }).catch(error => {
+            console.error(error);
+            alert("Client unexpect error.");
+        });
+        // e: Ajax ----------------------------------
+    }
+
     return (
         <>
             {/* <!-- ============================================================== -->
-            <!-- Messages -->
+            <!-- Comment -->
             <!-- ============================================================== --> */}
             <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i className="font-24 mdi mdi-comment-processing"></i>
+                <a className="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i className="mdi mdi-bell font-24"></i>
                 </a>
                 <div className="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
                     <ul className="list-style-none">
                         <li>
                             <div className="">
-                                {/* <!-- Message --> */}
-                                <a href="javascript:void(0)" className="link border-top">
-                                    <div className="d-flex no-block align-items-center p-10">
-                                        <span className="btn btn-success btn-circle"><i className="ti-calendar"></i></span>
-                                        <div className="m-l-10">
-                                            <h5 className="m-b-0">Event today</h5>
-                                            <span className="mail-desc">Just a reminder that event</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                {/* <!-- Message --> */}
-                                <a href="javascript:void(0)" className="link border-top">
-                                    <div className="d-flex no-block align-items-center p-10">
-                                        <span className="btn btn-info btn-circle"><i className="ti-settings"></i></span>
-                                        <div className="m-l-10">
-                                            <h5 className="m-b-0">Settings</h5>
-                                            <span className="mail-desc">You can customize this template</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                {/* <!-- Message --> */}
-                                <a href="javascript:void(0)" className="link border-top">
-                                    <div className="d-flex no-block align-items-center p-10">
-                                        <span className="btn btn-primary btn-circle"><i className="ti-user"></i></span>
-                                        <div className="m-l-10">
-                                            <h5 className="m-b-0">Pavan kumar</h5>
-                                            <span className="mail-desc">Just see the my admin!</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                {/* <!-- Message --> */}
-                                <a href="javascript:void(0)" className="link border-top">
-                                    <div className="d-flex no-block align-items-center p-10">
-                                        <span className="btn btn-danger btn-circle"><i className="fa fa-link"></i></span>
-                                        <div className="m-l-10">
-                                            <h5 className="m-b-0">Luanch Admin</h5>
-                                            <span className="mail-desc">Just see the my new admin!</span>
-                                        </div>
-                                    </div>
-                                </a>
+                                {notificationList.map( x => {
+                                    <NotificationMessage key={x.accountNotificationId} notiInfo={x}/>
+                                })}
                             </div>
                         </li>
                     </ul>
                 </div>
             </li>
             {/* <!-- ============================================================== -->
-            <!-- End Messages -->
+            <!-- End Comment -->
             <!-- ============================================================== --> */}
         </>
     );
+};
+
+const mapStateToProps = (state, ownProps) => {
+    return { appInfo: state };
 }
 
-export default Notification;
+export default connect(mapStateToProps) (Notification);

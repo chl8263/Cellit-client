@@ -59,11 +59,15 @@ const MainBoardTopbar = ( { switchLogin, initJwtToken, initUserInfo } ) => {
                         <!-- Right side toggle and nav items -->
                         <!-- ============================================================== --> */}
                         <ul className="navbar-nav float-right">
+                            
+                            
+                            <Notification />
+
                             {/* <!-- ============================================================== -->
-                            <!-- Comment -->
+                            <!-- Messages -->
                             <!-- ============================================================== --> */}
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i className="mdi mdi-bell font-24"></i>
+                                <a className="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i className="font-24 mdi mdi-comment-processing"></i>
                                 </a>
                                 <div className="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
                                     <ul className="list-style-none">
@@ -72,9 +76,8 @@ const MainBoardTopbar = ( { switchLogin, initJwtToken, initUserInfo } ) => {
                                                 {/* <!-- Message --> */}
                                                 <a href="javascript:void(0)" className="link border-top">
                                                     <div className="d-flex no-block align-items-center p-10">
-                                                        <span className="btn btn-success btn-circle"><i className="ti-calendar"></i></span>
                                                         <div className="m-l-10">
-                                                            <h5 className="m-b-0">Event today</h5>
+                                                            <i className="mdi mdi-close"></i>
                                                             <span className="mail-desc">Just a reminder that event</span>
                                                         </div>
                                                     </div>
@@ -115,10 +118,8 @@ const MainBoardTopbar = ( { switchLogin, initJwtToken, initUserInfo } ) => {
                                 </div>
                             </li>
                             {/* <!-- ============================================================== -->
-                            <!-- End Comment -->
+                            <!-- End Messages -->
                             <!-- ============================================================== --> */}
-                            
-                            <Notification />
 
                             {/* <!-- ============================================================== -->
                             <!-- User profile and search -->
