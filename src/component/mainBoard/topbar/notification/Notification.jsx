@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import NotificationMessage from "../notification/NotificationMessage";
 import { connect } from "react-redux";
+import { PAGE_ROUTE, HTTP, MediaType} from "../../../../util/Const";
+
 
 const Notification = ( { appInfo } ) => {
 
     const [notificationList, setNotificationList] = useState([]);
 
+    useEffect(() => {
+        getNotication();
+    }, []);
+
     const getNotication = () => {
+        console.log(111);
 
         const currentAccountId = appInfo.userInfo.currentUserId;
         const JWT_TOKEN = appInfo.appInfo.jwtToken;
@@ -42,27 +49,20 @@ const Notification = ( { appInfo } ) => {
 
     return (
         <>
-            {/* <!-- ============================================================== -->
-            <!-- Comment -->
-            <!-- ============================================================== --> */}
             <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i className="mdi mdi-bell font-24"></i>
-                </a>
+                <a onClick={getNotication} className="nav-link dropdown-toggle waves-effect waves-dark" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i className="mdi mdi-bell font-24"></i></a>
                 <div className="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
                     <ul className="list-style-none">
                         <li>
                             <div className="">
                                 {notificationList.map( x => {
-                                    <NotificationMessage key={x.accountNotificationId} notiInfo={x}/>
+                                    return <NotificationMessage key={x.accountNotificationId} notiInfo={x}/>
                                 })}
                             </div>
                         </li>
                     </ul>
                 </div>
             </li>
-            {/* <!-- ============================================================== -->
-            <!-- End Comment -->
-            <!-- ============================================================== --> */}
         </>
     );
 };
