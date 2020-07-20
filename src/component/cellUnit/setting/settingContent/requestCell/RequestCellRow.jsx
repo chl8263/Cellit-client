@@ -87,7 +87,6 @@ const RequestCellRow = ( {appInfo, requestInfo} ) => {
                 }
             });
             // e: Ajax ----------------------------------
-            
         }
     };
 

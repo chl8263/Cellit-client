@@ -1,6 +1,6 @@
 import React from "react";
 
-import CellsList from "../CellsList";
+import CellsList from "../cellList/CellsList";
 
 const CellsListContainer = ( { cellList, getCellList } ) => {
 

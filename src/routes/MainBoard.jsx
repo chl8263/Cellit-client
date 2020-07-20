@@ -6,10 +6,10 @@ import PreLoader from "../component/PreLoader";
 import { PAGE_ROUTE, HTTP, MediaType} from "../util/Const";
 import { actionCreators } from "../store";
 
-import MainBoardTopbar from "../component/mainBoard/frame/MainBoardTopbar";
-import CellsListContainer from "../component/mainBoard/frame/CellsListContainer";
-import CreateCellUnitModal from "../component/mainBoard/CreateCellUnitModal";
-import SearchAllCellUnitModal from "../component/mainBoard/SearchAllCellUnitModal";
+import MainBoardTopbar from "../component/mainBoard/topbar/MainBoardTopbar";
+import CellsListContainer from "../component/mainBoard/cellList/CellsListContainer";
+import CreateCellUnitModal from "../component/mainBoard/topbar/createNew/CreateCellUnitModal";
+import SearchAllCellUnitModal from "../component/mainBoard/topbar/createNew/SearchAllCellUnitModal";
 
 const MainBoard = ( {appInfo} ) => {
 

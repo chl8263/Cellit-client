@@ -1,8 +1,8 @@
 import React from "react"
 import { connect } from "react-redux";
 
-import { PAGE_ROUTE } from "../../util/Const";
-import { actionCreators } from "../../store";
+import { PAGE_ROUTE } from "../../../util/Const";
+import { actionCreators } from "../../../store";
 
 
 const CellsList = ({cellInfo, appInfo, switchCellUnit, renewCellInfo}) => {

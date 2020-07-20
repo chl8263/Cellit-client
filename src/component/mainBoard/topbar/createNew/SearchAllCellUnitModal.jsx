@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import { PAGE_ROUTE, HTTP, MediaType} from "../../util/Const";
-import errorCodeToAlertCreater from "../../util/ErrorCodeToAlertCreater";
+import { PAGE_ROUTE, HTTP, MediaType} from "../../../../util/Const";
+import errorCodeToAlertCreater from "../../../../util/ErrorCodeToAlertCreater";
 
-import SearchCellUnitList from "../mainBoard/SearchCellUnitList";
+import SearchCellUnitList from "../createNew/SearchCellUnitList";
 
 const SearchAllCellUnitModal = ( { appInfo, currentCellList } ) => {
 
