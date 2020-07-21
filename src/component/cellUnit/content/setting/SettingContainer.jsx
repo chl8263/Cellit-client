@@ -2,7 +2,7 @@ import React from "react";
 
 import RequestCell from "../setting/requestCell/RequestCell";
 
-const SideSettingContainer = () => {
+const SettingContainer = () => {
     return (
         <>
             <div className="card">
@@ -35,4 +35,4 @@ const SideSettingContainer = () => {
     );
 }
 
-export default SideSettingContainer;
+export default SettingContainer;

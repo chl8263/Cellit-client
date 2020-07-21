@@ -16,6 +16,7 @@ const RequestCellRow = ( {appInfo, requestInfo} ) => {
     const JWT_TOKEN = appInfo.appInfo.jwtToken;
 
     const deleteRequestCell = () => {
+        
         // s: Ajax ----------------------------------
         const cellId = appInfo.cellInfo.cellId;
         fetch(HTTP.SERVER_URL + `/api/cells/${cellId}/cellRequests/accounts/${requestInfo.accountId}`, {
