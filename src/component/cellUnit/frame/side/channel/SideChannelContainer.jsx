@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import { connect } from "react-redux";
 
-import { HTTP, MediaType } from "../../../util/Const";
+import { HTTP, MediaType } from "../../../../../util/Const";
 
-import ChannelChild from "./ChannelChild";
+import SideChannelChild from "./SideChannelChild";
 
 const init = () => {
 
@@ -22,7 +22,7 @@ const init = () => {
     });
 }
 
-const ChannelContainer = ({ appInfo }) => {
+const SideChannelContainer = ({ appInfo }) => {
 
     const [channels, setChannels] = useState([]);
 
@@ -63,7 +63,7 @@ const ChannelContainer = ({ appInfo }) => {
             <li className="sidebar-item sideContainer sideContainer-open"> <a className="sidebar-link has-arrow waves-effect waves-dark" aria-expanded="false"><span className="hide-menu">Channel </span></a>
                 <ul aria-expanded="false" className="collapse first-level">
                     {channels.map(x => {
-                        return <ChannelChild channelId={x.channelId} channelName={x.channelName}/> 
+                        return <SideChannelChild channelId={x.channelId} channelName={x.channelName}/> 
                     })}
                     
                     {/* <li className="sidebar-item"><a href="form-wizard.html" className="sidebar-link"><i className="mdi mdi-pound"></i><span className="hide-menu"> Form Wizard </span></a></li> */}
@@ -83,4 +83,4 @@ const mapDispathToProps = (dispatch) => {
     };
 }
 
-export default connect(mapStateToProps, mapDispathToProps) (ChannelContainer);
+export default connect(mapStateToProps, mapDispathToProps) (SideChannelContainer);

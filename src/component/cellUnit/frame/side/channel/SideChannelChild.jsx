@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ChannelChild = ({ channelId, channelName }) => {
+const SideChannelChild = ({ channelId, channelName }) => {
 
     const url = `/channel/${channelId}`
     return(
@@ -11,4 +11,4 @@ const ChannelChild = ({ channelId, channelName }) => {
     );
 };
 
-export default ChannelChild;
+export default SideChannelChild;

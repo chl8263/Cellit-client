@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 
 
-const Setting = () => {
+const SideSetting = () => {
     return (
         <>
             <hr className="hr1"/>
@@ -13,4 +13,4 @@ const Setting = () => {
     )
 };
 
-export default Setting;
+export default SideSetting;

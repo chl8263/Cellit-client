@@ -1,8 +1,8 @@
 import React from "react";
 
-import RequestCell from "./settingContent/requestCell/RequestCell"
+import RequestCell from "../setting/requestCell/RequestCell";
 
-const SettingContainer = () => {
+const SideSettingContainer = () => {
     return (
         <>
             <div className="card">
@@ -35,4 +35,4 @@ const SettingContainer = () => {
     );
 }
 
-export default SettingContainer;
+export default SideSettingContainer;

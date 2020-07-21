@@ -1,6 +1,6 @@
 import React from "react";
 
-import SettingContainer from "../cellUnit/setting/SettingContainer"
+import SideSettingContainer from "./content/setting/SettingContainer";
 
 const ContentMatcher = (props) => {
 
@@ -9,7 +9,7 @@ const ContentMatcher = (props) => {
     }else if(props.match.params.name === "channel"){
         return (<div>channel</div>);
     }else if(props.match.params.name === "setting"){
-        return (<SettingContainer />);
+        return (<SideSettingContainer />);
     }
     return (
         <>

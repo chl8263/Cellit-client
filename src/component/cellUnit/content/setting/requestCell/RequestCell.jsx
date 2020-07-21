@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { PAGE_ROUTE, HTTP, MediaType} from "../../../../../util/Const";
 import { connect } from "react-redux";
 
-import RequestCellRow from "../requestCell/RequestCellRow";
+import RequestCellRow from "./RequestCellRow";
 
 const RequestCell = ({appInfo}) => {
 

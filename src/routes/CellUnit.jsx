@@ -8,7 +8,7 @@ import { PAGE_ROUTE, HTTP, MediaType, ROLE} from "../util/Const";
 
 import PreLoader from "../component/PreLoader";
 import CellUnitTopBar from "../component/cellUnit/frame/CellUnitTopBar";
-import CellUnitSide from "../component/cellUnit/frame/CellUnitSide";
+import CellUnitSide from "../component/cellUnit/frame/side/CellUnitSide";
 import ContentMatcher from "../component/cellUnit/ContentMatcher";
 
 

@@ -1,10 +1,10 @@
 import React, { useEffect } from "react"
 import { HashRouter, Route, Link } from "react-router-dom";
 
-import { CellUnitRoles } from "../../../util/Const";
+import { CellUnitRoles } from "../../../../util/Const";
 
-import ChannelContainer from "../channel/ChannelContainer";
-import Setting from "../setting/Setting";
+import SideChannelContainer from "../side/channel/SideChannelContainer";
+import SideSetting from "../../frame/side/setting/SideSetting";
 import { connect } from "react-redux";
 
 const CellUnitSide = ({ appInfo }) => {
@@ -33,7 +33,7 @@ const CellUnitSide = ({ appInfo }) => {
                             <hr className="hr1"/>
 
                             {/* Channel */}
-                            <ChannelContainer />        
+                            <SideChannelContainer />        
 
                             {/* Direct Message */}
                             <li className="sidebar-item sideContainer"> <a className="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><span className="hide-menu">Direct Message </span></a>
@@ -45,7 +45,7 @@ const CellUnitSide = ({ appInfo }) => {
                             
                             {/* Setting for page admin */}
                             {(appInfo.cellInfo.role === CellUnitRoles.CREATOR || appInfo.cellInfo.role === CellUnitRoles.ADMIN)
-                                && <Setting /> }
+                                && <SideSetting /> }
                         </ul>
                     </nav>
                     {/* <!-- End Sidebar navigation --> */}
