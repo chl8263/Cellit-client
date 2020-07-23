@@ -34,6 +34,7 @@ const CellUnitSide = ({ appInfo }) => {
 
                             {/* Channel */}
                             <SideChannelContainer />        
+                            
 
                             {/* Direct Message */}
                             <li className="sidebar-item sideContainer"> <a className="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><span className="hide-menu">Direct Message </span></a>
