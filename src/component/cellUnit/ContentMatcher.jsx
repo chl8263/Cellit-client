@@ -8,7 +8,7 @@ const ContentMatcher = (props) => {
     if(props.match.params.name === "dashboard"){
         return (<div>dash board</div>);
     }else if(props.match.params.name === "channel"){
-        return (<Channel />);
+        return (<Channel data={props}/>);
     }else if(props.match.params.name === "setting"){
         return (<SettingContainer />);
     }
