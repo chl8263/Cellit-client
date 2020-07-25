@@ -13,11 +13,11 @@ const Channel = ( { data } ) => {
             <div className="scroll-sidebar doScroll scrollable" style={{"height": "98vh"}}>
                 <div className="card">
                     <div className="card-body">
-                        <h5 className="card-title">Channel : {channelData.channelName}</h5>
+                        <h4 className="card-title">Channel : {channelData.channelName}</h4>
                         <div className="table-responsive">
                             <div id="zero_config_wrapper" className="dataTables_wrapper container-fluid dt-bootstrap4">
                                 <div className="row">
-                                    <div className="col-sm-12 col-md-6">
+                                    <div className="col-sm-12 col-md-4">
                                         <div className="dataTables_length" id="zero_config_length">
                                             <label>Show 
                                                 <select name="zero_config_length" aria-controls="zero_config" className="form-control form-control-sm">
@@ -27,17 +27,25 @@ const Channel = ( { data } ) => {
                                             </label>
                                         </div>
                                     </div>
-                                <div className="col-sm-12 col-md-6">
+                                <div className="col-sm-12 col-md-4">
                                     <div id="zero_config_filter" className="dataTables_filter">
                                         <label>Search:<input type="search" className="form-control form-control-sm" placeholder="" aria-controls="zero_config"/></label>
                                     </div>
+                                </div>
+                                <div className="col-sm-12 col-md-4">
+                                    <button type="button" className="btn btn-success btn-lg">New post</button>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-sm-12"></div>
                                 <table id="zero_config" className="table table-striped table-bordered dataTable" role="grid" aria-describedby="zero_config_info">
                                     <thead>
-                                        <tr role="row"><th className="sorting_asc" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style={{"width": "204px"}}>Name</th><th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-label="Position: activate to sort column ascending" style={{"width": "321px"}}>Position</th><th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-label="Office: activate to sort column ascending" style={{"width": "151px"}}>Office</th><th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-label="Age: activate to sort column ascending" style={{"width": "74px"}}>Age</th><th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-label="Start date: activate to sort column ascending" style={{"width": "135px"}}>Start date</th><th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-label="Salary: activate to sort column ascending" style={{"width": "131px"}}>Salary</th></tr>
+                                        <tr role="row">
+                                            <th className="sorting_asc" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style={{"width": "204px"}}>Name</th>
+                                            <th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-label="Position: activate to sort column ascending" style={{"width": "321px"}}>Position</th>
+                                            <th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-label="Office: activate to sort column ascending" style={{"width": "151px"}}>Office</th><th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-label="Age: activate to sort column ascending" style={{"width": "74px"}}>Age</th>
+                                            <th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-label="Start date: activate to sort column ascending" style={{"width": "135px"}}>Start date</th><th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-label="Salary: activate to sort column ascending" style={{"width": "131px"}}>Salary</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                     <tr role="row" className="odd">
@@ -122,25 +130,25 @@ const Channel = ( { data } ) => {
                                     <div className="dataTables_paginate paging_simple_numbers" id="zero_config_paginate">
                                         <ul className="pagination">
                                             <li className="paginate_button page-item previous disabled" id="zero_config_previous">
-                                                <a href="#" aria-controls="zero_config" data-dt-idx="0" tabindex="0" className="page-link">Previous</a>
+                                                <a href="#!" aria-controls="zero_config" data-dt-idx="0" tabindex="0" className="page-link">Previous</a>
                                             </li>
                                             <li className="paginate_button page-item active">
-                                                <a href="#" aria-controls="zero_config" data-dt-idx="1" tabindex="0" className="page-link">1</a>
+                                                <a href="#!" aria-controls="zero_config" data-dt-idx="1" tabindex="0" className="page-link">1</a>
                                             </li>
                                             <li className="paginate_button page-item ">
-                                                <a href="#" aria-controls="zero_config" data-dt-idx="2" tabindex="0" className="page-link">2</a>
+                                                <a href="#!" aria-controls="zero_config" data-dt-idx="2" tabindex="0" className="page-link">2</a>
                                             </li>
                                             <li className="paginate_button page-item ">
-                                                <a href="#" aria-controls="zero_config" data-dt-idx="3" tabindex="0" className="page-link">3</a>
+                                                <a href="#!" aria-controls="zero_config" data-dt-idx="3" tabindex="0" className="page-link">3</a>
                                             </li>
                                             <li className="paginate_button page-item ">
-                                                <a href="#" aria-controls="zero_config" data-dt-idx="4" tabindex="0" className="page-link">4</a>
+                                                <a href="#!" aria-controls="zero_config" data-dt-idx="4" tabindex="0" className="page-link">4</a>
                                             </li>
                                             <li className="paginate_button page-item ">
-                                                <a href="#" aria-controls="zero_config" data-dt-idx="5" tabindex="0" className="page-link">5</a>
+                                                <a href="#!" aria-controls="zero_config" data-dt-idx="5" tabindex="0" className="page-link">5</a>
                                             </li>
                                             <li className="paginate_button page-item next" id="zero_config_next">
-                                                <a href="#" aria-controls="zero_config" data-dt-idx="7" tabindex="0" className="page-link">Next</a>
+                                                <a href="#!" aria-controls="zero_config" data-dt-idx="7" tabindex="0" className="page-link">Next</a>
                                             </li>
                                         </ul>
                                     </div>
