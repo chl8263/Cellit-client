@@ -36,8 +36,8 @@ const MainBoardTopbar = ( { switchLogin, initJwtToken, initUserInfo } ) => {
                                     <span className="d-block d-md-none"><i className="fa fa-plus"></i></span>
                                 </a>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a className="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#createCellUnit">Create Cell Unit</a>
-                                    <a className="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#searchAllCellUnit">Search All Cell Unit</a>
+                                    <a className="dropdown-item" href="#!" data-toggle="modal" data-target="#createCellUnit">Create Cell Unit</a>
+                                    <a className="dropdown-item" href="#!" data-toggle="modal" data-target="#searchAllCellUnit">Search All Cell Unit</a>
                                     <div className="dropdown-divider"></div>
                                     <a className="dropdown-item" href="#">....</a>
                                 </div>
@@ -46,10 +46,10 @@ const MainBoardTopbar = ( { switchLogin, initJwtToken, initUserInfo } ) => {
                             <!-- Search -->
                             <!-- ============================================================== --> */}
                             <li className="nav-item search-box">
-                                <input type="text" className="form-control" placeholder="Search Cell" style={{"margin-top": "15px", width: 300}}/>
+                                <input type="text" className="form-control" placeholder="Search Cell" style={{"marginTop": "15px", width: 300}}/>
                             </li>
                             
-                            {/* <li className="nav-item search-box"> <a className="nav-link waves-effect waves-dark" href="javascript:void(0)"><i className="ti-search"></i></a>
+                            {/* <li className="nav-item search-box"> <a className="nav-link waves-effect waves-dark" href="#!"><i className="ti-search"></i></a>
                                 <form className="app-search position-absolute">
                                     <input type="text" className="form-control" placeholder="Search &amp; enter"/> <a className="srh-btn"><i className="ti-close"></i></a>
                                 </form>
@@ -74,7 +74,7 @@ const MainBoardTopbar = ( { switchLogin, initJwtToken, initUserInfo } ) => {
                                         <li>
                                             <div className="">
                                                 {/* <!-- Message --> */}
-                                                <a href="javascript:void(0)" className="link border-top">
+                                                <a href="#!" className="link border-top">
                                                     <div className="d-flex no-block align-items-center p-10">
                                                         <div className="m-l-10">
                                                             <i className="mdi mdi-close"></i>
@@ -83,7 +83,7 @@ const MainBoardTopbar = ( { switchLogin, initJwtToken, initUserInfo } ) => {
                                                     </div>
                                                 </a>
                                                 {/* <!-- Message --> */}
-                                                <a href="javascript:void(0)" className="link border-top">
+                                                <a href="#!" className="link border-top">
                                                     <div className="d-flex no-block align-items-center p-10">
                                                         <span className="btn btn-info btn-circle"><i className="ti-settings"></i></span>
                                                         <div className="m-l-10">
@@ -93,7 +93,7 @@ const MainBoardTopbar = ( { switchLogin, initJwtToken, initUserInfo } ) => {
                                                     </div>
                                                 </a>
                                                 {/* <!-- Message --> */}
-                                                <a href="javascript:void(0)" className="link border-top">
+                                                <a href="#!" className="link border-top">
                                                     <div className="d-flex no-block align-items-center p-10">
                                                         <span className="btn btn-primary btn-circle"><i className="ti-user"></i></span>
                                                         <div className="m-l-10">
@@ -103,7 +103,7 @@ const MainBoardTopbar = ( { switchLogin, initJwtToken, initUserInfo } ) => {
                                                     </div>
                                                 </a>
                                                 {/* <!-- Message --> */}
-                                                <a href="javascript:void(0)" className="link border-top">
+                                                <a href="#!" className="link border-top">
                                                     <div className="d-flex no-block align-items-center p-10">
                                                         <span className="btn btn-danger btn-circle"><i className="fa fa-link"></i></span>
                                                         <div className="m-l-10">
@@ -125,13 +125,13 @@ const MainBoardTopbar = ( { switchLogin, initJwtToken, initUserInfo } ) => {
                             <!-- User profile and search -->
                             <!-- ============================================================== --> */}
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="./public/assets/images/users/1.jpg" style={{"margin-top": "15px"}}  alt="user" className="rounded-circle" width="31"/></a>
+                                <a className="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="./public/assets/images/users/1.jpg" style={{"marginTop": "15px"}}  alt="user" className="rounded-circle" width="31"/></a>
                                 <div className="dropdown-menu dropdown-menu-right user-dd animated">
-                                    <a className="dropdown-item" href="javascript:void(0)"><i className="ti-user m-r-5 m-l-5"></i> My Profile</a>
-                                    <a className="dropdown-item" href="javascript:void(0)"><i className="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
-                                    <a className="dropdown-item" href="javascript:void(0)"><i className="ti-email m-r-5 m-l-5"></i> Inbox</a>
+                                    <a className="dropdown-item" href="#!"><i className="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                                    <a className="dropdown-item" href="#!"><i className="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
+                                    <a className="dropdown-item" href="#!"><i className="ti-email m-r-5 m-l-5"></i> Inbox</a>
                                     <div className="dropdown-divider"></div>
-                                    <a className="dropdown-item" href="javascript:void(0)"><i className="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                                    <a className="dropdown-item" href="#!"><i className="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
                                     <div className="dropdown-divider"></div>
                                     <form id="logoutForm" onSubmit={onClickLogOut}>
                                         <button className="dropdown-item" type="submit"><i className="fa fa-power-off m-r-5 m-l-5"></i> Logout</button>

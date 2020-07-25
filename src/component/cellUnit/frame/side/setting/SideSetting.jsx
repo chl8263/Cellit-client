@@ -8,7 +8,7 @@ const SideSetting = () => {
         <>
             <hr className="hr1"/>
 
-            <Link to="/setting"><li className="sidebar-item"><a href="form-basic.html" className="sidebar-link"><i className="mdi mdi-settings"></i><span className="hide-menu"> Setting </span></a></li></Link>
+            <Link to="/setting"><li className="sidebar-item"><a href="#!" className="sidebar-link"><i className="mdi mdi-settings"></i><span className="hide-menu"> Setting </span></a></li></Link>
         </>
     )
 };

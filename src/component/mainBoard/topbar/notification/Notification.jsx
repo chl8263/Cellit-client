@@ -48,7 +48,7 @@ const Notification = ( { appInfo } ) => {
     return (
         <>
             <li className="nav-item dropdown">
-                <a onClick={getNotication} className="nav-link dropdown-toggle waves-effect waves-dark" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i className="mdi mdi-bell font-24"></i></a>
+                <a onClick={getNotication} className="nav-link dropdown-toggle waves-effect waves-dark" href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i className="mdi mdi-bell font-24"></i></a>
                 <div className="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
                     <ul className="list-style-none">
                         <li>

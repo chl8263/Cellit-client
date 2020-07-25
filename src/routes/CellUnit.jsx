@@ -32,7 +32,7 @@ const CellUnit = ({ switchMainBoard, appInfo }) => {
                 <nav className="navbar top-navbar navbar-expand-md navbar-dark">
                     <div className="navbar-header" data-logobg="skin5">
                         {/* <!-- This is for the sidebar toggle which is visible on mobile only --> */}
-                        {/* <a className="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i className="ti-menu ti-close"></i></a> */}
+                        {/* <a className="nav-toggler waves-effect waves-light d-block d-md-none" href="#!"><i className="ti-menu ti-close"></i></a> */}
                         {/* <!-- ============================================================== -->
                         <!-- Logo -->
                         <!-- ============================================================== --> */}
@@ -45,7 +45,7 @@ const CellUnit = ({ switchMainBoard, appInfo }) => {
                             <!-- Logo text --> */}
                             <span className="logo-text">
                                 {/* <!-- dark Logo text --> */}
-                                <div style={{"margin-left": "40px"}}>Account</div>
+                                <div style={{"marginLeft": "40px"}}>Account</div>
                             </span>
                             {/* <!-- Logo icon --> */}
                             {/* <!-- <b className="logo-icon"> -->
@@ -61,7 +61,7 @@ const CellUnit = ({ switchMainBoard, appInfo }) => {
                         <!-- ============================================================== -->
                         <!-- Toggle which is visible on mobile only -->
                         <!-- ============================================================== --> */}
-                        <a className="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i className="ti-more"></i></a>
+                        <a className="topbartoggler d-block d-md-none waves-effect waves-light" href="#!" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i className="ti-more"></i></a>
                     </div>
                     {/* <!-- ============================================================== -->
                     <!-- End Logo -->
@@ -86,7 +86,7 @@ const CellUnit = ({ switchMainBoard, appInfo }) => {
                 {/* <!-- ============================================================== -->
                 <!-- Main content  -->
                 <!-- ============================================================== --> */}
-                <div class="page-wrapper">
+                <div className="page-wrapper">
 
                     <Route path="/:name" render={(props) => <ContentMatcher {...props} />} />
                     {/* <div className="page-breadcrumb">

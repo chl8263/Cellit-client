@@ -13,7 +13,7 @@ const CellsListContainer = ( { cellList, getCellList } ) => {
             <div className="card">
                 <div className="card-body">
                     <span className="card-title">My Cell Unit</span>
-                    <a onClick={onClickReloadCellList} href="javascript:void(0)" className="mdi mdi-reload" style={{"float": "right", "font-size": "30px"}}></a>
+                    <a href="#!" onClick={onClickReloadCellList} className="mdi mdi-reload" style={{"float": "right", "fontSize": "30px"}}></a>
                 </div>
                 
                 {/* <div className="doScroll scroll-y"> */}
