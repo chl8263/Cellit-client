@@ -74,7 +74,7 @@ const CreateCellUnitModal = ( { appInfo, getCellList } ) => {
     return (
         <>
             <div className="modal fade none-border" id="createCellUnit">
-                <div className="modal-dialog">
+                <div className="modal-dialog" style={{"width": "500px"}}>
                     <div className="modal-content">
                         <div className="modal-header">
                             <h4 className="modal-title"><strong>Create new Cell Unit</strong></h4>

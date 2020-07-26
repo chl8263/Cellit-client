@@ -53,52 +53,52 @@ const SearchAllCellUnitModal = ( { appInfo, currentCellList } ) => {
     return (
         <>
             <div className="modal fade none-border" id="searchAllCellUnit">
-                <div className="modal-dialog">
+                <div className="modal-dialog" style={{"width": "500px"}}>
                     <div className="modal-content">
                         <div className="modal-header">
                             <h4 className="modal-title"><strong>Search All Cell Unit</strong></h4>
                             <button id="modalClose" type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         
-                            <div className="modal-body">
-                                <form id="createNewCellUnitForm" onSubmit={onSubmitSearchCell}>
-                                    <div className="row">
-                                        <div className="col-md-8">
-                                            <label className="control-label">Cell Unit Name</label>
-                                            <input style={{"display": "inline"}} id="cellName" name="cellName" className="form-control form-white" onChange={onSearchCreateCellname} value={searchCellname} placeholder="Enter cell name to search" type="text" />
-                                            <button style={{"display": "inline"}} type="submit" className="btn btn-secondary waves-effect">Search</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                <hr/>
-                                <label className="control-label">Result of Cell List</label>
-                                <div className="doScroll scrollable" style={{"height": "50vh"}}>
-                                    {searchedCellList.map( x => {
-                                        var isAssign = false;
-                                        for(const k of currentCellList){
-                                            if(k.cellId == x.cellId){
-                                                isAssign = true;
-                                                break;
-                                            }
-                                        }
-                                        return <SearchCellUnitList key={x.cellId} cellInfo={x} isAssign={isAssign}/>
-                                    })}
-                                </div>
-                                
-                                {/* <div className="row">
-                                    <div className="col-md-6">
-                                        <label className="control-label">Cell Unit Name</label>
-                                    </div>
-                                </div>
+                        <div className="modal-body">
+                            <form id="createNewCellUnitForm" onSubmit={onSubmitSearchCell}>
                                 <div className="row">
-                                    <div className="col-md-6">
+                                    <div className="col-md-8">
                                         <label className="control-label">Cell Unit Name</label>
+                                        <input style={{"display": "inline"}} id="cellName" name="cellName" className="form-control form-white" onChange={onSearchCreateCellname} value={searchCellname} placeholder="Enter cell name to search" type="text" />
+                                        <button style={{"display": "inline"}} type="submit" className="btn btn-secondary waves-effect">Search</button>
                                     </div>
-                                </div> */}
+                                </div>
+                            </form>
+                            <hr/>
+                            <label className="control-label">Result of Cell List</label>
+                            <div className="doScroll scrollable" style={{"height": "50vh"}}>
+                                {searchedCellList.map( x => {
+                                    var isAssign = false;
+                                    for(const k of currentCellList){
+                                        if(k.cellId == x.cellId){
+                                            isAssign = true;
+                                            break;
+                                        }
+                                    }
+                                    return <SearchCellUnitList key={x.cellId} cellInfo={x} isAssign={isAssign}/>
+                                })}
                             </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                            
+                            {/* <div className="row">
+                                <div className="col-md-6">
+                                    <label className="control-label">Cell Unit Name</label>
+                                </div>
                             </div>
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <label className="control-label">Cell Unit Name</label>
+                                </div>
+                            </div> */}
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
