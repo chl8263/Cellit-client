@@ -1,15 +1,20 @@
 import React, { useEffect } from "react";
+import $ from "jquery";
+
+import PreLoader from "../../../PreLoader";
+import ChannelPostModal from "../channel/ChannelPostModal";
 
 const Channel = ( { data } ) => {
 
     const channelData = data.location.channelData;
     useEffect(() => {
-        console.log(channelData.channelId);
-        console.log(channelData.channelName);
+        history.pushState('','', '/MainBoard');
+        $(".preloader").fadeOut(); // Remove preloader.
     }, []);
-
+    
     return (
         <>
+            <PreLoader />
             <div className="scroll-sidebar doScroll scrollable" style={{"height": "98vh"}}>
                 <div className="card">
                     <div className="card-body">
@@ -33,7 +38,8 @@ const Channel = ( { data } ) => {
                                     </div>
                                 </div>
                                 <div className="col-sm-12 col-md-4">
-                                    <button type="button" className="btn btn-success btn-lg">New post</button>
+                                {/* <a className="dropdown-item" href="#!" data-toggle="modal" data-target="#createChannelPost">Create Cell Unit</a> */}
+                                    <button type="button" className="btn btn-success btn-lg" data-toggle="modal" data-target="#createChannelPost">New post</button>
                                 </div>
                             </div>
                             <div className="row">
@@ -41,10 +47,10 @@ const Channel = ( { data } ) => {
                                 <table id="zero_config" className="table table-striped table-bordered dataTable" role="grid" aria-describedby="zero_config_info">
                                     <thead>
                                         <tr role="row">
-                                            <th className="sorting_asc" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style={{"width": "204px"}}>Name</th>
-                                            <th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-label="Position: activate to sort column ascending" style={{"width": "321px"}}>Position</th>
-                                            <th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-label="Office: activate to sort column ascending" style={{"width": "151px"}}>Office</th><th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-label="Age: activate to sort column ascending" style={{"width": "74px"}}>Age</th>
-                                            <th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-label="Start date: activate to sort column ascending" style={{"width": "135px"}}>Start date</th><th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colsPan="1" aria-label="Salary: activate to sort column ascending" style={{"width": "131px"}}>Salary</th>
+                                            <th className="sorting_asc" tabindex="0" aria-controls="zero_config" rowspan="1" colSpan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style={{"width": "204px"}}>Name</th>
+                                            <th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colSpan="1" aria-label="Position: activate to sort column ascending" style={{"width": "321px"}}>Position</th>
+                                            <th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colSpan="1" aria-label="Office: activate to sort column ascending" style={{"width": "151px"}}>Office</th><th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colSpan="1" aria-label="Age: activate to sort column ascending" style={{"width": "74px"}}>Age</th>
+                                            <th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colSpan="1" aria-label="Start date: activate to sort column ascending" style={{"width": "135px"}}>Start date</th><th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colSpan="1" aria-label="Salary: activate to sort column ascending" style={{"width": "131px"}}>Salary</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -158,6 +164,8 @@ const Channel = ( { data } ) => {
                     </div>
                 </div>
             </div>
+            
+            <ChannelPostModal />
         </>
     );
 };

@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import $ from "jquery";
 
+import PreLoader from "../../../PreLoader";
 import RequestCell from "../setting/requestCell/RequestCell";
 
 const SettingContainer = () => {
+
+    useEffect(() => {
+        history.pushState('','', '/MainBoard');
+        $(".preloader").fadeOut(); // Remove preloader.
+
+    }, []);
+
     return (
         <>
+            <PreLoader />
             <div className="card">
                 {/* <!-- Nav tabs --> */}
                 <ul className="nav nav-tabs" role="tablist">
