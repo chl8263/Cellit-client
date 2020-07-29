@@ -66,7 +66,7 @@ const SearchAllCellUnitModal = ( { appInfo, currentCellList } ) => {
                                     <div className="col-md-8">
                                         <label className="control-label">Cell Unit Name</label>
                                         <input style={{"display": "inline"}} id="cellName" name="cellName" className="form-control form-white" onChange={onSearchCreateCellname} value={searchCellname} placeholder="Enter cell name to search" type="text" />
-                                        <button style={{"display": "inline"}} type="submit" className="btn btn-secondary waves-effect">Search</button>
+                                        <button style={{"display": "inline"}} type="submit" className="btn btn-info waves-effect">Search</button>
                                     </div>
                                 </div>
                             </form>
@@ -97,7 +97,7 @@ const SearchAllCellUnitModal = ( { appInfo, currentCellList } ) => {
                             </div> */}
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>

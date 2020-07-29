@@ -106,8 +106,8 @@ const CreateCellUnitModal = ( { appInfo, getCellList } ) => {
                                 
                             </div>
                             <div className="modal-footer">
-                                <button type="submit" className="btn btn-danger waves-effect waves-light save-category">Save</button>
-                                <button type="button" className="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                                <button type="submit" className="btn btn-success waves-effect waves-light save-category">Save</button>
+                                <button type="button" className="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
                             </div>
                         </form>
                     </div>

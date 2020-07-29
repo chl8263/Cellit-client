@@ -24,7 +24,7 @@ const Channel = ( { data } ) => {
                                 <div className="row">
                                     <div className="col-sm-12 col-md-4">
                                         <div className="dataTables_length" id="zero_config_length">
-                                            <label>Show 
+                                            <label>Show  
                                                 <select name="zero_config_length" aria-controls="zero_config" className="form-control form-control-sm">
                                                     <option value="10">10</option><option value="25">25</option>
                                                     <option value="50">50</option><option value="100">100</option>
@@ -47,10 +47,10 @@ const Channel = ( { data } ) => {
                                 <table id="zero_config" className="table table-striped table-bordered dataTable" role="grid" aria-describedby="zero_config_info">
                                     <thead>
                                         <tr role="row">
-                                            <th className="sorting_asc" tabindex="0" aria-controls="zero_config" rowspan="1" colSpan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style={{"width": "204px"}}>Name</th>
-                                            <th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colSpan="1" aria-label="Position: activate to sort column ascending" style={{"width": "321px"}}>Position</th>
-                                            <th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colSpan="1" aria-label="Office: activate to sort column ascending" style={{"width": "151px"}}>Office</th><th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colSpan="1" aria-label="Age: activate to sort column ascending" style={{"width": "74px"}}>Age</th>
-                                            <th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colSpan="1" aria-label="Start date: activate to sort column ascending" style={{"width": "135px"}}>Start date</th><th className="sorting" tabindex="0" aria-controls="zero_config" rowspan="1" colSpan="1" aria-label="Salary: activate to sort column ascending" style={{"width": "131px"}}>Salary</th>
+                                            <th className="sorting_asc" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style={{"width": "204px"}}>Name</th>
+                                            <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Position: activate to sort column ascending" style={{"width": "321px"}}>Position</th>
+                                            <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Office: activate to sort column ascending" style={{"width": "151px"}}>Office</th><th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Age: activate to sort column ascending" style={{"width": "74px"}}>Age</th>
+                                            <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Start date: activate to sort column ascending" style={{"width": "135px"}}>Start date</th><th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Salary: activate to sort column ascending" style={{"width": "131px"}}>Salary</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -136,25 +136,25 @@ const Channel = ( { data } ) => {
                                     <div className="dataTables_paginate paging_simple_numbers" id="zero_config_paginate">
                                         <ul className="pagination">
                                             <li className="paginate_button page-item previous disabled" id="zero_config_previous">
-                                                <a href="#!" aria-controls="zero_config" data-dt-idx="0" tabindex="0" className="page-link">Previous</a>
+                                                <a href="#!" aria-controls="zero_config" data-dt-idx="0" tabIndex="0" className="page-link">Previous</a>
                                             </li>
                                             <li className="paginate_button page-item active">
-                                                <a href="#!" aria-controls="zero_config" data-dt-idx="1" tabindex="0" className="page-link">1</a>
+                                                <a href="#!" aria-controls="zero_config" data-dt-idx="1" tabIndex="0" className="page-link">1</a>
                                             </li>
                                             <li className="paginate_button page-item ">
-                                                <a href="#!" aria-controls="zero_config" data-dt-idx="2" tabindex="0" className="page-link">2</a>
+                                                <a href="#!" aria-controls="zero_config" data-dt-idx="2" tabIndex="0" className="page-link">2</a>
                                             </li>
                                             <li className="paginate_button page-item ">
-                                                <a href="#!" aria-controls="zero_config" data-dt-idx="3" tabindex="0" className="page-link">3</a>
+                                                <a href="#!" aria-controls="zero_config" data-dt-idx="3" tabIndex="0" className="page-link">3</a>
                                             </li>
                                             <li className="paginate_button page-item ">
-                                                <a href="#!" aria-controls="zero_config" data-dt-idx="4" tabindex="0" className="page-link">4</a>
+                                                <a href="#!" aria-controls="zero_config" data-dt-idx="4" tabIndex="0" className="page-link">4</a>
                                             </li>
                                             <li className="paginate_button page-item ">
-                                                <a href="#!" aria-controls="zero_config" data-dt-idx="5" tabindex="0" className="page-link">5</a>
+                                                <a href="#!" aria-controls="zero_config" data-dt-idx="5" tabIndex="0" className="page-link">5</a>
                                             </li>
                                             <li className="paginate_button page-item next" id="zero_config_next">
-                                                <a href="#!" aria-controls="zero_config" data-dt-idx="7" tabindex="0" className="page-link">Next</a>
+                                                <a href="#!" aria-controls="zero_config" data-dt-idx="7" tabIndex="0" className="page-link">Next</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -165,7 +165,7 @@ const Channel = ( { data } ) => {
                 </div>
             </div>
             
-            <ChannelPostModal />
+            <ChannelPostModal channelData = {channelData}/>
         </>
     );
 };
