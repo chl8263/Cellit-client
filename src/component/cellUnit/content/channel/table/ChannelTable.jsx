@@ -1,26 +1,31 @@
 import React from "react";
 
+import ChannelTableTr from "../table/ChannelTableTr";
+
 const ChannelTable = () => {
     return(
         <>
             <table id="zero_config" className="table table-striped table-bordered dataTable" role="grid" aria-describedby="zero_config_info">
                 <thead>
                     <tr role="row">
-                        <th className="sorting_asc" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style={{"width": "204px"}}>Name</th>
-                        <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Position: activate to sort column ascending" style={{"width": "321px"}}>Position</th>
-                        <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Office: activate to sort column ascending" style={{"width": "151px"}}>Office</th><th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Age: activate to sort column ascending" style={{"width": "74px"}}>Age</th>
-                        <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Start date: activate to sort column ascending" style={{"width": "135px"}}>Start date</th><th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Salary: activate to sort column ascending" style={{"width": "131px"}}>Salary</th>
+                        <th className="sorting_asc" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style={{"width": "120px"}}>Number</th>
+                        <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Position: activate to sort column ascending" style={{"width": "400"}}>Subject</th>
+                        <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Office: activate to sort column ascending" style={{"width": "151px"}}>Writer</th>
+                        <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Start date: activate to sort column ascending" style={{"width": "135px"}}>Time</th>
+                        <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Salary: activate to sort column ascending" style={{"width": "120px"}}>Salary</th>
                     </tr>
                 </thead>
                 <tbody>
-                <tr role="row" className="odd">
+                    <ChannelTableTr />
+                    <ChannelTableTr />
+                    <tr role="row" className="odd">
                         <td className="sorting_1">Airi Satou</td>
                         <td>Accountant</td>
                         <td>Tokyo</td>
                         <td>33</td>
                         <td>2008/11/28</td>
-                        <td>$162,700</td>
-                    </tr><tr role="row" className="even">
+                    </tr>
+                    {/* <tr role="row" className="even">
                         <td className="sorting_1">Angelica Ramos</td>
                         <td>Chief Executive Officer (CEO)</td>
                         <td>London</td>
@@ -83,7 +88,8 @@ const ChannelTable = () => {
                         <td>22</td>
                         <td>2012/03/29</td>
                         <td>$433,060</td>
-                    </tr></tbody>
+                    </tr> */}
+                </tbody>
             </table>
         </>
     );
