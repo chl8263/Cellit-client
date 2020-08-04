@@ -3,14 +3,56 @@ import $ from "jquery";
 
 import PreLoader from "../../../PreLoader";
 import ChannelPostModal from "../channel/ChannelPostModal";
+import ChannelTable from "../channel/table/ChannelTable";
 
-const Channel = ( { data } ) => {
+import { connect } from "react-redux";
+import { HTTP, MediaType } from "../../../../util/Const";
+
+const Channel = ( { appInfo, data } ) => {
 
     const channelData = data.location.channelData;
+
     useEffect(() => {
         history.pushState('','', '/MainBoard');
         $(".preloader").fadeOut(); // Remove preloader.
+        getCahnnelContent(0);
     }, []);
+
+    const getCahnnelContent = (pageNumber) => {
+        const JWT_TOKEN = appInfo.appInfo.jwtToken;
+        const channelId = channelData.channelId;
+
+        //s: Ajax ----------------------------------
+        fetch(HTTP.SERVER_URL + `/api/channels/${channelId}/channelPosts?page=${pageNumber}&size=${10}&sort=createDate,DESC`, {
+            method: HTTP.GET,
+            headers: {
+                'Content-type': MediaType.JSON,
+                'Accept': MediaType.HAL_JSON,
+                'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
+            },
+        }).then(res => {
+            return res.json();
+        }).then(res => {
+            console.log(res);
+            if("errors" in res){
+                try{
+                    errorCodeToAlertCreater(json);
+                }catch(error){
+                    throw error;
+                }
+            }else if("_embedded" in res){
+                console.log(111);
+                console.log(res);
+                console.log(res._embedded.cellEntityModelList);
+                console.log(22);
+                //setCellList(res._embedded.cellEntityModelList);
+            }
+        }).catch(error => {
+            console.error(error);
+            alert("Client unexpect error.");
+        });
+        // e: Ajax ----------------------------------
+    };
     
     return (
         <>
@@ -44,88 +86,7 @@ const Channel = ( { data } ) => {
                             </div>
                             <div className="row">
                                 <div className="col-sm-12"></div>
-                                <table id="zero_config" className="table table-striped table-bordered dataTable" role="grid" aria-describedby="zero_config_info">
-                                    <thead>
-                                        <tr role="row">
-                                            <th className="sorting_asc" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style={{"width": "204px"}}>Name</th>
-                                            <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Position: activate to sort column ascending" style={{"width": "321px"}}>Position</th>
-                                            <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Office: activate to sort column ascending" style={{"width": "151px"}}>Office</th><th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Age: activate to sort column ascending" style={{"width": "74px"}}>Age</th>
-                                            <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Start date: activate to sort column ascending" style={{"width": "135px"}}>Start date</th><th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Salary: activate to sort column ascending" style={{"width": "131px"}}>Salary</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr role="row" className="odd">
-                                            <td className="sorting_1">Airi Satou</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>33</td>
-                                            <td>2008/11/28</td>
-                                            <td>$162,700</td>
-                                        </tr><tr role="row" className="even">
-                                            <td className="sorting_1">Angelica Ramos</td>
-                                            <td>Chief Executive Officer (CEO)</td>
-                                            <td>London</td>
-                                            <td>47</td>
-                                            <td>2009/10/09</td>
-                                            <td>$1,200,000</td>
-                                        </tr><tr role="row" className="odd">
-                                            <td className="sorting_1">Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                            <td>$86,000</td>
-                                        </tr><tr role="row" className="even">
-                                            <td className="sorting_1">Bradley Greer</td>
-                                            <td>Software Engineer</td>
-                                            <td>London</td>
-                                            <td>41</td>
-                                            <td>2012/10/13</td>
-                                            <td>$132,000</td>
-                                        </tr><tr role="row" className="odd">
-                                            <td className="sorting_1">Brenden Wagner</td>
-                                            <td>Software Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>28</td>
-                                            <td>2011/06/07</td>
-                                            <td>$206,850</td>
-                                        </tr><tr role="row" className="even">
-                                            <td className="sorting_1">Brielle Williamson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                            <td>2012/12/02</td>
-                                            <td>$372,000</td>
-                                        </tr><tr role="row" className="odd">
-                                            <td className="sorting_1">Bruno Nash</td>
-                                            <td>Software Engineer</td>
-                                            <td>London</td>
-                                            <td>38</td>
-                                            <td>2011/05/03</td>
-                                            <td>$163,500</td>
-                                        </tr><tr role="row" className="even">
-                                            <td className="sorting_1">Caesar Vance</td>
-                                            <td>Pre-Sales Support</td>
-                                            <td>New York</td>
-                                            <td>21</td>
-                                            <td>2011/12/12</td>
-                                            <td>$106,450</td>
-                                        </tr><tr role="row" className="odd">
-                                            <td className="sorting_1">Cara Stevens</td>
-                                            <td>Sales Assistant</td>
-                                            <td>New York</td>
-                                            <td>46</td>
-                                            <td>2011/12/06</td>
-                                            <td>$145,600</td>
-                                        </tr><tr role="row" className="even">
-                                            <td className="sorting_1">Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>$433,060</td>
-                                        </tr></tbody>
-                                </table>
+                                <ChannelTable />
                             </div>
                         </div>
                             <div className="row">
@@ -170,4 +131,8 @@ const Channel = ( { data } ) => {
     );
 };
 
-export default Channel;
+const mapStateToProps = (state, ownProps) => {
+    return { appInfo: state };
+}
+
+export default connect(mapStateToProps) (Channel);
