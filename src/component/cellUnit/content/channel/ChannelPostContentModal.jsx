@@ -12,8 +12,11 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostList, ch
     const [content, setContent] = useState("");
     const [writer, setWriter] = useState("");
     const [editMode,setEditMode] = useState(false);
+    const [editable,setEditable] = useState(false);
+
     const JWT_TOKEN = appInfo.appInfo.jwtToken;
     const channelId = channelData.channelId;
+    const currentuser = appInfo.userInfo.currentUserId;
     const var1 = channelPostId;
 
     useEffect(() => {
@@ -45,6 +48,9 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostList, ch
                     setSubject(res.channelPostName);
                     setContent(res.channelPostContent);
                     setWriter(res.accountName);
+                    if(currentuser == res.accountId){
+                        setEditable(true);
+                    }
                     console.log(res);
                 }
             }).catch(error => {
@@ -121,6 +127,7 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostList, ch
 
                         <div className="modal-header">
                             <h4 className="modal-title"><strong>Channel Content</strong></h4>
+                            
                             <button id="modalClose" type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
 
@@ -133,9 +140,17 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostList, ch
                                     <div className="col-md-2">
                                         <p>{subject}</p>
                                     </div>
+                                    <div className="col-md-4">
+                                        <h5 className="control-label" style={{"float":"right"}}>Writer :</h5>
+                                    </div>
                                     <div className="col-md-2">
                                         <p>{writer}</p>
                                     </div>
+                                    {(editable === true && 
+                                        <div className="col-md-2">
+                                            <a href="#!"><i className="mdi mdi-table-edit font-24" style={{"float":"right"}}></i></a>
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="modal-content" >
                                     <div className="row">
