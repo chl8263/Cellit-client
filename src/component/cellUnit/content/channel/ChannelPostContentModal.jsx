@@ -91,55 +91,57 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostList, ch
     };
 
     const onClickUpdate = () => {
-        const content = document.getElementsByClassName("ql-editor")[0].innerHTML;
+        const content = document.getElementsByClassName("ql-editor")[1].innerHTML;
 
         const JWT_TOKEN = appInfo.appInfo.jwtToken;
         const userId = appInfo.userInfo.currentUserId;
         const userName = appInfo.userInfo.currentUserName;
         const channelId = channelData.channelId;
-        
-        const channelPostInfo = {
-            channelPostName: subject,
-            channelPostContent: content,
-            accountId: userId,
-            accountName: userName,
-        }
 
-        //s: Ajax ----------------------------------
-        fetch(HTTP.SERVER_URL + `/api/channels/${channelId}/channelPosts`, {
-            method: HTTP.POST,
-            headers: {
-                'Content-type': MediaType.JSON,
-                'Accept': MediaType.HAL_JSON,
-                'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
-            },
-            body: JSON.stringify(channelPostInfo)
-        }).then((res) => {
-            if(!res.ok && res.status !== HTTP.STATUS_CREATED && res.status !== HTTP.STATUS_BAD_REQUEST){
-                throw res;
-            }
-            return res;
-        }).then((res) => {
-            if(res.ok){        
-                alert("Create post successfully");
-                modalClose.click();
-                getCahnnelPostList();
-                throw(FETCH_STATE.FINE);
-            }else {
-                return res.json();
-            }
-        }).then((res) => {
-            try{
-                errorCodeToAlertCreater(res);
-            }catch(error){
-                throw error;
-            }
-        }).catch(error => {
-            if(!error === FETCH_STATE.FINE){
-                console.error(error);
-                alert("Client unexpect error.");
-            }
-        });
+        console.log(content);
+        
+        // const channelPostInfo = {
+        //     channelPostName: subject,
+        //     channelPostContent: content,
+        //     accountId: userId,
+        //     accountName: userName,
+        // }
+
+        // //s: Ajax ----------------------------------
+        // fetch(HTTP.SERVER_URL + `/api/channels/${channelId}/channelPosts`, {
+        //     method: HTTP.POST,
+        //     headers: {
+        //         'Content-type': MediaType.JSON,
+        //         'Accept': MediaType.HAL_JSON,
+        //         'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
+        //     },
+        //     body: JSON.stringify(channelPostInfo)
+        // }).then((res) => {
+        //     if(!res.ok && res.status !== HTTP.STATUS_CREATED && res.status !== HTTP.STATUS_BAD_REQUEST){
+        //         throw res;
+        //     }
+        //     return res;
+        // }).then((res) => {
+        //     if(res.ok){        
+        //         alert("Create post successfully");
+        //         modalClose.click();
+        //         getCahnnelPostList();
+        //         throw(FETCH_STATE.FINE);
+        //     }else {
+        //         return res.json();
+        //     }
+        // }).then((res) => {
+        //     try{
+        //         errorCodeToAlertCreater(res);
+        //     }catch(error){
+        //         throw error;
+        //     }
+        // }).catch(error => {
+        //     if(!error === FETCH_STATE.FINE){
+        //         console.error(error);
+        //         alert("Client unexpect error.");
+        //     }
+        // });
         // e: Ajax ----------------------------------
     };
 
