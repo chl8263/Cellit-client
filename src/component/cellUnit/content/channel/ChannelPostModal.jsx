@@ -4,7 +4,7 @@ import { FETCH_STATE ,PAGE_ROUTE, HTTP, MediaType} from "../../../../util/Const"
 import errorCodeToAlertCreater from "../../../../util/ErrorCodeToAlertCreater";
 import { connect } from "react-redux";
 
-const ChannelPostModal = ( { appInfo, channelData } ) => {
+const ChannelPostModal = ( { appInfo, channelData, getCahnnelPostList } ) => {
 
     const modalClose = document.getElementById("modalClose");
 
@@ -12,7 +12,7 @@ const ChannelPostModal = ( { appInfo, channelData } ) => {
     const [content, setContent] = useState("");
     const editorRef = useRef(null);
 
-    const var1 = `<p>Hello World!</p>
+    const channelPostContent = `<p>Hello World!</p>
     <p>Some initial <strong>bold</strong> text</p>
     <p>
         <br/>
@@ -63,7 +63,7 @@ const ChannelPostModal = ( { appInfo, channelData } ) => {
             if(res.ok){        
                 alert("Create post successfully");
                 modalClose.click();
-                //getCellList();
+                getCahnnelPostList();
                 throw(FETCH_STATE.FINE);
             }else {
                 return res.json();
@@ -109,7 +109,7 @@ const ChannelPostModal = ( { appInfo, channelData } ) => {
                                         <div className="card">
                                             <div className="card-body">
                                                 {/* <!-- Create the editor container --> */}
-                                                <div id="editor" style={{"height": "60vh"}} ref={editorRef} dangerouslySetInnerHTML={{ __html: var1 }}>
+                                                <div id="editor" style={{"height": "60vh"}} ref={editorRef} dangerouslySetInnerHTML={{ __html: channelPostContent }}>
                                                     {/* <p>Hello World!</p>
                                                     <p>Some initial <strong>bold</strong> text</p>
                                                     <p>

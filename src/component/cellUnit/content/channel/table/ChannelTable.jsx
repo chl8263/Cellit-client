@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import ChannelTableTr from "../table/ChannelTableTr";
 
-const ChannelTable = () => {
+const ChannelTable = ( { channelPostList, updateChannelPostId } ) => {
+
+    useEffect(() => {
+        console.log(333);
+        console.log(channelPostList);
+        console.log("===============");
+    }, []);
+
     return(
         <>
             <table id="zero_config" className="table table-striped table-bordered dataTable" role="grid" aria-describedby="zero_config_info">
@@ -11,20 +18,15 @@ const ChannelTable = () => {
                         <th className="sorting_asc" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style={{"width": "120px"}}>Number</th>
                         <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Position: activate to sort column ascending" style={{"width": "400"}}>Subject</th>
                         <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Office: activate to sort column ascending" style={{"width": "151px"}}>Writer</th>
-                        <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Start date: activate to sort column ascending" style={{"width": "135px"}}>Time</th>
-                        <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Salary: activate to sort column ascending" style={{"width": "120px"}}>Salary</th>
+                        <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Start date: activate to sort column ascending" style={{"width": "200px"}}>Time</th>
+                        <th className="sorting" tabIndex="0" aria-controls="zero_config" rowSpan="1" colSpan="1" aria-label="Salary: activate to sort column ascending" style={{"width": "120px"}}>View</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <ChannelTableTr />
-                    <ChannelTableTr />
-                    <tr role="row" className="odd">
-                        <td className="sorting_1">Airi Satou</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>33</td>
-                        <td>2008/11/28</td>
-                    </tr>
+                    {channelPostList.map( x => {
+                        return <ChannelTableTr key={x.channelPostId} channelPostInfo={x} updateChannelPostId={updateChannelPostId}/>
+                    })}
+                   
                     {/* <tr role="row" className="even">
                         <td className="sorting_1">Angelica Ramos</td>
                         <td>Chief Executive Officer (CEO)</td>

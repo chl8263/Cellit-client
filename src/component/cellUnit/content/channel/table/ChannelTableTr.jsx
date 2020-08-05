@@ -1,14 +1,20 @@
 import React from "react";
 
-const ChannelTableTr = () => {
+const ChannelTableTr = ( { channelPostInfo, updateChannelPostId } ) => {
+
+
+    const onClickTr = () => {
+        updateChannelPostId(channelPostInfo.channelPostId);
+    };
+
     return (
         <>
-            <tr role="row" className="odd">
-                <td className="sorting_1">Airi Satou</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>33</td>
-                <td>2008/11/28</td>
+            <tr onClick={onClickTr} data-toggle="modal" data-target="#channelContent" role="row" className="odd">
+                <td className="sorting_1">{channelPostInfo.channelPostId}</td>
+                <td>{channelPostInfo.channelPostName}</td>
+                <td>{channelPostInfo.accountName}</td>
+                <td>{channelPostInfo.createDate}</td>
+                <td>{channelPostInfo.viewCount}</td>
             </tr>
         </>
     );
