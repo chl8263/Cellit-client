@@ -17,15 +17,21 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostList, ch
     const JWT_TOKEN = appInfo.appInfo.jwtToken;
     const channelId = channelData.channelId;
     const currentuser = appInfo.userInfo.currentUserId;
-    const var1 = channelPostId;
+
+    useEffect(() => {
+        // var quill = new Quill('#channelPostContentModelEditor', {
+        //     theme: 'snow'
+        // });
+    }, []);
 
     useEffect(() => {
         var quill = new Quill('#channelPostContentModelEditor', {
             theme: 'snow'
         });
-    }, []);
+    }, [editMode]);
 
     useEffect(() => {
+        init();
         if(channelPostId != 0){
             //s: Ajax ----------------------------------
             fetch(HTTP.SERVER_URL + `/api/channels/${channelId}/channelPosts/${channelPostId}/channelContent`, {
@@ -61,12 +67,30 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostList, ch
         // e: Ajax ----------------------------------
     }, [channelPostId]);
 
+    const init = () => {
+        setSubject("");
+        setContent("");
+        setWriter("");
+        setEditMode(false);
+        setEditable(false);
+    };
+
     const onChangeSubject = (e) => {
         setSubject(e.target.value);
         
     };
 
-    const onClickSave = () => {
+    const onClickEdit = (e) => {
+        e.preventDefault();
+        setEditMode(true);
+    };
+
+    const onClickBack = (e) => {
+        e.preventDefault();
+        setEditMode(false);
+    };
+
+    const onClickUpdate = () => {
         const content = document.getElementsByClassName("ql-editor")[0].innerHTML;
 
         const JWT_TOKEN = appInfo.appInfo.jwtToken;
@@ -132,39 +156,41 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostList, ch
                         </div>
 
                         <div className="modal-body" >
-                            <div>
-                                <div className="form-group row">
-                                    <div className="col-md-2">
-                                        <h5 className="control-label">Subject :</h5>
-                                    </div>
-                                    <div className="col-md-2">
-                                        <p>{subject}</p>
-                                    </div>
-                                    <div className="col-md-4">
-                                        <h5 className="control-label" style={{"float":"right"}}>Writer :</h5>
-                                    </div>
-                                    <div className="col-md-2">
-                                        <p>{writer}</p>
-                                    </div>
-                                    {(editable === true && 
+                            {(editMode === false && 
+                                <div>
+                                    <div className="form-group row">
                                         <div className="col-md-2">
-                                            <a href="#!"><i className="mdi mdi-table-edit font-24" style={{"float":"right"}}></i></a>
+                                            <h5 className="control-label">Subject :</h5>
                                         </div>
-                                    )}
-                                </div>
-                                <div className="modal-content" >
-                                    <div className="row">
-                                        <div className="col-12">
-                                            <div className="card">
-                                                <div className="card-body">
-                                                    <div  dangerouslySetInnerHTML={{ __html: content }}>
+                                        <div className="col-md-2">
+                                            <p>{subject}</p>
+                                        </div>
+                                        <div className="col-md-4">
+                                            <h5 className="control-label" style={{"float":"right"}}>Writer :</h5>
+                                        </div>
+                                        <div className="col-md-2">
+                                            <p>{writer}</p>
+                                        </div>
+                                        {(editable === true && 
+                                            <div className="col-md-2">
+                                                <a onClick={onClickEdit} href="#!"><i className="mdi mdi-table-edit font-24" style={{"float":"right"}}></i></a>
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="modal-content" >
+                                        <div className="row">
+                                            <div className="col-12">
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div  dangerouslySetInnerHTML={{ __html: content }}>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            )}
                             {(editMode === true && 
                                 <div>
                                     <div className="form-group row">
@@ -174,13 +200,18 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostList, ch
                                         <div className="col-md-6">
                                             <input id="cellName" name="cellName" onChange={onChangeSubject} value={subject} className="form-control form-white" placeholder="Enter subject" type="text"  />
                                         </div>
+                                        {(editMode === true && 
+                                            <div className="col-md-2">
+                                                <a onClick={onClickBack} href="#!"><i className="mdi mdi-keyboard-backspace font-24" style={{"float":"right"}}></i></a>
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="modal-content" >
                                         <div className="row">
                                             <div className="col-12">
                                                 <div className="card">
                                                     <div className="card-body">
-                                                        <div id="channelPostContentModelEditor" style={{"height": "60vh"}} ref={editorRef} dangerouslySetInnerHTML={{ __html: content }}>
+                                                        <div id="channelPostContentModelEditor" style={{"height": "60vh"}} dangerouslySetInnerHTML={{ __html: content }}>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -189,10 +220,11 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostList, ch
                                     </div>
                                 </div>
                             )}
-                            
                         </div>                        
                         <div className="modal-footer">
-                            {/* <button type="button" onClick={onClickSave} className="btn btn-success waves-effect">Save</button> */}
+                            {(editMode === true &&
+                                <button type="button" onClick={onClickUpdate} className="btn btn-success waves-effect">Update</button>
+                            )}
                             <button type="button" className="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
                         </div>
                     </div>

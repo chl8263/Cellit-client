@@ -10,19 +10,11 @@ const ChannelPostModal = ( { appInfo, channelData, getCahnnelPostList } ) => {
 
     const [subject, setSubject] = useState("");
     const [content, setContent] = useState("");
-    const editorRef = useRef(null);
-
-    const channelPostContent = `<p>Hello World!</p>
-    <p>Some initial <strong>bold</strong> text</p>
-    <p>
-        <br/>
-    </p>`;
 
     useEffect(() => {
         var quill = new Quill('#editor', {
             theme: 'snow'
         });
-        editorRef.current.innerHtml = "aaaa" ;
     }, []);
 
     const onChangeSubject = (e) => {
@@ -109,7 +101,7 @@ const ChannelPostModal = ( { appInfo, channelData, getCahnnelPostList } ) => {
                                         <div className="card">
                                             <div className="card-body">
                                                 {/* <!-- Create the editor container --> */}
-                                                <div id="editor" style={{"height": "60vh"}} ref={editorRef} dangerouslySetInnerHTML={{ __html: channelPostContent }}>
+                                                <div id="editor" style={{"height": "60vh"}}>
                                                     {/* <p>Hello World!</p>
                                                     <p>Some initial <strong>bold</strong> text</p>
                                                     <p>
