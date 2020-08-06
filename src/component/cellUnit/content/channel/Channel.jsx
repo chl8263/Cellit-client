@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import $ from "jquery";
 
 import PreLoader from "../../../PreLoader";
-import ChannelPostModal from "../channel/ChannelPostModal";
+import CreateChannelPostModal from "../channel/CreateChannelPostModal";
 import ChannelPostContentModal from "../channel/ChannelPostContentModal";
 import ChannelTable from "../channel/table/ChannelTable";
 
@@ -144,7 +144,7 @@ const Channel = ( { appInfo, data } ) => {
                     </div>
                 </div>
             </div>
-            <ChannelPostModal channelData={channelData} getCahnnelPostList={getCahnnelPostList}/>
+            <CreateChannelPostModal channelData={channelData} getCahnnelPostList={getCahnnelPostList}/>
             <ChannelPostContentModal channelData={channelData} channelPostId={channelPostId}/>
         </>
     );
