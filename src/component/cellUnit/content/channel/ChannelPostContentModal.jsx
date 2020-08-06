@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostList, channelPostId } ) => {
 
-    const modalClose = document.getElementById("modalClose");
+    const modalClose = document.getElementById("channelPostContentModalModalClose");
 
     const [subject, setSubject] = useState("");
     const [content, setContent] = useState("");
@@ -91,58 +91,60 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostList, ch
     };
 
     const onClickUpdate = () => {
-        const content = document.getElementsByClassName("ql-editor")[1].innerHTML;
+        if(confirm("Do you want to edit post as current content?")){
+            const content = document.getElementsByClassName("ql-editor")[1].innerHTML;
 
-        const JWT_TOKEN = appInfo.appInfo.jwtToken;
-        const userId = appInfo.userInfo.currentUserId;
-        const userName = appInfo.userInfo.currentUserName;
-        const channelId = channelData.channelId;
+            const JWT_TOKEN = appInfo.appInfo.jwtToken;
+            const userId = appInfo.userInfo.currentUserId;
+            const userName = appInfo.userInfo.currentUserName;
+            const channelId = channelData.channelId;
 
-        console.log(content);
-        
-        // const channelPostInfo = {
-        //     channelPostName: subject,
-        //     channelPostContent: content,
-        //     accountId: userId,
-        //     accountName: userName,
-        // }
+            console.log(content);
+            
+            const channelPostInfo = {
+                channelPostName: subject,
+                channelPostContent: content,
+                accountId: userId,
+                accountName: userName,
+            }
 
-        // //s: Ajax ----------------------------------
-        // fetch(HTTP.SERVER_URL + `/api/channels/${channelId}/channelPosts`, {
-        //     method: HTTP.POST,
-        //     headers: {
-        //         'Content-type': MediaType.JSON,
-        //         'Accept': MediaType.HAL_JSON,
-        //         'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
-        //     },
-        //     body: JSON.stringify(channelPostInfo)
-        // }).then((res) => {
-        //     if(!res.ok && res.status !== HTTP.STATUS_CREATED && res.status !== HTTP.STATUS_BAD_REQUEST){
-        //         throw res;
-        //     }
-        //     return res;
-        // }).then((res) => {
-        //     if(res.ok){        
-        //         alert("Create post successfully");
-        //         modalClose.click();
-        //         getCahnnelPostList();
-        //         throw(FETCH_STATE.FINE);
-        //     }else {
-        //         return res.json();
-        //     }
-        // }).then((res) => {
-        //     try{
-        //         errorCodeToAlertCreater(res);
-        //     }catch(error){
-        //         throw error;
-        //     }
-        // }).catch(error => {
-        //     if(!error === FETCH_STATE.FINE){
-        //         console.error(error);
-        //         alert("Client unexpect error.");
-        //     }
-        // });
-        // e: Ajax ----------------------------------
+            //s: Ajax ----------------------------------
+            fetch(HTTP.SERVER_URL + `/api/channels/${channelId}/channelPosts/${channelPostId}/channelContent`, {
+                method: HTTP.PATCH,
+                headers: {
+                    'Content-type': MediaType.JSON,
+                    'Accept': MediaType.HAL_JSON,
+                    'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
+                },
+                body: JSON.stringify(channelPostInfo)
+            }).then((res) => {
+                if(!res.ok && res.status !== HTTP.STATUS_CREATED && res.status !== HTTP.STATUS_BAD_REQUEST){
+                    throw res;
+                }
+                return res;
+            }).then((res) => {
+                if(res.ok){        
+                    alert("Modify Post successfully");
+                    modalClose.click();
+                    getCahnnelPostList(0);
+                    throw(FETCH_STATE.FINE);
+                }else {
+                    return res.json();
+                }
+            }).then((res) => {
+                try{
+                    errorCodeToAlertCreater(res);
+                }catch(error){
+                    throw error;
+                }
+            }).catch(error => {
+                if(!error === FETCH_STATE.FINE){
+                    console.error(error);
+                    alert("Client unexpect error.");
+                }
+            });
+            // e: Ajax ----------------------------------
+        }
     };
 
     return (
@@ -154,7 +156,7 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostList, ch
                         <div className="modal-header">
                             <h4 className="modal-title"><strong>Channel Content</strong></h4>
                             
-                            <button id="modalClose" type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <button id="channelPostContentModalModalClose" type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
 
                         <div className="modal-body" >

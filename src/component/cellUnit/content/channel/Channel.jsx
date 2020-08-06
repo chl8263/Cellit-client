@@ -29,6 +29,7 @@ const Channel = ( { appInfo, data } ) => {
     };
 
     const getCahnnelPostList = (pageNumber) => {
+        console.log(7777);
         const JWT_TOKEN = appInfo.appInfo.jwtToken;
         const channelId = channelData.channelId;
 
@@ -145,7 +146,7 @@ const Channel = ( { appInfo, data } ) => {
                 </div>
             </div>
             <CreateChannelPostModal channelData={channelData} getCahnnelPostList={getCahnnelPostList}/>
-            <ChannelPostContentModal channelData={channelData} channelPostId={channelPostId}/>
+            <ChannelPostContentModal channelData={channelData} getCahnnelPostList={getCahnnelPostList} channelPostId={channelPostId}/>
         </>
     );
 };

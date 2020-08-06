@@ -20,6 +20,7 @@ const HTTP = {
     POST: "POST",
     PUT: "PUT",
     DELETE: "DELETE",
+    PATCH: "PATCH",
 
     // --- 2xx Success ---
     STATUS_OK: 200,
