@@ -4,7 +4,7 @@ import { FETCH_STATE ,PAGE_ROUTE, HTTP, MediaType} from "../../../../util/Const"
 import errorCodeToAlertCreater from "../../../../util/ErrorCodeToAlertCreater";
 import { connect } from "react-redux";
 
-const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostList, channelPostId } ) => {
+const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostListByPageNumber, channelPostId } ) => {
 
     const modalClose = document.getElementById("channelPostContentModalModalClose");
 
@@ -126,7 +126,7 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostList, ch
                 if(res.ok){        
                     alert("Modify Post successfully");
                     modalClose.click();
-                    getCahnnelPostList(0);
+                    getCahnnelPostListByPageNumber(0);
                     throw(FETCH_STATE.FINE);
                 }else {
                     return res.json();

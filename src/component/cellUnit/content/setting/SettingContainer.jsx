@@ -7,9 +7,7 @@ import RequestCell from "../setting/requestCell/RequestCell";
 const SettingContainer = () => {
 
     useEffect(() => {
-        history.pushState('','', '/MainBoard');
         $(".preloader").fadeOut(); // Remove preloader.
-
     }, []);
 
     return (

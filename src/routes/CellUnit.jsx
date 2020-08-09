@@ -15,7 +15,7 @@ import ContentMatcher from "../component/cellUnit/ContentMatcher";
 const CellUnit = ({ switchMainBoard, appInfo }) => {
 
     useEffect(() => {
-        history.pushState('','', `/CellUnit/${appInfo.cellInfo.cellId}`);
+        history.pushState('','', `/cell-unit/${appInfo.cellInfo.cellId}`);
         $(".preloader").fadeOut(); // Remove preloader.
     }, []);
 

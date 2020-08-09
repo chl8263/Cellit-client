@@ -16,7 +16,7 @@ const MainBoard = ( {appInfo} ) => {
     const [cellList, setCellList] = useState([]);
 
     useEffect(() => {
-        history.pushState('','', '/MainBoard');
+        history.pushState('','', '/main-board');
         $(".preloader").fadeOut(); // Remove preloader.
 
         getCellList(); //get Cells with current user

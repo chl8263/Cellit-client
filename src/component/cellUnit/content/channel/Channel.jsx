@@ -5,6 +5,7 @@ import PreLoader from "../../../PreLoader";
 import CreateChannelPostModal from "../channel/CreateChannelPostModal";
 import ChannelPostContentModal from "../channel/ChannelPostContentModal";
 import ChannelTable from "../channel/table/ChannelTable";
+import TableIndicator from "../channel/table/TableIndicator";
 
 import { connect } from "react-redux";
 import { HTTP, MediaType } from "../../../../util/Const";
@@ -12,29 +13,43 @@ import { HTTP, MediaType } from "../../../../util/Const";
 const Channel = ( { appInfo, data } ) => {
 
     const channelData = data.location.channelData;
+    const JWT_TOKEN = appInfo.appInfo.jwtToken;
+    const channelId = channelData.channelId;
 
     const [channelPostList, setChannelPostList] = useState([]);
+    const [tableIndicatorPageInfo, setTableIndicatorPageInfo] = useState({});
+    const [tableIndicatorLinkInfo, setTableIndicatorLinkInfo] = useState({});
     const [channelPostId, setChannelPostId] = useState(0);
 
     useEffect(() => {
-        history.pushState('','', '/MainBoard');
         $(".preloader").fadeOut(); // Remove preloader.
-        getCahnnelPostList(0);
+        getCahnnelPostListByPageNumber(0);
+        //getCahnnelPostList(0);
     }, []);
 
     const updateChannelPostId = (channelPostId) => {
-        console.log(11111111);
-        console.log(channelPostId);
         setChannelPostId(channelPostId);
     };
 
-    const getCahnnelPostList = (pageNumber) => {
-        console.log(7777);
-        const JWT_TOKEN = appInfo.appInfo.jwtToken;
-        const channelId = channelData.channelId;
+    const getCahnnelPostListByWholeUrl = (url) => {
+        console.log("onClick Wole!!!");
+        console.log(url);
+        console.log("onClick Wole!!!");
+        getCahnnelPostList(url);
+    };
 
+    const getCahnnelPostListByPageNumber = (pageNumber) => {
+        console.log("onClick page!!!");
+        console.log(pageNumber);
+        console.log("onClick page!!!");
+        const realPageNumber = pageNumber-1;
+        const url = HTTP.SERVER_URL+`/api/channels/${channelId}/channelPosts?page=${realPageNumber}&size=${10}&sort=createDate,DESC`;
+        getCahnnelPostList(url);
+    };
+
+    const getCahnnelPostList = (url) => {
         //s: Ajax ----------------------------------
-        fetch(HTTP.SERVER_URL + `/api/channels/${channelId}/channelPosts?page=${pageNumber}&size=${10}&sort=createDate,DESC`, {
+        fetch(url, {
             method: HTTP.GET,
             headers: {
                 'Content-type': MediaType.JSON,
@@ -55,7 +70,8 @@ const Channel = ( { appInfo, data } ) => {
                 console.log(111);
                 console.log(res);
                 setChannelPostList(res._embedded.channelPostEntityModelList);
-                console.log(22);
+                setTableIndicatorPageInfo(res.page);
+                setTableIndicatorLinkInfo(res._links);
             }
         }).catch(error => {
             console.error(error);
@@ -108,45 +124,14 @@ const Channel = ( { appInfo, data } ) => {
                                     <ChannelTable updateChannelPostId={updateChannelPostId} channelPostList={channelPostList}/>
                                 </div>
                             </div>
-                                <div className="row">
-                                    <div className="col-sm-12 col-md-5">
-                                        <div className="dataTables_info" id="zero_config_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                                    </div>
-                                    <div className="col-sm-12 col-md-7">
-                                        <div className="dataTables_paginate paging_simple_numbers" id="zero_config_paginate">
-                                            <ul className="pagination">
-                                                <li className="paginate_button page-item previous disabled" id="zero_config_previous">
-                                                    <a href="#!" aria-controls="zero_config" data-dt-idx="0" tabIndex="0" className="page-link">Previous</a>
-                                                </li>
-                                                <li className="paginate_button page-item active">
-                                                    <a href="#!" aria-controls="zero_config" data-dt-idx="1" tabIndex="0" className="page-link">1</a>
-                                                </li>
-                                                <li className="paginate_button page-item ">
-                                                    <a href="#!" aria-controls="zero_config" data-dt-idx="2" tabIndex="0" className="page-link">2</a>
-                                                </li>
-                                                <li className="paginate_button page-item ">
-                                                    <a href="#!" aria-controls="zero_config" data-dt-idx="3" tabIndex="0" className="page-link">3</a>
-                                                </li>
-                                                <li className="paginate_button page-item ">
-                                                    <a href="#!" aria-controls="zero_config" data-dt-idx="4" tabIndex="0" className="page-link">4</a>
-                                                </li>
-                                                <li className="paginate_button page-item ">
-                                                    <a href="#!" aria-controls="zero_config" data-dt-idx="5" tabIndex="0" className="page-link">5</a>
-                                                </li>
-                                                <li className="paginate_button page-item next" id="zero_config_next">
-                                                    <a href="#!" aria-controls="zero_config" data-dt-idx="7" tabIndex="0" className="page-link">Next</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                <TableIndicator getCahnnelPostListByWholeUrl={getCahnnelPostListByWholeUrl} getCahnnelPostListByPageNumber={getCahnnelPostListByPageNumber} pageInfo={tableIndicatorPageInfo} linkInfo={tableIndicatorLinkInfo}/>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <CreateChannelPostModal channelData={channelData} getCahnnelPostList={getCahnnelPostList}/>
-            <ChannelPostContentModal channelData={channelData} getCahnnelPostList={getCahnnelPostList} channelPostId={channelPostId}/>
+            <CreateChannelPostModal channelData={channelData} getCahnnelPostListByPageNumber={getCahnnelPostListByPageNumber}/>
+            <ChannelPostContentModal channelData={channelData} getCahnnelPostListByPageNumber={getCahnnelPostListByPageNumber} channelPostId={channelPostId}/>
         </>
     );
 };
