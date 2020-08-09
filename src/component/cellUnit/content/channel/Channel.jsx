@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import $ from "jquery";
 
 import PreLoader from "../../../PreLoader";
@@ -20,6 +20,7 @@ const Channel = ( { appInfo, data } ) => {
     const [tableIndicatorPageInfo, setTableIndicatorPageInfo] = useState({});
     const [tableIndicatorLinkInfo, setTableIndicatorLinkInfo] = useState({});
     const [channelPostId, setChannelPostId] = useState(0);
+    const elementsNumberRef = useRef(null);
 
     useEffect(() => {
         $(".preloader").fadeOut(); // Remove preloader.
@@ -43,7 +44,7 @@ const Channel = ( { appInfo, data } ) => {
         console.log(pageNumber);
         console.log("onClick page!!!");
         const realPageNumber = pageNumber-1;
-        const url = HTTP.SERVER_URL+`/api/channels/${channelId}/channelPosts?page=${realPageNumber}&size=${10}&sort=createDate,DESC`;
+        const url = HTTP.SERVER_URL+`/api/channels/${channelId}/channelPosts?page=${realPageNumber}&size=${elementsNumberRef.current.value}&sort=createDate,DESC`;
         getCahnnelPostList(url);
     };
 
@@ -79,6 +80,10 @@ const Channel = ( { appInfo, data } ) => {
         });
         // e: Ajax ----------------------------------
     };
+
+    const onChangeElementsNumber = () => {
+        getCahnnelPostListByPageNumber(0);
+    };
     
     return (
         <>
@@ -93,7 +98,7 @@ const Channel = ( { appInfo, data } ) => {
             </div>
 
             <div className="container-fluid">
-                <div className="scroll-sidebar doScroll scrollable" style={{"height": "98vh"}}>
+                <div className="scroll-sidebar doScroll scrollable" style={{"height": "90vh"}}>
                     <div className="card">
                         <div className="card-body">
                             <div className="table-responsive">
@@ -102,7 +107,7 @@ const Channel = ( { appInfo, data } ) => {
                                         <div className="col-sm-12 col-md-4">
                                             <div className="dataTables_length" id="zero_config_length">
                                                 <label>Show  
-                                                    <select name="zero_config_length" aria-controls="zero_config" className="form-control form-control-sm">
+                                                    <select onChange={onChangeElementsNumber} ref={elementsNumberRef} name="zero_config_length" aria-controls="zero_config" className="form-control form-control-sm">
                                                         <option value="10">10</option><option value="25">25</option>
                                                         <option value="50">50</option><option value="100">100</option>
                                                     </select> entries
