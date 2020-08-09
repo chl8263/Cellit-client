@@ -22,6 +22,8 @@ const TableIndicator = ( { getCahnnelPostListByWholeUrl, getCahnnelPostListByPag
 
     const [pageNumberList, setPageNumberList] = useState([]);
 
+    const [totalEntry, setTotalEntry] = useState(0);
+
 
     useEffect(() => {
         console.log("change");
@@ -49,6 +51,8 @@ const TableIndicator = ( { getCahnnelPostListByWholeUrl, getCahnnelPostListByPag
                 const listSize = pageInfo.size;
                 const totalElements = pageInfo.totalElements;
                 const totalPages = pageInfo.totalPages;
+
+                setTotalEntry(totalElements);
 
                 //const tempBunchOfPages = totalPages/BUNCH_OF_PAGES_NUMBER;
                 const tempBunchOfCurrentPage = currentPage/BUNCH_OF_PAGES_NUMBER;
@@ -103,7 +107,7 @@ const TableIndicator = ( { getCahnnelPostListByWholeUrl, getCahnnelPostListByPag
         <>
             <div className="row">
                 <div className="col-sm-12 col-md-4">
-                    <div className="dataTables_info" id="zero_config_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                    <div className="dataTables_info" id="zero_config_info" role="status" aria-live="polite">Total entries are {totalEntry}</div>
                 </div>
                 <div className="col-sm-12 col-md-5">
                     <div className="dataTables_paginate paging_simple_numbers" id="zero_config_paginate">
