@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const ChannelTableTr = ( { channelPostInfo, updateChannelPostId } ) => {
 
+    const [viewCount, setViewCount] = useState(channelPostInfo.viewCount);
 
     const onClickTr = () => {
         updateChannelPostId(channelPostInfo.channelPostId);
+        setViewCount(viewCount + 1);
     };
 
     return (
@@ -14,7 +16,7 @@ const ChannelTableTr = ( { channelPostInfo, updateChannelPostId } ) => {
                 <td>{channelPostInfo.channelPostName}</td>
                 <td>{channelPostInfo.accountName}</td>
                 <td>{channelPostInfo.createDate}</td>
-                <td>{channelPostInfo.viewCount}</td>
+                <td>{viewCount}</td>
             </tr>
         </>
     );
