@@ -21,6 +21,7 @@ const Channel = ( { appInfo, data } ) => {
     const [tableIndicatorLinkInfo, setTableIndicatorLinkInfo] = useState({});
     const [channelPostId, setChannelPostId] = useState(0);
     const elementsNumberRef = useRef(null);
+    const [postNameToSearch, setPostNameToSearch] = useState("");
 
     useEffect(() => {
         $(".preloader").fadeOut(); // Remove preloader.
@@ -30,6 +31,24 @@ const Channel = ( { appInfo, data } ) => {
 
     const updateChannelPostId = (channelPostId) => {
         setChannelPostId(channelPostId);
+    };
+
+    const onChangePostNameToSearch = (e) => {
+        setPostNameToSearch(e.target.value);
+    };
+
+    const onKeyPressOnPostNameToSearch = (e) => {
+        if(e.key == 'Enter'){
+            onClickPostNameToSearch(0);
+        }
+    };
+
+    const onClickPostNameToSearch = () => {
+        getCahnnelPostListByPageNumber(0);
+    };
+
+    const onChangeElementsNumber = () => {
+        getCahnnelPostListByPageNumber(0);
     };
 
     const getCahnnelPostListByWholeUrl = (url) => {
@@ -44,7 +63,7 @@ const Channel = ( { appInfo, data } ) => {
         console.log(pageNumber);
         console.log("onClick page!!!");
         const realPageNumber = pageNumber-1;
-        const url = HTTP.SERVER_URL+`/api/channels/${channelId}/channelPosts?page=${realPageNumber}&size=${elementsNumberRef.current.value}&sort=createDate,DESC`;
+        const url = HTTP.SERVER_URL+`/api/channels/${channelId}/channelPosts?postNameToSearch=${postNameToSearch}&page=${realPageNumber}&size=${elementsNumberRef.current.value}&sort=createDate,DESC`;
         getCahnnelPostList(url);
     };
 
@@ -81,9 +100,7 @@ const Channel = ( { appInfo, data } ) => {
         // e: Ajax ----------------------------------
     };
 
-    const onChangeElementsNumber = () => {
-        getCahnnelPostListByPageNumber(0);
-    };
+    
     
     return (
         <>
@@ -116,12 +133,14 @@ const Channel = ( { appInfo, data } ) => {
                                         </div>
                                     <div className="col-sm-12 col-md-4">
                                         <div id="zero_config_filter" className="dataTables_filter">
-                                            <label>Search:<input type="search" className="form-control form-control-sm" placeholder="" aria-controls="zero_config"/></label>
+                                            <label>Search:<input value={postNameToSearch} onKeyPress={onKeyPressOnPostNameToSearch} onChange={onChangePostNameToSearch} type="search" className="form-control form-control-sm" placeholder="" aria-controls="zero_config"/></label>
+                                            <button onClick={onClickPostNameToSearch} type="button" className="btn btn-info btn-sm"  style={{"marginLeft": "15px"}}>Search</button>
                                         </div>
                                     </div>
                                     <div className="col-sm-12 col-md-4">
                                     {/* <a className="dropdown-item" href="#!" data-toggle="modal" data-target="#createChannelPost">Create Cell Unit</a> */}
-                                        <button type="button" className="btn btn-success btn-lg" data-toggle="modal" data-target="#createChannelPost">New post</button>
+                                        
+                                        <button type="button" className="btn btn-primary btn-lg" data-toggle="modal" data-target="#createChannelPost" style={{"marginLeft": "15px"}}>New post</button>
                                     </div>
                                 </div>
                                 <div className="row">

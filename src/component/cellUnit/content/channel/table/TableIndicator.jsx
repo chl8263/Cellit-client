@@ -33,19 +33,31 @@ const TableIndicator = ( { getCahnnelPostListByWholeUrl, getCahnnelPostListByPag
             if("first" in linkInfo) {
                 setIsFirst(true);
                 setFirstUrl(linkInfo.first.href);
+            }else {
+                setIsFirst(false);
             }
+
             if("prev" in linkInfo) {
                 setIsPrev(true);
                 setPrevUrl(linkInfo.prev.href);
+            }else {
+                setIsPrev(false);
             }
+
             if("next" in linkInfo) {
                 setIsNext(true);
                 setNextUrl(linkInfo.next.href);
+            }else {
+                setIsNext(false);
             }
+
             if("last" in linkInfo) {
                 setIsLast(true);
                 setLastUrl(linkInfo.last.href);
+            }else {
+                setIsLast(false);
             }
+
             if("number" in pageInfo && "size" in pageInfo && "totalElements" in pageInfo && "totalPages" in pageInfo){
                 const currentPage = pageInfo.number;
                 const listSize = pageInfo.size;

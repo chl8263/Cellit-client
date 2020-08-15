@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 
-const ChannelTableTr = ( { channelPostInfo, updateChannelPostId } ) => {
+const ChannelTableTr = ( { appInfo, channelPostInfo, updateChannelPostId } ) => {
 
     const [viewCount, setViewCount] = useState(channelPostInfo.viewCount);
 
     const onClickTr = () => {
         updateChannelPostId(channelPostInfo.channelPostId);
-        setViewCount(viewCount + 1);
+        
+        if(appInfo.userInfo.currentUserId !== channelPostInfo.accountId){
+            setViewCount(viewCount + 1);    
+        }
     };
 
     return (
@@ -22,4 +26,9 @@ const ChannelTableTr = ( { channelPostInfo, updateChannelPostId } ) => {
     );
 };
 
-export default ChannelTableTr;
+
+const mapStateToProps = (state, ownProps) => {
+    return { appInfo: state };
+}
+
+export default connect(mapStateToProps) (ChannelTableTr);
