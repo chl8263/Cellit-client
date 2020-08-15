@@ -60,42 +60,7 @@ const RequestCell = ({appInfo}) => {
                         {cellRequestList.map(x => {
                             return <RequestCellRow key={x.accountId} requestInfo={x} />
                         })}
-                        {/* <tr>
-                            <td>Making The New Suit</td>
-                            <td className="text-success">Progress</td>
-                            <td>
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Update">
-                                    <i className="mdi mdi-check"></i>
-                                </a>
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Delete">
-                                    <i className="mdi mdi-close"></i>
-                                </a>     
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Luanch My New Site</td>
-                            <td className="text-warning">Pending</td>
-                            <td>
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Update">
-                                    <i className="mdi mdi-check"></i>
-                                </a>
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Delete">
-                                    <i className="mdi mdi-close"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Maruti Excellant Theme</td>
-                            <td className="text-danger">Cancled</td>
-                            <td>
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Update">
-                                    <i className="mdi mdi-check"></i>
-                                </a>
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Delete">
-                                    <i className="mdi mdi-close"></i>
-                                </a>
-                            </td>  
-                        </tr> */}
+                       
                     </tbody>
                 </table>
             </div>

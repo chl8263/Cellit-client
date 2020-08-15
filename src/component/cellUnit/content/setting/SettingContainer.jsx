@@ -27,18 +27,18 @@ const SettingContainer = () => {
                 <div className="card" style={{"height" : "80vh"}}>
                     {/* <!-- Nav tabs --> */}
                     <ul className="nav nav-tabs" role="tablist">
-                        <li className="nav-item"> <a className="nav-link active" data-toggle="tab" href="#home" role="tab"><span className="hidden-sm-up"></span> <span className="hidden-xs-down">Request cell</span></a> </li>
-                        <li className="nav-item"> <a className="nav-link" data-toggle="tab" href="#profile" role="tab"><span className="hidden-sm-up"></span> <span className="hidden-xs-down">Tab2</span></a> </li>
+                        <li className="nav-item"> <a className="nav-link active" data-toggle="tab" href="#requestAccounts" role="tab"><span className="hidden-sm-up"></span> <span className="hidden-xs-down">Requested Accounts</span></a> </li>
+                        <li className="nav-item"> <a className="nav-link" data-toggle="tab" href="#manageChannels" role="tab"><span className="hidden-sm-up"></span> <span className="hidden-xs-down">Manage Channels</span></a> </li>
                         <li className="nav-item"> <a className="nav-link" data-toggle="tab" href="#messages" role="tab"><span className="hidden-sm-up"></span> <span className="hidden-xs-down">Tab3</span></a> </li>
                     </ul>
                     {/* <!-- Tab panes --> */}
                     <div className="tab-content tabcontent-border">
-                        <div className="tab-pane active" id="home" role="tabpanel">
+                        <div className="tab-pane active" id="requestAccounts" role="tabpanel">
                             <div className="p-20">
                                 <RequestCell />
                             </div>
                         </div>
-                        <div className="tab-pane  p-20" id="profile" role="tabpanel">
+                        <div className="tab-pane  p-20" id="manageChannels" role="tabpanel">
                             <div className="p-20">
                                 two
                             </div>
