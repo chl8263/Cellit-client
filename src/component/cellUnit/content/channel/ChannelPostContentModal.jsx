@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FETCH_STATE ,PAGE_ROUTE, HTTP, MediaType} from "../../../../util/Const";
 import errorCodeToAlertCreater from "../../../../util/ErrorCodeToAlertCreater";
 import { connect } from "react-redux";
+import ChannelPostContentComment from "./ChannelPostContentComment";
 
 const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostListByPageNumber, channelPostId } ) => {
 
@@ -14,9 +15,12 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostListByPa
     const [editMode,setEditMode] = useState(false);
     const [editable,setEditable] = useState(false);
 
+    const [comment, setComment] = useState("");
+
     const JWT_TOKEN = appInfo.appInfo.jwtToken;
     const channelId = channelData.channelId;
-    const currentuser = appInfo.userInfo.currentUserId;
+    const currentUserId = appInfo.userInfo.currentUserId;
+    const currentUserName = appInfo.userInfo.currentUserName;
 
     useEffect(() => {
         // var quill = new Quill('#channelPostContentModelEditor', {
@@ -54,7 +58,7 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostListByPa
                     setSubject(res.channelPostName);
                     setContent(res.channelPostContent);
                     setWriter(res.accountName);
-                    if(currentuser == res.accountId){
+                    if(currentUserId == res.accountId){
                         setEditable(true);
                     }
                     console.log(res);
@@ -63,8 +67,8 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostListByPa
                 console.error(error);
                 alert("Client unexpect error.");
             });
+            // e: Ajax ----------------------------------
         }
-        // e: Ajax ----------------------------------
     }, [channelPostId]);
 
     const init = () => {
@@ -95,8 +99,6 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostListByPa
             const content = document.getElementsByClassName("ql-editor")[1].innerHTML;
 
             const JWT_TOKEN = appInfo.appInfo.jwtToken;
-            const userId = appInfo.userInfo.currentUserId;
-            const userName = appInfo.userInfo.currentUserName;
             const channelId = channelData.channelId;
 
             console.log(content);
@@ -104,8 +106,8 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostListByPa
             const channelPostInfo = {
                 channelPostName: subject,
                 channelPostContent: content,
-                accountId: userId,
-                accountName: userName,
+                accountId: currentUserId,
+                accountName: currentUserName,
             }
 
             //s: Ajax ----------------------------------
@@ -145,6 +147,58 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostListByPa
             });
             // e: Ajax ----------------------------------
         }
+    };
+
+    const handleCommentText = (e) => {
+        setComment(e.target.value);
+    };
+
+    const onClickSubmitComment = (e) => {
+        e.preventDefault();
+
+        const channelPostCommentInfo = {
+            accountId: currentUserId,
+            channelPostComment: comment,
+        };
+
+        //s: Ajax ----------------------------------
+        fetch(HTTP.SERVER_URL + `/api/channels/${channelId}/channelPosts/${channelPostId}/channelPostComments`, {
+            method: HTTP.POST,
+            headers: {
+                'Content-type': MediaType.JSON,
+                'Accept': MediaType.HAL_JSON,
+                'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
+            },
+            body: JSON.stringify(channelPostCommentInfo)
+        }).then((res) => {
+            if(!res.ok && res.status !== HTTP.STATUS_CREATED && res.status !== HTTP.STATUS_BAD_REQUEST){
+                throw res;
+            }
+            return res;
+        }).then((res) => {
+            if(res.ok){        
+                
+                console.log("########");
+                console.log(res);
+
+                throw(FETCH_STATE.FINE);
+            }else {
+                return res.json();
+            }
+        }).then((res) => {
+            try{
+                errorCodeToAlertCreater(res);
+            }catch(error){
+                throw error;
+            }
+        }).catch(error => {
+            if(!error === FETCH_STATE.FINE){
+                console.error(error);
+                alert("Client unexpect error.");
+            }
+        });
+        // e: Ajax ----------------------------------
+
     };
 
     return (
@@ -224,65 +278,32 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostListByPa
                                     </div>
                                 </div>
                             )}
-                        </div>
-
-                        <div class="card-body">
-                            <h6 className="control-label">Commnet</h6>
-                            <div class="chat-box scrollable">
-                                <ul class="chat-list">
-                                    <li class="chat-item">
-                                        <div class="chat-img"><img src="" alt="user"/></div>
-                                        <div class="chat-content">
-                                            <h6 class="font-medium">James Anderson</h6>
-                                            <div class="box bg-light-info">Lorem Ipsum is simply dummy text of the printing &amp; type setting industry.</div>
-                                        </div>
-                                        <div class="chat-time">10:56 am</div>
-                                    </li>
-                                    <li class="chat-item">
-                                        <div class="chat-img"><img src="" alt="user"/></div>
-                                        <div class="chat-content">
-                                            <h6 class="font-medium">Bianca Doe</h6>
-                                            <div class="box bg-light-info">It’s Great opportunity to work.</div>
-                                        </div>
-                                        <div class="chat-time">10:57 am</div>
-                                    </li>
-                                    <li class="odd chat-item">
-                                        <div class="chat-content">
-                                            <div class="box bg-light-inverse">I would love to join the team.</div>
-                                            <br/>
-                                        </div>
-                                    </li>
-                                    <li class="odd chat-item">
-                                        <div class="chat-content">
-                                            <div class="box bg-light-inverse">Whats budget of the new project.</div>
-                                            <br/>
-                                        </div>
-                                        <div class="chat-time">10:59 am</div>
-                                    </li>
-                                    <li class="chat-item">
-                                        <div class="chat-img"><img src="" alt="user"/></div>
-                                        <div class="chat-content">
-                                            <h6 class="font-medium">Angelina Rhodes</h6>
-                                            <div class="box bg-light-info">Well we have good budget for the project</div>
-                                        </div>
-                                        <div class="chat-time">11:00 am</div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-body border-top">
-                            <div class="row">
-                                <div class="col-9">
-                                    <div class="input-field m-t-0 m-b-0">
-                                        <textarea id="textarea1" placeholder="Type and enter" class="form-control border-0"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <a class="btn-circle btn-lg btn-cyan float-right text-white" href="javascript:void(0)"><i class="fas fa-paper-plane"></i></a>
-                                </div>
-                            </div>
-                        </div>
                         
+                            {(editMode === false && 
+                                <>
+                                    <div className="card-body">
+                                        <h6 className="control-label">Commnet</h6>
+                                        <div className="chat-box scrollable">
+                                            <ul className="chat-list">
+                                                <ChannelPostContentComment />
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div className="card-body border-top">
+                                        <div className="row">
+                                            <div className="col-9">
+                                                <div className="input-field m-t-0 m-b-0">
+                                                    <textarea id="textarea1" value={comment} onChange={handleCommentText} placeholder="Type and enter" className="form-control border-0"></textarea>
+                                                </div>
+                                            </div>
+                                            <div className="col-3">
+                                                <a className="btn-circle btn-lg btn-cyan float-right text-white" onClick={onClickSubmitComment} href="#!"><i className="fas fa-paper-plane"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+                        </div>
                         <div className="modal-footer">
                             {(editMode === true &&
                                 <button type="button" onClick={onClickUpdate} className="btn btn-success waves-effect">Update</button>
