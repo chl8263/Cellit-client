@@ -15,6 +15,7 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostListByPa
     const [editMode,setEditMode] = useState(false);
     const [editable,setEditable] = useState(false);
 
+    const [commentList, setCommentList] = useState([]);
     const [comment, setComment] = useState("");
 
     const JWT_TOKEN = appInfo.appInfo.jwtToken;
@@ -69,6 +70,9 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostListByPa
             });
             // e: Ajax ----------------------------------
         }
+
+        getCommentsData();
+
     }, [channelPostId]);
 
     const init = () => {
@@ -149,6 +153,42 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostListByPa
         }
     };
 
+    const getCommentsData = () => {
+        //s: Ajax ----------------------------------
+        fetch(HTTP.SERVER_URL + `/api/channels/${channelId}/channelPosts/${channelPostId}/channelPostComments`, {
+            method: HTTP.GET,
+            headers: {
+                'Content-type': MediaType.JSON,
+                'Accept': MediaType.HAL_JSON,
+                'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
+            },
+        }).then(res => {
+            return res.json();
+        }).then(res => {
+            if("errors" in res){
+                try{
+                    errorCodeToAlertCreater(json);
+                }catch(error){
+                    throw error;
+                }
+            }else {
+                if(currentUserId == res.accountId){
+                }
+                console.log("&&&&&&&&&&");
+                console.log(res);
+                if("_embedded" in res){
+                    setCommentList(res._embedded.channelPostCommentEntityModelList);
+                }else {
+                    setCommentList([]);
+                }
+            }
+        }).catch(error => {
+            console.error(error);
+            alert("Client unexpect error.");
+        });
+        // e: Ajax ----------------------------------
+    };
+
     const handleCommentText = (e) => {
         setComment(e.target.value);
     };
@@ -180,7 +220,7 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostListByPa
                 
                 console.log("########");
                 console.log(res);
-
+                getCommentsData();
                 throw(FETCH_STATE.FINE);
             }else {
                 return res.json();
@@ -285,7 +325,9 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostListByPa
                                         <h6 className="control-label">Commnet</h6>
                                         <div className="chat-box scrollable">
                                             <ul className="chat-list">
-                                                <ChannelPostContentComment />
+                                                {commentList.map(x => {
+                                                    return <ChannelPostContentComment key={x.channelPostCommentId} commentInfo={x}/>
+                                                })}
                                             </ul>
                                         </div>
                                     </div>
