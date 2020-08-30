@@ -83,7 +83,7 @@ const Login = ( {switchSignUp,switchMainBoard, addJwtToken, addUserInfo} ) => {
                             // TODO : switch ADMIN page..
                         }else {throw json;}
                     }).catch(error => {
-                        console.log(error);
+                        console.error(error);
                         alert("Please check account again.");
                     });
                 }

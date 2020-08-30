@@ -40,7 +40,6 @@ const SearchAllCellUnitModal = ( { appInfo, currentCellList } ) => {
                     throw error;
                 }
             }else if("_embedded" in res && res._embedded.cellEntityModelList.length > 0){
-                console.log(res._embedded.cellEntityModelList);
                 setSearchedCellList(res._embedded.cellEntityModelList);
             }
         }).catch(error => {

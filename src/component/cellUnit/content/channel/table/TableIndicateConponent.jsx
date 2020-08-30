@@ -6,16 +6,11 @@ const TableIndicateConponent = ( { link, name, clickFuntion, isAble, isActive } 
         var str = "paginate_button page-item";
         if(!isAble) str += " disabled";
         if(isActive) str += " active";
-        console.log("====1=======");
-        console.log(name);
-        console.log(str);
-        console.log("====2=======");
         return str;
     }
 
     const onClickLink = e => {
         e.preventDefault();
-        console.log("onClick Component");
         clickFuntion(link);
     }
 

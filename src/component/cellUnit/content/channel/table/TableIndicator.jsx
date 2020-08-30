@@ -26,10 +26,7 @@ const TableIndicator = ( { getCahnnelPostListByWholeUrl, getCahnnelPostListByPag
 
 
     useEffect(() => {
-        console.log("change");
         if(Object.keys(pageInfo).length > 0 && Object.keys(linkInfo).length > 0){
-            console.log(pageInfo);
-            console.log(linkInfo);
             if("first" in linkInfo) {
                 setIsFirst(true);
                 setFirstUrl(linkInfo.first.href);
@@ -66,20 +63,13 @@ const TableIndicator = ( { getCahnnelPostListByWholeUrl, getCahnnelPostListByPag
 
                 setTotalElements(totalElements);
 
-                //const tempBunchOfPages = totalPages/BUNCH_OF_PAGES_NUMBER;
                 const tempBunchOfCurrentPage = currentPage/BUNCH_OF_PAGES_NUMBER;
-                console.log("====Bunch of pages=======");
-                //const bunchOfPages = Math.ceil(tempBunchOfPages);
                 const bunchOfCurrentPage = parseInt(tempBunchOfCurrentPage)+1;
-                //console.log(bunchOfPages);
-                console.log(bunchOfCurrentPage);
                 const startPageNumber = ((bunchOfCurrentPage-1) * BUNCH_OF_PAGES_NUMBER)+1;
                 let endPageNumber = (bunchOfCurrentPage) * BUNCH_OF_PAGES_NUMBER;
                 if(endPageNumber >= totalPages){
                     endPageNumber = totalPages;
                 }
-                console.log(startPageNumber);
-                console.log(endPageNumber);
 
                 const numberList = new Array();
                 for(let i = startPageNumber; i <= endPageNumber; i++){
@@ -96,24 +86,9 @@ const TableIndicator = ( { getCahnnelPostListByWholeUrl, getCahnnelPostListByPag
                     numberList.push(pageNumberData);
                 }
                 setPageNumberList(numberList);
-                console.log("====Bunch of pages eee =======");
             }
         }
     }, [pageInfo, linkInfo]);
-
-    useEffect(() => {
-        pageNumberList.map(x => {
-            console.log("********");
-            console.log(x);
-            console.log(x.isActive);
-            console.log("********");
-        });
-    }, [pageNumberList]);
-
-    const onClickLink = (link) => {
-        console.log("~~~~~~~");
-        console.log(link);
-    };
 
     return (
         <>

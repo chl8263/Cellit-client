@@ -35,7 +35,6 @@ const Notification = ( { appInfo } ) => {
                     throw error;
                 }
             }else if("_embedded" in res){
-                console.log(res._embedded.accountNotificationEntityModelList);
                 setNotificationList(res._embedded.accountNotificationEntityModelList);
             }
         }).catch(error => {

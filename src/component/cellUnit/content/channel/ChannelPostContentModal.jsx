@@ -105,8 +105,6 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostListByPa
             const JWT_TOKEN = appInfo.appInfo.jwtToken;
             const channelId = channelData.channelId;
 
-            console.log(content);
-            
             const channelPostInfo = {
                 channelPostName: subject,
                 channelPostContent: content,
@@ -174,8 +172,6 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostListByPa
             }else {
                 if(currentUserId == res.accountId){
                 }
-                console.log("&&&&&&&&&&");
-                console.log(res);
                 if("_embedded" in res){
                     setCommentList(res._embedded.channelPostCommentEntityModelList);
                 }else {
@@ -218,9 +214,8 @@ const ChannelPostContentModal = ( { appInfo, channelData, getCahnnelPostListByPa
         }).then((res) => {
             if(res.ok){        
                 
-                console.log("########");
-                console.log(res);
                 getCommentsData();
+                setComment("");
                 throw(FETCH_STATE.FINE);
             }else {
                 return res.json();

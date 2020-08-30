@@ -42,7 +42,6 @@ const MainBoard = ( {appInfo} ) => {
                     throw error;
                 }
             }else if("_embedded" in res){
-                console.log(res._embedded.cellEntityModelList);
                 setCellList(res._embedded.cellEntityModelList);
             }
         }).catch(error => {

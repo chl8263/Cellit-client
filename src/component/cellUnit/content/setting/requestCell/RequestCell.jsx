@@ -33,7 +33,6 @@ const RequestCell = ({appInfo}) => {
                     throw error;
                 }
             }else if("_embedded" in res){
-                console.log(res._embedded.cellRequestEntityModelList);
                 setCellRequestList(res._embedded.cellRequestEntityModelList);
             }
         }).catch(error => {

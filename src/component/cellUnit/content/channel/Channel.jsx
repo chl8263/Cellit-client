@@ -52,16 +52,10 @@ const Channel = ( { appInfo, data } ) => {
     };
 
     const getCahnnelPostListByWholeUrl = (url) => {
-        console.log("onClick Wole!!!");
-        console.log(url);
-        console.log("onClick Wole!!!");
         getCahnnelPostList(url);
     };
 
     const getCahnnelPostListByPageNumber = (pageNumber) => {
-        console.log("onClick page!!!");
-        console.log(pageNumber);
-        console.log("onClick page!!!");
         const realPageNumber = pageNumber-1;
         const url = HTTP.SERVER_URL+`/api/channels/${channelId}/channelPosts?postNameToSearch=${postNameToSearch}&page=${realPageNumber}&size=${elementsNumberRef.current.value}&sort=createDate,DESC`;
         getCahnnelPostList(url);
@@ -79,7 +73,6 @@ const Channel = ( { appInfo, data } ) => {
         }).then(res => {
             return res.json();
         }).then(res => {
-            console.log(res);
             if("errors" in res){
                 try{
                     errorCodeToAlertCreater(json);
@@ -87,8 +80,6 @@ const Channel = ( { appInfo, data } ) => {
                     throw error;
                 }
             }else if("_embedded" in res){
-                console.log(111);
-                console.log(res);
                 setChannelPostList(res._embedded.channelPostEntityModelList);
                 setTableIndicatorPageInfo(res.page);
                 setTableIndicatorLinkInfo(res._links);
