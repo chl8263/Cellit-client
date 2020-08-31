@@ -4,146 +4,52 @@ import { connect } from "react-redux";
 import { HTTP, MediaType, FETCH_STATE} from "../../../../../util/Const";
 import errorCodeToAlertCreater from "../../../../../util/ErrorCodeToAlertCreater";
 
-const ACTIVE = "ACTIVE";
-const INACTIVE = "INACTIVE";
+const ACTIVE = 1;
+const INACTIVE = 0;
 
-const ManageChannelsRow = ( {appInfo, channelInfo} ) => {
+const ManageChannelsRow = ( {appInfo, channelInfo, getChannelList } ) => {
 
     const [channelName, setChannelName] = useState(channelInfo.channelName);
-    const [status, setStatus] = useState(ACTIVE);
-    const [btnStatus, setBtnStatus] = useState(channelInfo.active);
-    const JWT_TOKEN = appInfo.appInfo.jwtToken;
+    const [status, setStatus] = useState(channelInfo.active);
 
-    const inActiveChannel = () => {
-        
-        // s: Ajax ----------------------------------
-        const cellId = appInfo.cellInfo.cellId;
-        fetch(HTTP.SERVER_URL + `/api/cells/${cellId}/cellRequests/accounts/${requestInfo.accountId}`, {
-            method: HTTP.DELETE,
-            headers: {
-                'Content-type': MediaType.JSON,
-                'Accept': MediaType.HAL_JSON,
-                'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
-            },
-        }).then(res => {
-            if(res.ok){        
-                throw(FETCH_STATE.FINE);
-            }else {
-                return res.json();
-            }
-        }).then(json => {
-            try{
-                errorCodeToAlertCreater(json);
-            }catch(error){
-                throw error;
-            }
-        }).catch(error => {
-            if(!error === FETCH_STATE.FINE){
-                console.error(error);
-                alert("Client unexpect error.");
-            }
-        });
-        // e: Ajax ----------------------------------
-    };
-
-    const onclickActive = () => {
-        if(confirm(`Would you like to Active ${channelName}?`)){
-            // s: Ajax ----------------------------------
-            fetch(HTTP.SERVER_URL + `/api/cells/${appInfo.cellInfo.cellId}/accounts/${requestInfo.accountId}`, {
-                method: HTTP.POST,
-                headers: {
-                    'Content-type': MediaType.JSON,
-                    'Accept': MediaType.HAL_JSON,
-                    'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
-                },
-            }).then(res => {
-                if(res.ok){        
-                    alert("The request was processed successfully.");
-                    setStatus(ACCEPT);
-                    setBtnStatus(false);
-
-                    const notiInfo = {
-                        message: `Approved join request the cell '${appInfo.cellInfo.cellName}'`,
-                        status: "APPROVE"
-                    }
-                    // s: Ajax ----------------------------------
-                    fetch(HTTP.SERVER_URL + `/api/accounts/${requestInfo.accountId}/accountNotifications`, {
-                        method: HTTP.POST,
-                        headers: {
-                            'Content-type': MediaType.JSON,
-                            'Accept': MediaType.HAL_JSON,
-                            'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
-                        },
-                        body: JSON.stringify(notiInfo)
-                    }).then(res => {
-                        if(res.ok){        
-                            throw(FETCH_STATE.FINE);
-                        }else {
-                            return res.json();
-                        }
-                    }).then(json => {
-                        try{
-                            errorCodeToAlertCreater(json);
-                        }catch(error){
-                            throw error;
-                        }
-                    }).catch(error => {
-                        if(!error === FETCH_STATE.FINE){
-                            console.error(error);
-                            alert("Client unexpect error.");
-                        }
-                    });
-                    // e: Ajax ----------------------------------
-                    deleteRequestCell();
-                    throw(FETCH_STATE.FINE);
-                }else {
-                    return res.json();
-                }
-            }).then(json => {
-                try{
-                    errorCodeToAlertCreater(json);
-                }catch(error){
-                    throw error;
-                }
-            }).catch(error => {
-                console.error(error);
-                if(!error === FETCH_STATE.FINE){
-                    console.error(error);
-                    alert("Client unexpect error.");
-                }
-            });
-            // e: Ajax ----------------------------------
-        }
+    const onclickAvtive = () => {
+        updateAcitiveState(1);
     };
 
     const onclickInavtive = () => {
-        const notiInfo = {
-            message: `Rejected join request the cell '${appInfo.cellInfo.cellName}'`,
-            status: "REJECT"
-        }
-        if(confirm(`Would you like to Inactive ${channelName}?`)){
-            // s: Ajax ----------------------------------
-            fetch(HTTP.SERVER_URL + `/api/accounts/${requestInfo.accountId}/accountNotifications`, {
-                method: HTTP.POST,
+        updateAcitiveState(0);
+    };
+
+    const updateAcitiveState = (state) => {
+        if(confirm(`Would you like to Active ${channelName}?`)){
+            const JWT_TOKEN = appInfo.appInfo.jwtToken;
+            const channelId = channelInfo.channelId;
+
+            //s: Ajax ----------------------------------
+            fetch(HTTP.SERVER_URL + `/api/channels/${channelId}/active`, {
+                method: HTTP.PATCH,
                 headers: {
                     'Content-type': MediaType.JSON,
                     'Accept': MediaType.HAL_JSON,
                     'Authorization': HTTP.BASIC_TOKEN_PREFIX + JWT_TOKEN
                 },
-                body: JSON.stringify(notiInfo)
-            }).then(res => {
+                body: state
+            }).then((res) => {
+                if(!res.ok && res.status !== HTTP.STATUS_CREATED && res.status !== HTTP.STATUS_BAD_REQUEST){
+                    throw res;
+                }
+                return res;
+            }).then((res) => {
                 if(res.ok){        
-                    alert("The request was processed successfully.");
-                    setStatus(REJECT);
-                    setBtnStatus(false);
-                    deleteRequestCell();
+                    alert("update successfully");
+                    getChannelList();
                     throw(FETCH_STATE.FINE);
                 }else {
                     return res.json();
                 }
-            }).then(json => {
+            }).then((res) => {
                 try{
-                    errorCodeToAlertCreater(json);
+                    errorCodeToAlertCreater(res);
                 }catch(error){
                     throw error;
                 }
@@ -175,7 +81,7 @@ const ManageChannelsRow = ( {appInfo, channelInfo} ) => {
                     <>
                         <td class="text-danger">Inactive</td> 
                         <td>
-                            <a onClick={onclickActive} href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Accept">
+                            <a onClick={onclickAvtive} href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Accept">
                             <i className="mdi mdi-check"></i>
                             </a>
                         </td>

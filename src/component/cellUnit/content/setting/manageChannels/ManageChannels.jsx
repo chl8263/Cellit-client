@@ -62,7 +62,7 @@ const ManageChannels = ({appInfo}) => {
                     <tbody>
 
                         {channelList.map(x => {
-                            return <ManageChannelsRow key={x.channelId} channelInfo={x} />
+                            return <ManageChannelsRow key={x.channelId} channelInfo={x} getChannelList={getChannelList}/>
                         })}
                        
                     </tbody>
