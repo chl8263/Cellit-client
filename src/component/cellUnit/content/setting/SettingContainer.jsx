@@ -3,6 +3,7 @@ import $ from "jquery";
 
 import PreLoader from "../../../PreLoader";
 import RequestCell from "../setting/requestCell/RequestCell";
+import ManageChannels from "../setting/manageChannels/ManageChannels";
 
 const SettingContainer = () => {
 
@@ -40,7 +41,7 @@ const SettingContainer = () => {
                         </div>
                         <div className="tab-pane  p-20" id="manageChannels" role="tabpanel">
                             <div className="p-20">
-                                two
+                                <ManageChannels />
                             </div>
                         </div>
                         <div className="tab-pane p-20" id="messages" role="tabpanel">

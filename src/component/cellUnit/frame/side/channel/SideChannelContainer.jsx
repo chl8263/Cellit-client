@@ -28,7 +28,11 @@ const SideChannelContainer = ({ appInfo }) => {
 
     useEffect(() => {
         init();
+        getChannelList();
+    }, []);
 
+    const getChannelList = () => {
+        console.log(11111111);
         const cellId = appInfo.cellInfo.cellId;
         const JWT_TOKEN = appInfo.appInfo.jwtToken;
 
@@ -56,13 +60,13 @@ const SideChannelContainer = ({ appInfo }) => {
             alert("Cannot load channel list");
         });
         // e: Ajax ----------------------------------
-    }, []);
+    };
 
     return (
         <>
-            <li className="sidebar-item sideContainer sideContainer-open"> <a className="sidebar-link has-arrow waves-effect waves-dark" aria-expanded="false"><span className="hide-menu">Channel </span></a>
+            <li onClick={getChannelList} className="sidebar-item sideContainer sideContainer-open"> <a className="sidebar-link has-arrow waves-effect waves-dark" aria-expanded="false"><span className="hide-menu">Channel </span></a>
                 <ul aria-expanded="false" className="collapse first-level">
-                    {channels.map(x => {
+                    {channels.filter(x => x.active == 1).map(x => {
                         return <SideChannelChild channelId={x.channelId} channelName={x.channelName}/> 
                     })}
                     
