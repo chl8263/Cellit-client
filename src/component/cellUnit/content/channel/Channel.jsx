@@ -29,6 +29,10 @@ const Channel = ( { appInfo, data } ) => {
         //getCahnnelPostList(0);
     }, []);
 
+    useEffect(() => {
+        getCahnnelPostListByPageNumber(0);
+    }, [channelId]);
+
     const updateChannelPostId = (channelPostId) => {
         setChannelPostId(channelPostId);
     };
@@ -83,6 +87,12 @@ const Channel = ( { appInfo, data } ) => {
                 setChannelPostList(res._embedded.channelPostEntityModelList);
                 setTableIndicatorPageInfo(res.page);
                 setTableIndicatorLinkInfo(res._links);
+            }else {
+                setChannelPostList([]);
+                setTableIndicatorPageInfo({});
+                setTableIndicatorLinkInfo({});
+                setChannelPostId(0);
+                setPostNameToSearch("");
             }
         }).catch(error => {
             console.error(error);
