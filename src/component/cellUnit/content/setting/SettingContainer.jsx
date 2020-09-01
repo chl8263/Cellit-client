@@ -4,6 +4,8 @@ import $ from "jquery";
 import PreLoader from "../../../PreLoader";
 import RequestCell from "../setting/requestCell/RequestCell";
 import ManageChannels from "../setting/manageChannels/ManageChannels";
+import ManageUsers from "../setting/manageUsers/ManageUsers";
+
 
 const SettingContainer = () => {
 
@@ -30,7 +32,7 @@ const SettingContainer = () => {
                     <ul className="nav nav-tabs" role="tablist">
                         <li className="nav-item"> <a className="nav-link active" data-toggle="tab" href="#requestAccounts" role="tab"><span className="hidden-sm-up"></span> <span className="hidden-xs-down">Requested Accounts</span></a> </li>
                         <li className="nav-item"> <a className="nav-link" data-toggle="tab" href="#manageChannels" role="tab"><span className="hidden-sm-up"></span> <span className="hidden-xs-down">Manage Channels</span></a> </li>
-                        <li className="nav-item"> <a className="nav-link" data-toggle="tab" href="#messages" role="tab"><span className="hidden-sm-up"></span> <span className="hidden-xs-down">Tab3</span></a> </li>
+                        <li className="nav-item"> <a className="nav-link" data-toggle="tab" href="#messages" role="tab"><span className="hidden-sm-up"></span> <span className="hidden-xs-down">Manage Users</span></a> </li>
                     </ul>
                     {/* <!-- Tab panes --> */}
                     <div className="tab-content tabcontent-border">
@@ -46,7 +48,7 @@ const SettingContainer = () => {
                         </div>
                         <div className="tab-pane p-20" id="messages" role="tabpanel">
                             <div className="p-20">
-                                three
+                                <ManageUsers />
                             </div>
                         </div>
                     </div>
