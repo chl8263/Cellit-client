@@ -36,6 +36,7 @@ const ManageChannels = ({appInfo}) => {
                 }
             }else{
                 console.log(res);
+                setChannelList([]);
                 setChannelList(res._embedded.channelEntityModelList);
             }
         }).catch(error => {

@@ -16,6 +16,7 @@ const Channel = ( { appInfo, data } ) => {
     const JWT_TOKEN = appInfo.appInfo.jwtToken;
     const channelId = channelData.channelId;
 
+    const [channelIdAsState, setChannelIdAsState] = useState("");
     const [channelPostList, setChannelPostList] = useState([]);
     const [tableIndicatorPageInfo, setTableIndicatorPageInfo] = useState({});
     const [tableIndicatorLinkInfo, setTableIndicatorLinkInfo] = useState({});
@@ -31,6 +32,7 @@ const Channel = ( { appInfo, data } ) => {
 
     useEffect(() => {
         getCahnnelPostListByPageNumber(0);
+        setChannelIdAsState(channelId);
     }, [channelId]);
 
     const updateChannelPostId = (channelPostId) => {
@@ -146,7 +148,7 @@ const Channel = ( { appInfo, data } ) => {
                                 </div>
                                 <div className="row">
                                     <div className="col-sm-12"></div>
-                                    <ChannelTable updateChannelPostId={updateChannelPostId} channelPostList={channelPostList}/>
+                                    <ChannelTable updateChannelPostId={updateChannelPostId} channelPostList={channelPostList} channelId={channelIdAsState}/>
                                 </div>
                             </div>
                                 <TableIndicator getCahnnelPostListByWholeUrl={getCahnnelPostListByWholeUrl} getCahnnelPostListByPageNumber={getCahnnelPostListByPageNumber} pageInfo={tableIndicatorPageInfo} linkInfo={tableIndicatorLinkInfo}/>

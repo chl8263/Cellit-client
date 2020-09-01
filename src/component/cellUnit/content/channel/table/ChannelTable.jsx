@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import ChannelTableTr from "../table/ChannelTableTr";
 
-const ChannelTable = ( { channelPostList, updateChannelPostId } ) => {
+const ChannelTable = ( { channelPostList, updateChannelPostId, channelId } ) => {
 
     return(
         <>
@@ -18,7 +18,7 @@ const ChannelTable = ( { channelPostList, updateChannelPostId } ) => {
                 </thead>
                 <tbody>
                     {channelPostList.map( x => {
-                        return <ChannelTableTr key={x.channelPostId} channelPostInfo={x} updateChannelPostId={updateChannelPostId}/>
+                        return <ChannelTableTr key={x.channelPostId} channelPostInfo={x} updateChannelPostId={updateChannelPostId} channelId={channelId}/>
                     })}
                 </tbody>
             </table>
