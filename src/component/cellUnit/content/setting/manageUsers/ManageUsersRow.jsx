@@ -6,16 +6,16 @@ import errorCodeToAlertCreater from "../../../../../util/ErrorCodeToAlertCreater
 
 const ManageUsersRow = ( {appInfo, accountInfo, getAccountList } ) => {
 
+    const cellId = appInfo.cellInfo.cellId;
     const [accountName, setChannelName] = useState(accountInfo.accountName);
 
     const removeAccountAtCell = (state) => {
         if(confirm(`Would you like to Remove ${accountName} at this cell?`)){
             const JWT_TOKEN = appInfo.appInfo.jwtToken;
-            const channelId = channelInfo.channelId;
 
             //s: Ajax ----------------------------------
-            fetch(HTTP.SERVER_URL + `/api/channels/${channelId}/active`, {
-                method: HTTP.PATCH,
+            fetch(HTTP.SERVER_URL + `/api/cells/${cellId}/accounts/${accountInfo.accountId}`, {
+                method: HTTP.DELETE,
                 headers: {
                     'Content-type': MediaType.JSON,
                     'Accept': MediaType.HAL_JSON,
@@ -29,8 +29,8 @@ const ManageUsersRow = ( {appInfo, accountInfo, getAccountList } ) => {
                 return res;
             }).then((res) => {
                 if(res.ok){        
-                    alert("update successfully");
-                    getChannelList();
+                    alert("Delete successfully.");
+                    getAccountList();
                     throw(FETCH_STATE.FINE);
                 }else {
                     return res.json();
