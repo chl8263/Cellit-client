@@ -1,12 +1,13 @@
 import React from "react";
 
+import Calendar from "./content/calendar/Calendar";
 import Channel from "./content/channel/Channel";
 import SettingContainer from "./content/setting/SettingContainer";
 
 const ContentMatcher = (props) => {
 
     if(props.match.params.name === "calendar"){
-        return (<div>calendar</div>);
+        return (<Calendar />);
     }else if(props.match.params.name === "charts"){
         return (<div>dash board</div>);
     }else if(props.match.params.name === "gallery"){

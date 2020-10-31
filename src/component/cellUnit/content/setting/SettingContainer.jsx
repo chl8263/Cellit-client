@@ -17,10 +17,10 @@ const SettingContainer = () => {
         <>
             <PreLoader />
 
-            <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Setting</h4>
+            <div className="page-breadcrumb">
+                <div className="row">
+                    <div className="col-12 d-flex no-block align-items-center">
+                        <h4 className="page-title">Setting</h4>
                         
                     </div>
                 </div>
