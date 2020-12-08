@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import NotificationMessage from "../notification/NotificationMessage";
 import { connect } from "react-redux";
-import { PAGE_ROUTE, HTTP, MediaType} from "../../../../util/Const";
+import { PAGE_ROUTE, HTTP, MediaType, COLOR} from "../../../../util/Const";
 
 
 const Notification = ( { appInfo } ) => {
@@ -48,8 +48,8 @@ const Notification = ( { appInfo } ) => {
         <>
             <li className="nav-item dropdown">
                 <a onClick={getNotication} className="nav-link dropdown-toggle waves-effect waves-dark" href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i className="mdi mdi-bell font-24"></i></a>
-                <div className="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
-                    <ul className="list-style-none">
+                <div className="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2" style={{"background": COLOR.light_background}}>
+                    <ul className="list-style-none" >
                         <li>
                             <div className="">
                                 {notificationList.map( x => {

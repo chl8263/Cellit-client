@@ -15,6 +15,11 @@ const PAGE_ROUTE  = {
     ADMIN: "ADMIN",
 }
 
+const COLOR  = {
+    WHITE: "#FFFFFFFF",
+    light_background: "#F2F2F2"
+}
+
 const HTTP = {
     GET: "GET",
     POST: "POST",
@@ -49,4 +54,4 @@ const CellUnitRoles = {
 }
 
 
-export {FETCH_STATE, PAGE_ROUTE, HTTP, MediaType, ROLE, CellUnitRoles};
+export {FETCH_STATE, PAGE_ROUTE, HTTP, MediaType, ROLE, CellUnitRoles, COLOR};

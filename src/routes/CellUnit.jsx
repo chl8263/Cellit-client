@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { HashRouter, Route, Link } from "react-router-dom";
 
 import { actionCreators } from "../store";
-import { PAGE_ROUTE, HTTP, MediaType, ROLE} from "../util/Const";
+import { PAGE_ROUTE, HTTP, MediaType, ROLE, COLOR} from "../util/Const";
 
 import PreLoader from "../component/PreLoader";
 import CellUnitTopBar from "../component/cellUnit/frame/CellUnitTopBar";
@@ -43,9 +43,9 @@ const CellUnit = ({ switchMainBoard, appInfo }) => {
                             </b>
                             {/* <!--End Logo icon -->
                             <!-- Logo text --> */}
-                            <span className="logo-text">
+                            <span className="logo-text" style={{"marginLeft": "40px"}}>
                                 {/* <!-- dark Logo text --> */}
-                                <div style={{"marginLeft": "40px"}}>Account</div>
+                                <div  style={{"color": COLOR.light_background}}>{appInfo.cellInfo.cellName}</div>
                             </span>
                             {/* <!-- Logo icon --> */}
                             {/* <!-- <b className="logo-icon"> -->

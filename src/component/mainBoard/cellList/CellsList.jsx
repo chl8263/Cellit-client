@@ -23,9 +23,9 @@ const CellsList = ({cellInfo, appInfo, switchCellUnit, renewCellInfo}) => {
                         <span className="m-b-15 d-block">{cellInfo.cellDescription} </span>
                         <div className="comment-footer">
                             <span className="text-muted float-right">{cellInfo.createDate}</span>
-                            <button type="button" className="btn btn-cyan btn-sm">Edit</button>
+                            {/* <button type="button" className="btn btn-cyan btn-sm">Edit</button>
                             <button type="button" className="btn btn-success btn-sm">Publish</button>
-                            <button type="button" className="btn btn-danger btn-sm">Delete</button>
+                            <button type="button" className="btn btn-danger btn-sm">Delete</button> */}
                         </div>
                     </div>
                 </div>

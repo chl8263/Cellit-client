@@ -32,7 +32,6 @@ const SideChannelContainer = ({ appInfo }) => {
     }, []);
 
     const getChannelList = () => {
-        console.log(11111111);
         const cellId = appInfo.cellInfo.cellId;
         const JWT_TOKEN = appInfo.appInfo.jwtToken;
 
