@@ -68,6 +68,7 @@ const Channel = ( { appInfo, data } ) => {
     };
 
     const getCahnnelPostList = (url) => {
+        console.warn(url);
         //s: Ajax ----------------------------------
         fetch(url, {
             method: HTTP.GET,

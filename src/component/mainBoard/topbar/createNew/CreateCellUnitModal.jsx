@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { FETCH_STATE ,PAGE_ROUTE, HTTP, MediaType} from "../../../../util/Const";
+import { FETCH_STATE ,PAGE_ROUTE, HTTP, MediaType, COLOR} from "../../../../util/Const";
 import errorCodeToAlertCreater from "../../../../util/ErrorCodeToAlertCreater";
 
 const CreateCellUnitModal = ( { appInfo, getCellList } ) => {
@@ -92,14 +92,11 @@ const CreateCellUnitModal = ( { appInfo, getCellList } ) => {
                                             <input id="cellDescription" name="cellDescription" className="form-control form-white" onChange={onChangeCreateCellDescription} value={createCellDescription} placeholder="Enter Description" type="text"  />
                                         </div>
                                         <div className="col-md-6">
-                                            <label className="control-label">Choose Category Color</label>
+                                            <br/>
+                                            <label className="control-label">Category</label>
                                             <select className="form-control form-white" data-placeholder="Choose a color..." name="category-color">
-                                                <option value="success">Success</option>
-                                                <option value="danger">Danger</option>
-                                                <option value="info">Info</option>
-                                                <option value="primary">Primary</option>
-                                                <option value="warning">Warning</option>
-                                                <option value="inverse">Inverse</option>
+                                                <option value="success">Entertainment</option>
+                                                <option value="danger">Information</option>
                                             </select>
                                         </div>
                                     </div>

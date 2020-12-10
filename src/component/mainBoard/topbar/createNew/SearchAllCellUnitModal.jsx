@@ -65,6 +65,7 @@ const SearchAllCellUnitModal = ( { appInfo, currentCellList } ) => {
                                     <div className="col-md-8">
                                         <label className="control-label">Cell Unit Name</label>
                                         <input style={{"display": "inline"}} id="cellName" name="cellName" className="form-control form-white" onChange={onSearchCreateCellname} value={searchCellname} placeholder="Enter cell name to search" type="text" />
+                                        <br/>
                                         <button style={{"display": "inline"}} type="submit" className="btn btn-info waves-effect">Search</button>
                                     </div>
                                 </div>

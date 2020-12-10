@@ -37,8 +37,8 @@ const CellUnitSide = ({ appInfo }) => {
                             {/* Direct Message */}
                             <li className="sidebar-item sideContainer"> <a className="sidebar-link has-arrow waves-effect waves-dark" href="#!"  aria-expanded="false"><span className="hide-menu">Direct Message</span></a>
                                 <ul aria-expanded="false" className="collapse  first-level">
-                                    <li className="sidebar-item"><a href="#!"  className="sidebar-link"><i className="mdi mdi-note-outline"></i><span className="hide-menu"> Form Basic </span></a></li>
-                                    <li className="sidebar-item"><a href="#!"  className="sidebar-link"><i className="mdi mdi-note-plus"></i><span className="hide-menu"> Form Wizard </span></a></li>
+                                    <li className="sidebar-item"><a href="#!"  className="sidebar-link"><i className="mdi mdi-note-outline"></i><span className="hide-menu"> Ewan </span></a></li>
+                                    <li className="sidebar-item"><a href="#!"  className="sidebar-link"><i className="mdi mdi-note-plus"></i><span className="hide-menu"> Ewan2 </span></a></li>
                                 </ul>
                             </li>
                             
