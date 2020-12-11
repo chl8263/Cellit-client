@@ -128,30 +128,55 @@ The following items should be installed in your setting:
 
 ### Signup
 
-![structrue](./img/sign_up.PNG)
+![sign_up](./img/sign_up.PNG)
 
 ### Login
 
-![structrue](./img/login.PNG)
+![login](./img/login.PNG)
 
 
 ### Mainboard
 
-![structrue](./img/mainboard.PNG)
+![mainboard](./img/mainboard.PNG)
 
-### create_new
+![create_new](./img/create_new.PNG)
 
-![structrue](./img/create_new.PNG)
+![mainboard_in_item1](./img/mainboard_in_item1.PNG)
 
-![structrue](./img/mainboard_in_item1.PNG)
+![mainboard_notification](./img/mainboard_notification.PNG)
 
-### search_cell
-
-![structrue](./img/search_cell.PNG)
-
-![structrue](./img/search_cell_not_joined.PNG)
-
+![mainboard_profile](./img/mainboard_profile.PNG)
 
 ### search_cell
 
-![structrue](./img/search_cell.PNG)
+![search_cell](./img/search_cell.PNG)
+
+![search_cell_not_joined](./img/search_cell_not_joined.PNG)
+
+### cell_unit
+
+![cell_unit](./img/cell_unit.PNG)
+
+
+### channel
+
+![channel](./img/channel.PNG)
+
+![channel_content](./img/channel_content.PNG)
+
+![channel_content_modify](./img/channel_content_modify.PNG)
+
+![channel_content_pagination](./img/channel_content_pagination.PNG)
+
+### channel
+
+![channel_setting](./img/channel_setting.PNG)
+
+![setting_request_account_accept](./img/setting_request_account_accept.PNG)
+
+![setting_request_account_reject](./img/setting_request_account_reject.PNG)
+
+![setting_manage_channels](./img/setting_manage_channels.PNG)
+
+![setting_manage_users](./img/setting_manage_users.PNG)
+
