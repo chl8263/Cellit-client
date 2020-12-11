@@ -1,4 +1,4 @@
-Cellit client - release 1.0
+Cellit client
 =============
 ### The related program
 
@@ -120,3 +120,38 @@ The following items should be installed in your setting:
     ~~~shell
     npm run dev
     ~~~
+
+<br/>
+
+:computer: UI Function
+-------------
+
+### Signup
+
+![structrue](./img/sign_up.PNG)
+
+### Login
+
+![structrue](./img/login.PNG)
+
+
+### Mainboard
+
+![structrue](./img/mainboard.PNG)
+
+### create_new
+
+![structrue](./img/create_new.PNG)
+
+![structrue](./img/mainboard_in_item1.PNG)
+
+### search_cell
+
+![structrue](./img/search_cell.PNG)
+
+![structrue](./img/search_cell_not_joined.PNG)
+
+
+### search_cell
+
+![structrue](./img/search_cell.PNG)
