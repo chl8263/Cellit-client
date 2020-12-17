@@ -134,10 +134,16 @@ The following items should be installed in your setting:
 
 ![login](./img/login.PNG)
 
+~~~
+Client request JWT Token about specific account and try to login to Api server
+~~~
+
 
 ### Mainboard
 
 ![mainboard](./img/mainboard.PNG)
+
+### create_new
 
 ![create_new](./img/create_new.PNG)
 
