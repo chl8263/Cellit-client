@@ -143,46 +143,68 @@ Client request JWT Token about specific account and try to login to Api server
 
 ![mainboard](./img/mainboard.PNG)
 
-### create_new
+### Create_new
 
 ![create_new](./img/create_new.PNG)
 
+### Mainboard_in_item1
+
 ![mainboard_in_item1](./img/mainboard_in_item1.PNG)
+
+### Mainboard_notification
 
 ![mainboard_notification](./img/mainboard_notification.PNG)
 
+### Mainboard_profile
+
 ![mainboard_profile](./img/mainboard_profile.PNG)
 
-### search_cell
+### Search_cell
 
 ![search_cell](./img/search_cell.PNG)
 
+### Search_cell_not_joined
+
 ![search_cell_not_joined](./img/search_cell_not_joined.PNG)
 
-### cell_unit
+### Cell_unit
 
 ![cell_unit](./img/cell_unit.PNG)
 
 
-### channel
+### Channel
 
 ![channel](./img/channel.PNG)
 
+### Channel_content
+
 ![channel_content](./img/channel_content.PNG)
+
+### Channel_content_modify
 
 ![channel_content_modify](./img/channel_content_modify.PNG)
 
+### Channel_content_pagination
+
 ![channel_content_pagination](./img/channel_content_pagination.PNG)
 
-### channel
+### Channel_setting
 
 ![channel_setting](./img/channel_setting.PNG)
 
+### Setting_request_account_accept
+
 ![setting_request_account_accept](./img/setting_request_account_accept.PNG)
+
+### Setting_request_account_reject
 
 ![setting_request_account_reject](./img/setting_request_account_reject.PNG)
 
+### Setting_manage_channels
+
 ![setting_manage_channels](./img/setting_manage_channels.PNG)
+
+### Setting_manage_users
 
 ![setting_manage_users](./img/setting_manage_users.PNG)
 
